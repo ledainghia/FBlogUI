@@ -161,6 +161,10 @@ body.down .header-classic .header-bottom.clone {
   padding-top: 0;
   padding-bottom: 0;
   margin-right: 0;
+  img {
+    height: 100px;
+    width: 100px;
+  }
 }
 
 .dropdown-menu {
