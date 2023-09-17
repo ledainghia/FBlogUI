@@ -10,10 +10,13 @@ import './assets/css/fontawesome-all.min.css';
 import { useEffect, useState } from 'react';
 import { HashLoader } from 'react-spinners';
 import './App.css'
+import { useForgetStore } from './store/store';
+import ForgotPassContent from './components/ForgotPassContent';
 
 function App() {
 
   const [loading, setLoading] = useState(false);
+  const { isForgotten } = useForgetStore();
 
   useEffect(() => {
     setLoading(true)
@@ -34,25 +37,30 @@ function App() {
             />
           </div>
           :
+          <>
 
-          <div className="form-body">
-            <div className="website-logo">
-              <a href="index.html">
-                <div className="logo">
-                  <img className="logo-size" src={logo} alt="" />
-                </div>
-              </a>
-            </div>
-            <div className="row">
-              <div className="img-holder">
-                <div className="bg"></div>
-                <div className="info-holder">
-                  <img src={file} alt="" />
-                </div>
+            <div className="form-body">
+              <div className="website-logo">
+                <a href="index.html">
+                  <div className="logo">
+                    <img className="logo-size" src={logo} alt="" />
+                  </div>
+                </a>
               </div>
-              <LoginContent />
+              <div className="row">
+                <div className="img-holder">
+                  <div className="bg"></div>
+                  <div className="info-holder">
+                    <img src={file} alt="" />
+                  </div>
+                </div>
+                {isForgotten ? (< ForgotPassContent />) :
+                  <LoginContent />
+                }
+              </div>
             </div>
-          </div>
+
+          </>
       }
     </>
   )

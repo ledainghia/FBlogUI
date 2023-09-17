@@ -1,6 +1,11 @@
+import { useForgetStore } from "../store/store";
 
 
 export default function ForgotPassContent() {
+    const { setForget } = useForgetStore();
+    const handleForget = () => {
+        setForget(false); // Đặt isForgotten thành true
+    };
     return (
         <div className="form-holder">
             <div className="form-content">
@@ -13,8 +18,11 @@ export default function ForgotPassContent() {
                             <button id="submit" type="submit" className="ibtn btn-forget">Send Reset Link</button>
                         </div>
                     </form>
+                    <div className="form-button">
+                        <a onClick={handleForget}>Back to Login</a>
+                    </div>
                 </div>
-                <div className="form-sent">
+                {/* <div className="form-sent">
                     <div className="tick-holder">
                         <div className="tick-icon"></div>
                     </div>
@@ -23,7 +31,7 @@ export default function ForgotPassContent() {
                     <div className="info-holder">
                         <span>Unsure if that email address was correct?</span> <a href="#">We can help</a>.
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

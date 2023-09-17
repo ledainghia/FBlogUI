@@ -4,39 +4,45 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useForgetStore } from '../store/store';
+
 export default function Login() {
     const [passwordVisible, setPasswordVisible] = useState(false);
-
+    const { setForget } = useForgetStore();
     const userRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const handleForget = () => {
+        setForget(true); // Đặt isForgotten thành true
+    };
 
     const handleSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const user = userRef.current?.value;
         const password = passwordRef.current?.value;
         const data = {
-            user: user,
+            username: user,
             password: password,
-        };
-
-        const headers = {
-            'Server': 'openresty', // Thay thế YourAccessToken bằng token của bạn
-
-        };
-
-        const config = {
-            headers: headers,
         };
 
 
         await axios
-            .post('http://localhost:8083/api/login', data)
+            .post('https://api.fublog.tech/api/login', data)
             .then((response) => {
                 console.log(response);
+                toast.success('Login success!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
             .catch((error) => {
                 console.log(error.response);
-                toast.error('DUMA MAY LOI ROI CON', {
+                toast.error(error.response.data, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -60,7 +66,7 @@ export default function Login() {
                 position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}
-                newestOnTop={false}
+                newestOnTop={true}
                 closeOnClick
                 rtl={false}
                 pauseOnFocusLoss
@@ -96,7 +102,7 @@ export default function Login() {
                     <button id="submit" type="submit" className="ibtn">
                         Login
                     </button>
-                    <a href="forget7.html">Forget password?</a>
+                    <a onClick={handleForget}>Forget password?</a>
                 </div>
             </form>
             <div className="other-links">
