@@ -24,7 +24,7 @@ html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-family: 'Montserrat Alternates', sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
@@ -79,7 +79,7 @@ html, #root {
 }
 
 .website-logo .logo img.logo-size {
-    opacity: 1 !important;
+    opacity: 0 !important;
 }
 
 .website-logo-inside {
@@ -1549,6 +1549,10 @@ input.sm-content {
     font-size: 9px;
     margin-left: 0;
 }
+
+.form-body.without-side .website-logo-inside .logo {
+    background-image: url("../images/logo-color.svg");
+  }
 
 .form-body.without-side .form-content .form-items .page-links {
     margin-bottom: 0;

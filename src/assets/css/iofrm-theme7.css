@@ -38,6 +38,10 @@
   width: 100px;
 }
 
+.website-logo .logo {
+  background-image: url("../images/logo-light.svg");
+}
+
 
 
 .website-logo .logo img {
@@ -48,6 +52,9 @@
   width: 100px;
 }
 
+.website-logo-inside .logo {
+  background-image: url("../images/logo-light.svg");
+}
 
 
 .website-logo-inside .logo img {
@@ -560,6 +567,13 @@
   .form-holder {
     margin-left: 0;
   }
+  .website-logo .logo {
+    background-image: url("../images/logo-color.svg");
+}
+
+.form-body.without-side .website-logo .logo {
+    background-image: url("../images/logo-light.svg");
+}
 
   .website-logo {
     top: 50px;
