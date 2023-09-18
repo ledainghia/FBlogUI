@@ -2,8 +2,8 @@
 /*                      HEADER                              
 /*=================================================================*/
 .header-default {
-  padding: 40px 0;
   position: relative;
+  margin-bottom: 30px;
   width: 100%;
   .navbar-nav {
     margin-left: 50px;
@@ -17,7 +17,7 @@
   background: #fff;
   border-bottom: solid 1px #ebebeb;
   right: 0;
-  padding: 25px 0;
+
   @include transform(translateY(-100%));
   transition: 0.2s transform cubic-bezier(0.3, 0.73, 0.3, 0.74);
   z-index: 4;
