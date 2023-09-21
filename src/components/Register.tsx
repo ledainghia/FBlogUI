@@ -3,10 +3,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    // Thêm state để lưu thông báo lỗi và giá trị của trường email
+    const [emailError, setEmailError] = useState<string | null>(null);
+    const [emailValue, setEmailValue] = useState<string>(''); // Giá trị ban đầu là chuỗi rỗng
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newEmail = e.target.value;
+        setEmailValue(newEmail); // Cập nhật giá trị email
+
+        // Kiểm tra xem email có đúng định dạng không
+        const emailPattern = /^[a-zA-Z0-9._-]+@fpt\.edu\.vn$/; // Mẫu email
+        if (emailPattern.test(newEmail)) {
+            setEmailError('Nếu bạn login bằng mail @fpt.edu.vn thì bạn phải sử dụng đăng nhập bằng google');
+        } else {
+            setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
+        }
+    };
+
+    const handleEmailBlur = () => {
+        // Kiểm tra email khi người dùng rời khỏi trường
+        const emailPattern = /^[a-zA-Z0-9._-]+@fpt\.edu\.vn$/; // Mẫu email
+        if (emailPattern.test(emailValue)) {
+            setEmailError('Nếu bạn login bằng mail @fpt.edu.vn thì bạn phải sử dụng đăng nhập bằng google');
+        } else {
+            setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
+        }
+    };
+
+    const navigate = useNavigate();
 
     const userRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -40,13 +69,13 @@ export default function Register() {
 
             username: user,
             password: password,
-            fullname: fullName,
+            fullName: fullName,
             email: mail,
         };
 
 
         await axios
-            .post('https://api.fublog.tech/api/signup', data)
+            .post('https://api.fublog.tech/api/v1/auth/signup', data)
             .then((response) => {
                 console.log(response);
                 toast.success('Đăng kí thành công!', {
@@ -59,6 +88,8 @@ export default function Register() {
                     progress: undefined,
                     theme: "light",
                 });
+
+                navigate("/");
             })
             .catch((error) => {
                 console.log(error.response);
@@ -108,7 +139,20 @@ export default function Register() {
                 >
                     <input className="form-control" ref={fullNameRef} type="text" name="fullname" placeholder="Full Name" required />
                     <input className="form-control" ref={userRef} type="text" name="username" placeholder="User Name" required />
-                    <input className="form-control" ref={mailRef} type="email" name="email" placeholder="E-mail Address" required />
+                    <input
+                        className="form-control"
+                        ref={mailRef}
+                        type="email"
+                        name="email"
+                        placeholder="E-mail Address"
+                        required
+                        value={emailValue} // Giá trị của trường email
+                        onChange={handleEmailChange} // Xử lý khi giá trị thay đổi
+                        onBlur={handleEmailBlur} // Xử lý khi người dùng rời khỏi trường
+                    />
+                    {emailError && (
+                        <div className="text-danger">{emailError}</div>
+                    )}
                     <div className="password-container">
                         <input
                             className="form-control"
@@ -148,12 +192,12 @@ export default function Register() {
                         </button>
                     </div>
                 </form>
-                <div className="other-links">
+                {/* <div className="other-links">
                     <span>Or register with</span>
                     <a href="#" style={{ color: "#ffa94d" }}>
                         Google
                     </a>
-                </div>
+                </div> */}
             </div>
         </>
     );

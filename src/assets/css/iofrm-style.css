@@ -158,11 +158,11 @@ html, #root {
 
 .img-holder {
     display: inline-block;
-    position: absolute;
+
     top: 0;
     left: 0;
-    width: 550px;
-    min-height: 700px;
+    width: 100%;
+ 
     height: 100%;
     overflow: hidden;
     background-color: #820505;
@@ -259,7 +259,7 @@ html, #root {
 
 @media (min-height: 700px) {
     .img-holder {
-        position: fixed;
+        position: relative;
     }
 
     .website-logo {
@@ -268,8 +268,9 @@ html, #root {
 }
 
 .form-holder {
-    margin-left: 550px;
+   
     width: 100%;
+    height: 100%;
 }
 
 .form-holder .form-content {
@@ -547,7 +548,7 @@ html, #root {
     transition: all 0.3s ease;
 }
 
-.form-content input[type=checkbox], .form-content input[type=radio] {
+/* .form-content input[type=checkbox], .form-content input[type=radio] {
     width: auto;
 }
 
@@ -653,7 +654,7 @@ html, #root {
     background-color: #0093FF;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
-}
+} */
 
 .form-content .custom-options {
     display: -webkit-box;
@@ -663,7 +664,7 @@ html, #root {
     display: flex;
 }
 
-.form-content .custom-options input[type=checkbox], .form-content .custom-options input[type=radio] {
+/* .form-content .custom-options input[type=checkbox], .form-content .custom-options input[type=radio] {
     width: auto;
 }
 
@@ -723,7 +724,7 @@ html, #root {
 
 .form-content .custom-options input[type=checkbox]:not(:checked) + label:after, .form-content .custom-options input[type=radio]:not(:checked) + label:after {
     display: none;
-}
+} */
 
 .form-content .form-button {
     margin-top: 30px;
@@ -1129,7 +1130,7 @@ html, #root {
     bottom: -3px;
     width: 100%;
     height: 2px;
-    background-color: #DEDEDE;
+    /* background-color: #DEDEDE; */
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
@@ -1138,10 +1139,10 @@ html, #root {
     font-weight: 700;
 }
 
-.nav-tabs .nav-item .nav-link.active:before {
+/* .nav-tabs .nav-item .nav-link.active:before {
     height: 3px;
     background-color: #57D38C;
-}
+} */
 
 .form-subtitle {
     font-size: 19px;
@@ -1602,7 +1603,7 @@ input.sm-content {
     color: #000000;
 }
 
-.form-body.without-side .form-content input[type=checkbox]:not(:checked) + label, .form-body.without-side .form-content input[type=checkbox]:checked + label, .form-body.without-side .form-content input[type=radio]:not(:checked) + label, .form-body.without-side .form-content input[type=radio]:checked + label {
+/* .form-body.without-side .form-content input[type=checkbox]:not(:checked) + label, .form-body.without-side .form-content input[type=checkbox]:checked + label, .form-body.without-side .form-content input[type=radio]:not(:checked) + label, .form-body.without-side .form-content input[type=radio]:checked + label {
     color: #000;
 }
 
@@ -1638,7 +1639,7 @@ input.sm-content {
     background-color: #57D38C;
     -webkit-box-shadow: 0 3px 8px rgba(74, 230, 142, 0.35);
     box-shadow: 0 3px 8px rgba(74, 230, 142, 0.35);
-}
+} */
 
 .form-body.without-side .form-content .form-button {
     margin-bottom: 0;

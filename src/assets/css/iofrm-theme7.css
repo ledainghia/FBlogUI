@@ -62,7 +62,7 @@
 }
 
 .img-holder {
-  width: 550px;
+  width: 100%;
   background-image: linear-gradient( to left,#FFBB5C ,#FF9B50 );
 }
 
@@ -95,7 +95,11 @@
 }
 
 .form-holder {
-  margin-left: 550px;
+
+}
+
+.form-switch .form-check-input:checked {
+  background-color: orange;
 }
 
 .form-holder .form-content ::-webkit-input-placeholder {

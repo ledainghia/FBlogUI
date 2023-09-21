@@ -1,69 +1,69 @@
-
-import LoginContent from './components/LoginContent';
-
-import logo from '/images/logo-light.svg';
-import file from '/images/graphic3.svg';
-import './assets/css/iofrm-style.css';
-import './assets/css/iofrm-theme7.css';
-import './assets/css/bootstrap.min.css';
-import './assets/css/fontawesome-all.min.css';
-import { useEffect, useState } from 'react';
-import { HashLoader } from 'react-spinners';
-import './App.css'
-import { useForgetStore } from './store/store';
-import ForgotPassContent from './components/ForgotPassContent';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import './App.css';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import ProtectedRoute from './ProtectedRoute'; // Import as a default export
+import { useEffect } from 'react';
+import { useUserStore } from './store/store';
 
 function App() {
-
-  const [loading, setLoading] = useState(false);
-  const { isForgotten } = useForgetStore();
+  const { setUser } = useUserStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 3000)
-  }, [])
+    const userFromLocalStorage = localStorage.getItem('user');
+    const userFromSessionStorage = sessionStorage.getItem('user');
+    if (userFromLocalStorage) {
+      const parsedUser = JSON.parse(userFromLocalStorage);
+      setUser(parsedUser);
+    } else {
+
+      if (userFromSessionStorage) {
+        const parsedUser = JSON.parse(userFromSessionStorage);
+        setUser(parsedUser);
+      }
+    }
+
+
+    if (userFromLocalStorage) {
+      const tokenExpirationTime = JSON.parse(userFromLocalStorage).exp;
+      const currentTime = Date.now() / 1000;
+      if (tokenExpirationTime < currentTime) {
+        handleLogout();
+      }
+    }
+
+    if (userFromSessionStorage) {
+      const tokenExpirationTime = JSON.parse(userFromSessionStorage).exp;
+      console.log("cccccccc " + JSON.parse(userFromSessionStorage).exp);
+      const currentTime = Date.now() / 1000;
+      console.log("NOW " + currentTime);
+      if (tokenExpirationTime < currentTime) {
+        handleLogout();
+      }
+    }
+
+  }, [setUser]);
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
+    navigate('/login');
+  };
+
 
   return (
     <>
-      {
-        loading ?
-          <div style={{ textAlign: 'center', backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
-            <HashLoader
-              color="rgba(255, 193, 166, 1)"
-              cssOverride={{}}
-              size={100}
-            />
-          </div>
-          :
-          <>
-
-            <div className="form-body">
-              <div className="website-logo">
-                <a href="index.html">
-                  <div className="logo">
-                    <img className="logo-size" src={logo} alt="" />
-                  </div>
-                </a>
-              </div>
-              <div className="row">
-                <div className="img-holder">
-                  <div className="bg"></div>
-                  <div className="info-holder">
-                    <img src={file} alt="" />
-                  </div>
-                </div>
-                {isForgotten ? (< ForgotPassContent />) :
-                  <LoginContent />
-                }
-              </div>
-            </div>
-
-          </>
-      }
+      <Routes>
+        <Route
+          path="/login"
+          element={<ProtectedRoute element={<Login />} />} 
+        />
+        <Route path="/" element={<Home />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,6 +1,6 @@
 
 
-import Login from './Login';
+import Login from './LoginCom';
 import { useState } from 'react';
 import Register from './Register';
 
@@ -11,7 +11,7 @@ export default function LoginContent() {
 
 
     return (
-        <div className="form-holder">
+        <div className="  form-holder ">
             <div className="form-content">
                 <div className="form-items">
                     <h3>Chào mừng sự trở lại</h3>
