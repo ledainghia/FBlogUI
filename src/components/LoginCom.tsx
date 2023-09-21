@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
@@ -43,7 +43,7 @@ export default function Login() {
 
 
 
-    const { user, setUser } = useUserStore();
+    const { setUser } = useUserStore();
 
 
     const handleSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {

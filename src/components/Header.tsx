@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useUserStore } from "../store/store";
-import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 export default function Header() {
 
@@ -20,7 +19,7 @@ export default function Header() {
     };
 
     return (
-        <header className="header-default">
+        <header className="header-default sticky-top bg-light">
             <nav className="navbar navbar-expand-lg">
                 <div className="container-xl">
 
@@ -126,18 +125,7 @@ export default function Header() {
 
 
                     <div className="header-right">
-                        {/* 
-                        <ul className="social-icons list-unstyled list-inline mb-0">
-                            <li className="list-inline-item">
-                                <a href="#"><i className="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="#"><i className="fab fa-twitter"></i></a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a href="#"><i className="fab fa-instagram"></i></a>
-                            </li>
-                        </ul> */}
+
 
                         <div className="header-buttons">
                             <button className="search icon-button">
@@ -152,22 +140,17 @@ export default function Header() {
                             {user ? <>
 
 
-                                <ul className="navbar-nav mr-auto" style={{ display: "inline-block" }}>
+                                <div className="btn-group dropdown-center">
+                                    <button type="button" className="btn dropdown-toggle" style={{ color: "orange" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                        Hi, {user.fullname}
+                                    </button>
+                                    <ul className="dropdown-menu">
+                                        <li><a className="dropdown-item" href="#">Trang cá nhân</a></li>
 
-                                    <li className="nav-item dropdown">
-                                        <a className="nav-link dropdown-toggle" href="#">Hi {user.fullname}</a>
-                                        <ul className="dropdown-menu">
-                                            <li>
-                                                <a className="dropdown-item" href="">Profile</a>
-                                            </li>
-                                            <li className="dropdown-divider"></li>
-                                            <li>
-                                                <a className="dropdown-item logout" onClick={handleLogout}>Logout</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                </ul>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li className="logout"><a className="dropdown-item" onClick={handleLogout}>Đăng xuất</a></li>
+                                    </ul>
+                                </div>
                             </> :
                                 <span className="px-4 login"><Link to={"/login"} className="login">Đăng nhập</Link> </span>}
                         </div>

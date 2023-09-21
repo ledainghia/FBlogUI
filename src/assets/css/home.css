@@ -547,8 +547,8 @@ blockquote p {
 /*                      HEADER                              
 /*=================================================================*/
 .header-default {
-  position: relative;
-  margin-bottom: 30px;
+  /* position: relative; */
+  margin-bottom: 10px;
   width: 100%;
 }
 .header-default .navbar-nav {
@@ -867,7 +867,7 @@ body.down .header-classic .header-bottom.clone {
 }
 .header-right .header-buttons {
   display: inline-block;
-  margin-left: 50px;
+  /* margin-left: 50px; */
 }
 .header-right .header-buttons button {
   margin-left: 10px;
