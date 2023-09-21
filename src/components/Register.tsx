@@ -4,6 +4,16 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../store/store';
+import jwt from 'jwt-decode'
+interface userLogin {
+    user: string,
+    email: string,
+    roles: [],
+    fullname: string,
+    picture: string,
+
+}
 
 export default function Register() {
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -11,6 +21,7 @@ export default function Register() {
     // Thêm state để lưu thông báo lỗi và giá trị của trường email
     const [emailError, setEmailError] = useState<string | null>(null);
     const [emailValue, setEmailValue] = useState<string>(''); // Giá trị ban đầu là chuỗi rỗng
+    const { setUser } = useUserStore();
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
@@ -73,11 +84,23 @@ export default function Register() {
             email: mail,
         };
 
+        toast.info('Đang xử lý...', {
+            position: "top-right",
+            autoClose: false, // Không tự động đóng toast
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
 
         await axios
             .post('https://api.fublog.tech/api/v1/auth/signup', data)
             .then((response) => {
                 console.log(response);
+                toast.dismiss();
+                const userL: userLogin = jwt(response.data.token);
                 toast.success('Đăng kí thành công!', {
                     position: "top-right",
                     autoClose: 5000,
@@ -88,12 +111,16 @@ export default function Register() {
                     progress: undefined,
                     theme: "light",
                 });
+                localStorage.setItem('user', JSON.stringify(userL));
+                setUser(userL);
+                console.log(userL);
 
                 navigate("/");
             })
             .catch((error) => {
+                toast.dismiss();
                 console.log(error.response);
-                toast.error(error.response.data, {
+                toast.error(error.response.data + error.reponse.status, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,

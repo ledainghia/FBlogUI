@@ -131,7 +131,7 @@ export default function Header() {
                             <button className="search icon-button">
                                 <i className="icon-magnifier"></i>
                             </button>
-                            <button className="icon-button">
+                            <button className="icon-button" onClick={() => { navigate('/writepost') }}>
                                 <i className="icon-note"></i>
                             </button>
                             {/* <!-- <button className="burger-menu icon-button">

@@ -13,14 +13,11 @@ import ForgotPassContent from '../components/ForgotPassContent';
 
 function Login() {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { isForgotten } = useForgetStore();
 
     useEffect(() => {
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
+        window.onload = () => setLoading(false);
     }, [])
 
     return (

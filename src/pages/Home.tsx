@@ -12,17 +12,14 @@ import Footer from '../components/Footer';
 
 export default function Home() {
 
-    const [loading, setLoading] = useState(false);
-   
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
+        window.onload = () => setLoading(false);
     }, [])
 
-    
+
 
 
     return (

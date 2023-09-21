@@ -54,13 +54,25 @@ export default function Login() {
             username: user,
             password: password,
         };
+        toast.info('Đang xử lý...', {
+            position: "top-right",
+            autoClose: false, // Không tự động đóng toast
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         await axios
             .post('https://api.fublog.tech/api/v1/auth/login', data)
             .then((response) => {
+                toast.dismiss();
                 console.log(response);
-                const userL: userLogin = jwt(response.data.refreshToken);
+                const userL: userLogin = jwt(response.data.token);
                 console.log(userL);
                 toast.success('Login success!', {
+
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -79,8 +91,9 @@ export default function Login() {
 
             })
             .catch((error) => {
+                toast.dismiss();
                 console.log(error.response);
-                toast.error(error.response.data, {
+                toast.error(error.response.data.message, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,

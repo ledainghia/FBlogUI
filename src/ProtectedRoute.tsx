@@ -14,3 +14,14 @@ export default function ProtectedRoute({ element }: ProtectedRouteProps) {
 
   return <>{element}</>;
 }
+
+export function ProtectedRoute2({ element }: ProtectedRouteProps) {
+  const { user } = useUserStore();
+
+  if (!user) {
+    return <Navigate to="/login" />;
+    console.log("lozma" + user);
+  }
+
+  return <>{element}</>;
+}

@@ -2,9 +2,10 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import ProtectedRoute from './ProtectedRoute'; // Import as a default export
+import ProtectedRoute, { ProtectedRoute2 } from './ProtectedRoute'; // Import as a default export
 import { useEffect } from 'react';
 import { useUserStore } from './store/store';
+import WritePost from './pages/WritePost';
 
 function App() {
   const { setUser } = useUserStore();
@@ -58,9 +59,16 @@ function App() {
       <Routes>
         <Route
           path="/login"
-          element={<ProtectedRoute element={<Login />} />} 
+          element={<ProtectedRoute element={<Login />} />}
         />
         <Route path="/" element={<Home />} />
+
+        <Route
+          path='/writepost'
+          element={<ProtectedRoute2 element={<WritePost />} />}
+        />
+
+
       </Routes>
     </>
   );
