@@ -2147,7 +2147,6 @@ section {
   font-weight: 700;
 }
 .widget ul.list li a:before {
-  content: "\e606";
   color: #ffa94d;
   font-family: "simple-line-icons";
   font-size: 11px;
@@ -2223,6 +2222,10 @@ footer .footer-inner .copyright {
 /*=================================================================*/
 /*                      SEARCH POPUP                              
 /*=================================================================*/
+.search {
+  margin-left: 150px;
+}
+
 .search-popup {
   background: rgb(255, 255, 255);
   position: fixed;
