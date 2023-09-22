@@ -306,3 +306,25 @@
   top: 40%;
   left: 5%;
 }
+.block-exhibition {
+  .exhibition-item {
+    img {
+      width: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+  }
+  .user-info {
+    margin-left: 20px;
+    .name-author {
+      .name-user {
+        color: #555;
+      }
+      .user-stats {
+        span {
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+}

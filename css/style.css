@@ -2409,7 +2409,7 @@ button:focus {
 }
 
 .btn {
-  color: #FFF;
+  color: #fff;
   border: 0;
   border-radius: 25px;
   font-family: "Roboto", sans-serif;
@@ -2434,7 +2434,7 @@ button:focus {
 }
 
 .btn-default {
-  color: #FFF;
+  color: #fff;
   padding: 9.5px 36px;
   background: #ffa94d;
   background: -webkit-linear-gradient(left, #ffa94d 0%, #ff922b 51%, #ffa94d 100%);
@@ -2442,7 +2442,7 @@ button:focus {
   background-size: 200% auto;
 }
 .btn-default:hover {
-  color: #FFF;
+  color: #fff;
   background-position: right center;
 }
 
@@ -2450,7 +2450,7 @@ button:focus {
   color: #8f9bad;
   padding: 9.5px 36px;
   background: transparent;
-  border: solid 1px #EBEBEB;
+  border: solid 1px #ebebeb;
 }
 .btn-simple:hover {
   color: #ffa94d;
@@ -2458,14 +2458,14 @@ button:focus {
 }
 
 .btn-light {
-  color: #FFF;
+  color: #fff;
   padding: 9.5px 36px;
   background: transparent;
-  border: solid 1px #FFF;
+  border: solid 1px #fff;
 }
 .btn-light:hover {
   color: #ffa94d;
-  border-color: #FFF;
+  border-color: #fff;
 }
 
 .btn-full {
@@ -2489,7 +2489,7 @@ button:focus {
 }
 
 .icon-button {
-  color: #FFF;
+  color: #fff;
   border: 0;
   border-radius: 50%;
   background: #ff922b;
@@ -2525,6 +2525,13 @@ button:focus {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 1;
+}
+
+.btn-follow {
+  color: #fff;
+  background-color: #5488c7;
+  border-radius: 10px;
+  margin: 10px auto;
 }
 
 /*=================================================================*/
@@ -2835,6 +2842,21 @@ button:focus {
 .post-actions {
   top: 40%;
   left: 5%;
+}
+
+.block-exhibition .exhibition-item img {
+  width: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+.block-exhibition .user-info {
+  margin-left: 20px;
+}
+.block-exhibition .user-info .name-author .name-user {
+  color: #555;
+}
+.block-exhibition .user-info .name-author .user-stats span {
+  margin-left: 16px;
 }
 
 /*=================================================================*/
