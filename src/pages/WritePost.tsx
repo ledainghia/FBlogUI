@@ -81,13 +81,18 @@ export default function WritePost() {
 
                     </div>
                     <div className='col-md-6'>
-                        <h2>Preview</h2>
-                        <div dangerouslySetInnerHTML={{ __html: value }}></div>
+                        <h2 className='text-center'>Preview</h2>
+
+                        <div className="card">
+                            <div className="card-body">
+                                <div dangerouslySetInnerHTML={{ __html: value }} />
+                            </div>
+                        </div>
                     </div>
+                    {/* <Editor></Editor> */}
                 </div>
-                {/* <Editor></Editor> */}
+                <Footer />
             </div>
-            <Footer />
         </div>
     );
 }
