@@ -1,0 +1,35 @@
+/* CSS để tùy chỉnh code-block */
+.ql-syntax {
+    background-color: #f4f4f4; /* Màu nền của code-block */
+    border: 1px solid #ccc; /* Đường viền xung quanh code-block */
+    padding: 10px; /* Khoảng cách giữa nội dung và viền */
+    font-size: 14px; /* Kích thước font chữ */
+    line-height: 1.4; /* Độ cao dòng */
+    white-space: pre-wrap; /* Để đảm bảo các dòng code bọc dòng đúng cách */
+    overflow-x: auto; /* Cho cuộn ngang nếu cần thiết */
+    border-radius: 10px;
+  }
+  
+  /* Tùy chỉnh màu syntax highlight (tùy chọn) */
+  .ql-syntax .keyword {
+    color: #0077aa; /* Màu cho các từ khóa (ví dụ: if, else, function) */
+  }
+  
+  .ql-syntax .comment {
+    color: #888; /* Màu cho các comment */
+  }
+  
+  /* Tùy chỉnh màu cho các loại dữ liệu (tùy chọn) */
+  .ql-syntax .string {
+    color: #dd1144; /* Màu cho chuỗi */
+  }
+  
+  .ql-syntax .number {
+    color: #0077aa; /* Màu cho số */
+  }
+  
+  /* Tùy chỉnh màu cho các biến (tùy chọn) */
+  .ql-syntax .variable {
+    color: #333; /* Màu cho biến */
+  }
+  

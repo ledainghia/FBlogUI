@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
+import '../assets/css/writepost.css'
 
 import { useEffect, useState } from 'react';
 
@@ -24,10 +24,8 @@ export default function WritePost() {
             [{ 'color': [] }, { 'background': [] }],
             [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
             [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-            [{ 'font': [] }],
-            [{ 'align': [] }],
             ['link', 'image', 'video'],
-            ['clean']
+
         ],
 
     };
@@ -36,15 +34,6 @@ export default function WritePost() {
         <div>
             <Header />
             <div className='container-fluid'>
-                {/* <Editor
-                    initialValue="Bạn viết post của mình ở đây"
-                    previewStyle="vertical"
-                    height="600px"
-                    initialEditType="markdown"
-                    useCommandShortcut={true}
-                    ref={editorRef}
-                /> */}
-
                 <div className='row'>
                     <div className='col-md-6'>
                         <form>
@@ -70,7 +59,7 @@ export default function WritePost() {
                                     <div className="form-check">
                                         <input className="form-check-input" type="checkbox" id="disabledFieldsetCheck" />
                                         <label className="form-check-label" >
-                                            Bạn đã đọc kỹ nội quy đăng bài. Nếu bài viết bạn vi phạm tùy mức độ có thể bị ban account viễn viễn
+                                            Bạn đã đọc kỹ nội quy đăng bài. Nếu bài viết bạn vi phạm tùy mức độ có thể bị <strong className='text-danger'>ban account viễn viễn</strong>!!
                                         </label>
                                     </div>
                                 </div>
@@ -89,7 +78,6 @@ export default function WritePost() {
                             </div>
                         </div>
                     </div>
-                    {/* <Editor></Editor> */}
                 </div>
                 <Footer />
             </div>
