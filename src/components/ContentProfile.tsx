@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export default function ContentProfile() {
     return (
@@ -540,8 +540,7 @@ export default function ContentProfile() {
                                         </ul>
                                         <h5 className="post-title mb-3 mt-3">
                                             <a href="blog-single.html"
-                                            >An Incredibly Easy Method That Works For All</a
-                                            >
+                                            >An Incredibly Easy Method That Works For All</a>
                                         </h5>
                                         <p className="excerpt mb-0">
                                             I am so happy, my dear friend, so absorbed in the
@@ -612,8 +611,7 @@ export default function ContentProfile() {
                                         </ul>
                                         <h5 className="post-title mb-3 mt-3">
                                             <a href="blog-single.html"
-                                            >10 Ways To Immediately Start Selling Furniture</a
-                                            >
+                                            >10 Ways To Immediately Start Selling Furniture</a>
                                         </h5>
                                         <p className="excerpt mb-0">
                                             I am so happy, my dear friend, so absorbed in the
@@ -712,8 +710,7 @@ export default function ContentProfile() {
                                                 </li>
                                                 <li className="list-inline-item">
                                                     <a href="#"
-                                                    ><i className="fab fa-telegram-plane"></i
-                                                    ></a>
+                                                    ><i className="fab fa-telegram-plane"></i></a>
                                                 </li>
                                                 <li className="list-inline-item">
                                                     <a href="#"><i className="far fa-envelope"></i></a>
@@ -722,8 +719,7 @@ export default function ContentProfile() {
                                         </div>
                                         <div className="more-button float-end">
                                             <a href="blog-single.html"
-                                            ><span className="icon-options"></span
-                                            ></a>
+                                            ><span className="icon-options"></span></a>
                                         </div>
                                     </div>
                                 </div>
