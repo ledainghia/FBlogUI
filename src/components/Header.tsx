@@ -145,7 +145,7 @@ export default function Header() {
                                         Hi, {user.fullname}
                                     </button>
                                     <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="#">Trang cá nhân</a></li>
+                                        <li><Link className="dropdown-item" to={"/profile"}>Trang cá nhân</Link></li>
 
                                         <li><hr className="dropdown-divider" /></li>
                                         <li className="logout"><a className="dropdown-item" onClick={handleLogout}>Đăng xuất</a></li>

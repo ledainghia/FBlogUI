@@ -2123,7 +2123,7 @@ section {
 /*=================================================================*/
 .widget {
   border: solid 1px #ebebeb;
-  padding: 35px 30px;
+  padding: 35px 20px;
   margin-bottom: 40px;
 }
 .widget:last-child {

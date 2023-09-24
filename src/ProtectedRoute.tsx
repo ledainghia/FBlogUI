@@ -20,7 +20,7 @@ export function ProtectedRoute2({ element }: ProtectedRouteProps) {
 
   if (!user) {
     return <Navigate to="/login" />;
-    console.log("lozma" + user);
+
   }
 
   return <>{element}</>;

@@ -6,6 +6,7 @@ import ProtectedRoute, { ProtectedRoute2 } from './ProtectedRoute'; // Import as
 import { useEffect } from 'react';
 import { useUserStore } from './store/store';
 import WritePost from './pages/WritePost';
+import Profile from './pages/Profile';
 // import Test from './pages/Test';
 
 function App() {
@@ -67,6 +68,10 @@ function App() {
         <Route
           path='/writepost'
           element={<ProtectedRoute2 element={<WritePost />} />}
+        />
+        <Route
+          path='/profile'
+          element={<ProtectedRoute2 element={<Profile />} />}
         />
 
 
