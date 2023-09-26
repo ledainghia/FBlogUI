@@ -1,5 +1,3 @@
-
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import ReactQuill from 'react-quill';
@@ -7,6 +5,8 @@ import 'react-quill/dist/quill.snow.css';
 import '../assets/css/writepost.css'
 
 import { useEffect, useState } from 'react';
+import HeaderProfile from '../components/HeaderProfile';
+import WritePost2 from './WritePost2';
 
 export default function WritePost() {
     const [value, setValue] = useState('');
@@ -32,7 +32,7 @@ export default function WritePost() {
 
     return (
         <div>
-            <Header />
+            <HeaderProfile />
             <div className='container-fluid'>
                 <div className='row'>
                     <div className='col-md-6'>
@@ -63,7 +63,8 @@ export default function WritePost() {
                                         </label>
                                     </div>
                                 </div>
-                                <ReactQuill className='editor mb-3 ' theme="snow" value={value} onChange={setValue} modules={modules} />
+                                {/* <ReactQuill className='editor mb-3 ' theme="snow" value={value} onChange={setValue} modules={modules} /> */}
+                                <WritePost2></WritePost2>
                                 <button type="submit" className="btn btn-primary ">Submit</button>
                             </fieldset>
                         </form>

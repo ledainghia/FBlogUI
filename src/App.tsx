@@ -38,9 +38,8 @@ function App() {
 
     if (userFromSessionStorage) {
       const tokenExpirationTime = JSON.parse(userFromSessionStorage).exp;
-      console.log("cccccccc " + JSON.parse(userFromSessionStorage).exp);
+      
       const currentTime = Date.now() / 1000;
-      console.log("NOW " + currentTime);
       if (tokenExpirationTime < currentTime) {
         handleLogout();
       }

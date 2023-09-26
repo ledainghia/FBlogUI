@@ -1,11 +1,19 @@
 
+import { useEffect } from 'react';
 import { useUserStore } from '../store/store';
-import { IoNotificationsOutline } from 'react-icons/io5'
-import { Link } from 'react-router-dom';
+
+import { Link, useLocation } from 'react-router-dom';
 
 export default function HeaderProfile() {
 
     const { user } = useUserStore();
+    const path = useLocation();
+    useEffect(() => {
+        console.log(path);
+    }, []);
+
+
+
 
     return (
         <>
@@ -58,60 +66,62 @@ export default function HeaderProfile() {
                                 <button
                                     className="burger-menu icon-button ms-2 float-end float-md-none"
                                 >
-                                    <span className=""><IoNotificationsOutline style={{ with: '21px', height: '21px' }} /></span>
+                                    <span className=""><i className='icon-bell'></i></span>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <nav className="navbar navbar-expand-lg">
-                    <div className="container-xl">
-                        <div
-                            className="collapse navbar-collapse justify-content-center centered-nav">
-                            {/* <!-- menus --> */}
-                            <ul className="navbar-nav">
-                                <li className="nav-item dropdown active">
-                                    <a className="nav-link dropdown-toggle" href="home.html">Blog</a>
-                                    <ul className="dropdown-menu">
-                                        {/* <!-- <li><a className="dropdown-item" href="home.html">Home</a></li> --> */}
-                                        <li><Link to={"/profile"} className="dropdown-item">Personal</Link>
 
-                                        </li>
-                                        {/* <!-- <li><a className="dropdown-item" href="personal-alt.html">Personal Alt</a></li> -->
+
+            </header>
+            <nav className="navbar navbar-expand-lg sticky-top p-3" style={{ backgroundColor: 'white' }}>
+                <div className="container-xl">
+                    <div
+                        className="collapse navbar-collapse justify-content-center centered-nav">
+                        {/* <!-- menus --> */}
+                        <ul className="navbar-nav">
+                            <li className={`nav-item dropdown ${path.pathname === "/profile" ? "active" : ""}`}>
+                                <a className="nav-link dropdown-toggle" href="home.html">Blog</a>
+                                <ul className="dropdown-menu">
+                                    {/* <!-- <li><a className="dropdown-item" href="home.html">Home</a></li> --> */}
+                                    <li><Link to={"/profile"} className="dropdown-item">Personal</Link>
+
+                                    </li>
+                                    {/* <!-- <li><a className="dropdown-item" href="personal-alt.html">Personal Alt</a></li> -->
                                     <!-- <li><a className="dropdown-item" href="minimal.html">Minimal</a></li> --> */}
-                                        <li><Link to={"/"} className="dropdown-item">Home</Link></li>
-                                    </ul>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={"/writepost"}>
-                                        <a className="nav-link">Write</a>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="minimal.html">Mark Book</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="personal_folowing.html">Following</a>
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link" href="setting.html">Setting</a>
-                                    {/* <!-- <ul className="dropdown-menu">
+                                    <li><Link to={"/"} className="dropdown-item">Home</Link></li>
+                                </ul>
+                            </li>
+                            <li className={`nav-item ${path.pathname === "/writepost" ? "active" : ""}`}>
+                                <Link to={"/writepost"}>
+                                    <a className="nav-link">Write</a>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="minimal.html">Mark Book</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="personal_folowing.html">Following</a>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link" href="setting.html">Setting</a>
+                                {/* <!-- <ul className="dropdown-menu">
                                     <li><a className="dropdown-item" href="category.html">Category</a></li>
                                     <li><a className="dropdown-item" href="blog-single.html">Blog Single</a></li>
                                     <li><a className="dropdown-item" href="blog-single-alt.html">Blog Single Alt</a></li>
                                     <li><a className="dropdown-item" href="about.html">About</a></li>
                                     <li><a className="dropdown-item" href="contact.html">Contact</a></li>
                                 </ul> --> */}
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="contact.html">Contact</a>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
-            </header>
+                </div>
+            </nav>
         </>
     )
 }
