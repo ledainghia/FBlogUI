@@ -31,14 +31,13 @@ Description: Minimal Blog and Magazine HTML Template
 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 /*=================================================================*/
 /*                      BASE                              
 /*=================================================================*/
 body {
   color: #8f9bad;
   background-color: #fff;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 15px;
   line-height: 1.7;
   overflow-x: hidden;
@@ -491,7 +490,7 @@ img {
 /*=================================================================*/
 h1, h2, h3, h4, h5, h6 {
   color: #203656;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   line-height: 1.4;
   margin: 20px 0;
@@ -541,7 +540,6 @@ blockquote p {
 /*=================================================================*/
 .header-default {
   position: relative;
-  margin-bottom: 30px;
   width: 100%;
 }
 .header-default .navbar-nav {
@@ -665,7 +663,7 @@ body.down .header-classic .header-bottom.clone {
 }
 
 .slogan {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #9faabb;
   font-size: 14px;
 }
@@ -675,7 +673,7 @@ body.down .header-classic .header-bottom.clone {
 }
 
 .navbar-nav {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
 }
 .navbar-nav .nav-link {
@@ -1021,7 +1019,7 @@ body.down .header-classic .header-bottom.clone {
 }
 .canvas-menu .vertical-menu li a {
   color: #203656;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 400;
   text-decoration: none;
@@ -1223,9 +1221,8 @@ section {
   border-radius: 50%;
 }
 .post .thumb.circle .inner img {
-  width: 50px;
   height: 50px;
-  object-fit: cover;
+  width: 50px;
 }
 .post .thumb.top-rounded .inner {
   overflow: hidden;
@@ -1375,7 +1372,7 @@ section {
   border: solid 2px #fff;
   border-radius: 50%;
   font-size: 12px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   height: 24px;
   line-height: 22px;
@@ -2150,7 +2147,6 @@ section {
   font-weight: 700;
 }
 .widget ul.list li a:before {
-  content: "\e606";
   color: #ffa94d;
   font-family: "simple-line-icons";
   font-size: 11px;
@@ -2171,6 +2167,17 @@ section {
 }
 .widget ul.list li span {
   float: right;
+}
+.widget ul.list li .sublist {
+  list-style: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+.widget ul.list li .sublist li {
+  margin-left: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
 }
 .widget ul.list.social-icons li a:before {
   content: "";
@@ -2215,6 +2222,10 @@ footer .footer-inner .copyright {
 /*=================================================================*/
 /*                      SEARCH POPUP                              
 /*=================================================================*/
+.search {
+  margin-left: 150px;
+}
+
 .search-popup {
   background: rgb(255, 255, 255);
   position: fixed;
@@ -2246,6 +2257,112 @@ footer .footer-inner .copyright {
   right: 30px;
   top: 30px;
   position: absolute;
+}
+
+/*=================================================================*/
+/*                      setting                             
+/*=================================================================*/
+body {
+  background: #f5f5f5;
+  margin-top: 20px;
+}
+
+.ui-w-80 {
+  width: 80px !important;
+  height: auto;
+  border-radius: 50%;
+}
+
+.btn-default {
+  border-color: rgba(24, 28, 33, 0.1);
+  background: rgba(0, 0, 0, 0);
+  color: #4e5155;
+}
+
+label.btn {
+  margin-bottom: 0;
+}
+
+.btn-outline-primary {
+  border-color: #26b4ff;
+  background: transparent;
+  color: #26b4ff;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.text-light {
+  color: #babbbc !important;
+}
+
+.btn-facebook {
+  border-color: rgba(0, 0, 0, 0);
+  background: #3b5998;
+  color: #fff;
+}
+
+.btn-instagram {
+  border-color: rgba(0, 0, 0, 0);
+  background: #000;
+  color: #fff;
+}
+
+.card {
+  background-clip: padding-box;
+  box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
+}
+
+.row-bordered {
+  overflow: hidden;
+}
+
+.account-settings-fileinput {
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.account-settings-links .list-group-item.active {
+  font-weight: bold !important;
+}
+
+html:not(.dark-style) .account-settings-links .list-group-item.active {
+  background: transparent !important;
+}
+
+.account-settings-multiselect ~ .select2-container {
+  width: 100% !important;
+}
+
+.light-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(24, 28, 33, 0.03) !important;
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(24, 28, 33, 0.03) !important;
+}
+.light-style .account-settings-links .list-group-item.active {
+  color: #4e5155 !important;
+  color: #4e5155 !important;
+}
+
+.material-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(24, 28, 33, 0.03) !important;
+}
+.material-style .account-settings-links .list-group-item.active {
+  color: #4e5155 !important;
+}
+
+.dark-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+.dark-style .account-settings-links .list-group-item.active {
+  color: #fff !important;
 }
 
 /*=================================================================*/
@@ -2287,7 +2404,7 @@ footer .footer-inner .copyright {
 
 .ads-title {
   color: #C0C0C0;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   display: block;
   margin-bottom: 10px;
@@ -2398,10 +2515,10 @@ button:focus {
 }
 
 .btn {
-  color: #FFF;
+  color: #fff;
   border: 0;
   border-radius: 25px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 400;
   overflow: hidden;
@@ -2423,7 +2540,7 @@ button:focus {
 }
 
 .btn-default {
-  color: #FFF;
+  color: #fff;
   padding: 9.5px 36px;
   background: #ffa94d;
   background: -webkit-linear-gradient(left, #ffa94d 0%, #ff922b 51%, #ffa94d 100%);
@@ -2431,7 +2548,7 @@ button:focus {
   background-size: 200% auto;
 }
 .btn-default:hover {
-  color: #FFF;
+  color: #fff;
   background-position: right center;
 }
 
@@ -2439,7 +2556,7 @@ button:focus {
   color: #8f9bad;
   padding: 9.5px 36px;
   background: transparent;
-  border: solid 1px #EBEBEB;
+  border: solid 1px #ebebeb;
 }
 .btn-simple:hover {
   color: #ffa94d;
@@ -2447,14 +2564,14 @@ button:focus {
 }
 
 .btn-light {
-  color: #FFF;
+  color: #fff;
   padding: 9.5px 36px;
   background: transparent;
-  border: solid 1px #FFF;
+  border: solid 1px #fff;
 }
 .btn-light:hover {
   color: #ffa94d;
-  border-color: #FFF;
+  border-color: #fff;
 }
 
 .btn-full {
@@ -2478,7 +2595,7 @@ button:focus {
 }
 
 .icon-button {
-  color: #FFF;
+  color: #fff;
   border: 0;
   border-radius: 50%;
   background: #ff922b;
@@ -2516,6 +2633,13 @@ button:focus {
   z-index: 1;
 }
 
+.btn-follow {
+  color: #fff;
+  background-color: #5488c7;
+  border-radius: 10px;
+  margin: 10px auto;
+}
+
 /*=================================================================*/
 /*                     BOOTSTRAP ELEMENTS
 /*=================================================================*/
@@ -2546,9 +2670,9 @@ button:focus {
   font-size: 14px;
   line-height: 1.6;
   color: #8f9bad;
-  background-color: #FFF;
+  background-color: #fff;
   background-image: none;
-  border: solid 1px #EBEBEB;
+  border: solid 1px #ebebeb;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -2576,19 +2700,23 @@ button:focus {
   border-radius: 0;
 }
 
-.form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.form-control::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
   color: #9faabb;
 }
 
-.form-control::-moz-placeholder { /* Firefox 19+ */
+.form-control::-moz-placeholder {
+  /* Firefox 19+ */
   color: #9faabb;
 }
 
-.form-control:-ms-input-placeholder { /* IE 10+ */
+.form-control:-ms-input-placeholder {
+  /* IE 10+ */
   color: #9faabb;
 }
 
-.form-control:-moz-placeholder { /* Firefox 18- */
+.form-control:-moz-placeholder {
+  /* Firefox 18- */
   color: #9faabb;
 }
 
@@ -2600,7 +2728,8 @@ button:focus {
   border-radius: 0;
 }
 
-.alert-dismissable .close, .alert-dismissible .close {
+.alert-dismissable .close,
+.alert-dismissible .close {
   position: relative;
   top: 0;
   right: 0;
@@ -2667,19 +2796,22 @@ button:focus {
     transform: rotate(360deg);
   }
 }
-.nav-fill .nav-item, .nav-fill > .nav-link {
+.nav-fill .nav-item,
+.nav-fill > .nav-link {
   margin-right: 10px;
 }
-.nav-fill .nav-item:last-child, .nav-fill > .nav-link:last-child {
+.nav-fill .nav-item:last-child,
+.nav-fill > .nav-link:last-child {
   margin-right: 0;
 }
 
 .nav-fill .nav-item > .nav-link {
-  color: #8F9BAD !important;
+  color: #8f9bad !important;
   margin-right: 10px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   color: #fff !important;
   background: #ffa94d;
   background: -webkit-linear-gradient(left, #ffa94d 0%, #ff922b 51%, #ffa94d 100%);
@@ -2690,7 +2822,7 @@ button:focus {
 
 .nav-pills .nav-link {
   background: 0 0;
-  border: solid 1px #EBEBEB;
+  border: solid 1px #ebebeb;
   border-radius: 30px;
 }
 
@@ -2708,7 +2840,7 @@ button:focus {
 
 .page-item.active .page-link {
   z-index: 3;
-  color: #FFF;
+  color: #fff;
   border-color: transparent;
   background: #ff922b;
   background: -webkit-linear-gradient(bottom, #ff922b 0%, #ffa94d 51%, #ff922b 100%);
@@ -2729,7 +2861,7 @@ button:focus {
   border-radius: 50%;
   font-size: 14px;
   text-decoration: none;
-  border: solid 1px #EBEBEB;
+  border: solid 1px #ebebeb;
   height: 45px;
   line-height: 45px;
   text-align: center;
@@ -2740,7 +2872,7 @@ button:focus {
 
 .page-link:hover {
   z-index: 2;
-  color: #FFF;
+  color: #fff;
   background: #ff922b;
   background: -webkit-linear-gradient(bottom, #ff922b 0%, #ffa94d 51%, #ff922b 100%);
   background: linear-gradient(to top, #ff922b 0%, #ffa94d 51%, #ff922b 100%);
@@ -2765,7 +2897,7 @@ button:focus {
 #return-to-top {
   color: #8f9bad;
   font-size: 13px;
-  border: solid 1px #EBEBEB;
+  border: solid 1px #ebebeb;
   text-decoration: none;
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
@@ -2811,6 +2943,127 @@ button:focus {
 }
 .social-icons li:not(:last-child) {
   margin-right: 1rem;
+}
+
+.post-actions {
+  top: 40%;
+  left: 5%;
+}
+
+.block-exhibition .exhibition-item img {
+  width: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+.block-exhibition .user-info {
+  margin-left: 20px;
+}
+.block-exhibition .user-info .name-author .name-user {
+  color: #555;
+}
+.block-exhibition .user-info .name-author .user-stats span {
+  margin-left: 16px;
+}
+
+.card .card-block .post-author-avatar {
+  margin: 14px;
+}
+.card .card-block .post-author-avatar .avatar--md {
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+}
+.card .card-block .post-header .post-meta .user--inline .el-popover__reference-wrapper .el-popover__reference {
+  color: #7a8ac7;
+  font-size: 12px;
+}
+.card .card-block .post-header .post-meta .text-muted .icon-btn {
+  outline: none;
+  background: none;
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  margin-left: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.card .card-block .post-header .post-meta .text-muted .btn-copy {
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+.card .card-block .post-header .post-meta .text-muted .btn-copy .fa {
+  font-size: 0.7rem;
+  color: #9b9b9b;
+  transform: rotate(45deg);
+  font-style: normal;
+}
+.card .card-block .post-title-box {
+  flex-direction: column;
+}
+.card .card-block .post-title-box h1 {
+  padding-right: 0.5rem;
+  color: #0b1a33;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  width: 80%;
+}
+.card .card-block .post-title-box a {
+  color: #0b1a33;
+}
+.card .card-block .post-title-box .tag {
+  font-size: 12px;
+}
+.card .post-stats {
+  display: flex;
+  align-items: center;
+  line-height: 22px;
+  color: #9b9b9b;
+  gap: 8px;
+}
+.card .commentators {
+  align-self: center;
+  margin-left: 20px;
+}
+.card .commentators .participants--xs .participants__item {
+  margin-right: 5px;
+}
+.card .commentators .participants--xs .participants__item a img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.card .commentators li:last-child .el-button {
+  background: none;
+  padding: 7px;
+  border-radius: 50%;
+  border: #9b9b9b 1px solid;
+  width: 30px;
+  height: 30px;
+  line-height: 18px;
+  font-size: 9px;
+}
+.card .points {
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+.card .points .carets {
+  display: inline-flex;
+  flex-direction: column;
+  margin-right: 0.25rem;
+}
+.card .points .carets .fa:first-child {
+  height: 0.5rem;
+  margin-top: -0.25rem;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.user-activities {
+  border: solid 1px #ebebeb;
+  border-radius: 10px;
+  padding: 20px 20px;
 }
 
 /*=================================================================*/
