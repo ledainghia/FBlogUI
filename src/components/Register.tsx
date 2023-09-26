@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import jwt from 'jwt-decode';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useUserStore } from '../store/store';
-import jwt from 'jwt-decode'
+import CustomToast from '../customHooks/configToast';
+import useToast from './CustomToast';
 interface userLogin {
     user: string,
     email: string,
@@ -16,6 +18,7 @@ interface userLogin {
 }
 
 export default function Register() {
+    const cusToast = useToast();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     // Thêm state để lưu thông báo lỗi và giá trị của trường email
@@ -24,14 +27,17 @@ export default function Register() {
     const { setUser } = useUserStore();
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newEmail = e.target.value;
+        const newEmail = e.target?.value;
         setEmailValue(newEmail); // Cập nhật giá trị email
 
         // Kiểm tra xem email có đúng định dạng không
         const emailPattern = /^[a-zA-Z0-9._-]+@fpt\.edu\.vn$/; // Mẫu email
         if (emailPattern.test(newEmail)) {
             setEmailError('Nếu bạn login bằng mail @fpt.edu.vn thì bạn phải sử dụng đăng nhập bằng google');
+            cusToast.showToast("Không thể đăng kí bằng mail @fpt.edu.vn", "error")
+            console.log(emailPattern.test(newEmail));
         } else {
+            cusToast.dismissToast();
             setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
         }
     };
@@ -41,7 +47,10 @@ export default function Register() {
         const emailPattern = /^[a-zA-Z0-9._-]+@fpt\.edu\.vn$/; // Mẫu email
         if (emailPattern.test(emailValue)) {
             setEmailError('Nếu bạn login bằng mail @fpt.edu.vn thì bạn phải sử dụng đăng nhập bằng google');
+            cusToast.showToast("Không thể đăng kí bằng mail @fpt.edu.vn", "error")
+
         } else {
+            cusToast.dismissToast();
             setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
         }
     };
@@ -84,33 +93,15 @@ export default function Register() {
             email: mail,
         };
 
-        toast.info('Đang xử lý...', {
-            position: "top-right",
-            autoClose: false, // Không tự động đóng toast
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        cusToast.showToast("Đang xử lý...", "error");
 
         await axios
             .post('https://api.fublog.tech/api/v1/auth/signup', data)
             .then((response) => {
                 console.log(response);
-                toast.dismiss();
+                cusToast.dismissToast();
                 const userL: userLogin = jwt(response.data.token);
-                toast.success('Đăng kí thành công!', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                cusToast.showToast("Đăng kí thành công", "success");
                 localStorage.setItem('user', JSON.stringify(userL));
                 setUser(userL);
                 console.log(userL);
@@ -118,7 +109,7 @@ export default function Register() {
                 navigate("/");
             })
             .catch((error) => {
-                toast.dismiss();
+                cusToast.dismissToast();
                 console.log(error.response);
                 toast.error(error.response.data + error.reponse.status, {
                     position: "top-right",
@@ -144,20 +135,7 @@ export default function Register() {
     return (
         <>
 
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
-            {/* Same as */}
-            <ToastContainer />
+            <CustomToast />
             <div>
                 <form
                     action="post"
