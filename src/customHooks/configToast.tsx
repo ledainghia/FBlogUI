@@ -60,7 +60,7 @@ const useToast = () => {
     }
   }, [message, type]);
 
-  const showToast = (message: string, toastType: 'error' | 'success' | 'info' = 'error') => {
+  const showToast = (message: string, toastType: 'error' | 'success' | 'info' | null = 'error') => {
     setMessage(message);
     setType(toastType);
   };

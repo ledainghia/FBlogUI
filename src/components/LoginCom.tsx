@@ -2,7 +2,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useToast from '../customHooks/configToast';
 import { useForgetStore, useUserStore } from '../store/store';
@@ -153,7 +153,7 @@ export default function Login() {
         <>
 
 
-
+            <ToastContainer />
             <form
                 action="post"
                 onSubmit={handleSubmitLogin}

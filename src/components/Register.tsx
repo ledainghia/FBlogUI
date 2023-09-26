@@ -4,7 +4,7 @@ import axios from 'axios';
 import jwt from 'jwt-decode';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useUserStore } from '../store/store';
 
 import useToast from '../customHooks/configToast';
@@ -38,6 +38,7 @@ export default function Register() {
             console.log(emailPattern.test(newEmail));
         } else {
             cusToast.dismissToast();
+            cusToast.showToast("", null)
             setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
         }
     };
@@ -51,6 +52,7 @@ export default function Register() {
 
         } else {
             cusToast.dismissToast();
+            cusToast.showToast("", null)
             setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
         }
     };
@@ -134,7 +136,7 @@ export default function Register() {
 
     return (
         <>
-
+            <ToastContainer />
 
             <div>
                 <form
