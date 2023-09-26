@@ -6,8 +6,8 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useUserStore } from '../store/store';
-import CustomToast from '../customHooks/configToast';
-import useToast from './CustomToast';
+
+import useToast from '../customHooks/configToast';
 interface userLogin {
     user: string,
     email: string,
@@ -135,7 +135,7 @@ export default function Register() {
     return (
         <>
 
-            <CustomToast />
+
             <div>
                 <form
                     action="post"

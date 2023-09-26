@@ -10,7 +10,7 @@ import { useForgetStore, useUserStore } from '../store/store';
 import { signInWithPopup } from "firebase/auth";
 import jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-import CustomToast from './CustomToast';
+
 import { auth, provider } from './firebase';
 
 
@@ -152,7 +152,7 @@ export default function Login() {
     return (
         <>
 
-            <CustomToast />
+
 
             <form
                 action="post"
