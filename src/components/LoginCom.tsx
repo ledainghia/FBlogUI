@@ -1,13 +1,19 @@
-import { useRef, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useToast from '../custom/configToast';
 import { useForgetStore, useUserStore } from '../store/store';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import jwt from 'jwt-decode'
+
+import { signInWithPopup } from "firebase/auth";
+import jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import CustomToast from './CustomToast';
+import { auth, provider } from './firebase';
+
+
 
 interface userGoogle {
     name: string,
@@ -24,13 +30,23 @@ interface userLogin {
 
 }
 
+
+
+
 export default function Login() {
+
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [check, setCheck] = useState(false);
     const { setForget } = useForgetStore();
     const navigate = useNavigate();
     const userRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
+    const cusToast = useToast();
+    const toastId = useRef(null);
+    const handleSignIn = (user: any) => {
+        console.log(user); // Xử lý người dùng sau khi đăng nhập thành công
+    }
+
 
 
     const handleCheckboxChange = () => {
@@ -41,6 +57,54 @@ export default function Login() {
         setForget(true); // Đặt isForgotten thành true
     };
 
+    const handleClickLoginGG = () => {
+
+        cusToast.showToast("Loading ...", "info");
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // Đăng nhập thành công
+                toast.dismiss();
+
+                const user = result.user;
+                console.log("User:", user.email);
+
+
+                cusToast.showToast("Login success", 'success');
+                if (user.email && !user.email.endsWith('@fpt.edu.vn')) {
+                    cusToast.showToast("Bạn chỉ có thể đăng nhập với google bằng tài khoản mail có đuôi @fpt.edu.vn", "error");
+                    return;
+                } else {
+                    // Chuỗi email không kết thúc bằng '@example.com'
+                }
+
+                // navigate("/")
+
+                // Tiếp theo, bạn có thể thực hiện xử lý cho người dùng sau khi đăng nhập ở đây
+            })
+            .catch((error) => {
+                // Xử lý lỗi đăng nhập
+                cusToast.dismissToast();
+                console.error("Error:", error);
+                cusToast.showToast("Login Google error", 'error');
+            });
+    };
+
+    // Ví dụ về cách sử dụng useEffect để theo dõi trạng thái đăng nhập
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                // Đã đăng nhập
+                console.log("User is signed in:", user);
+
+            } else {
+                // Đã đăng xuất
+                console.log("User is signed out");
+            }
+            return () => unsubscribe;
+        });
+
+        return () => unsubscribe(); // Hủy theo dõi trạng thái đăng nhập khi component unmounts
+    }, []);
 
 
     const { setUser } = useUserStore();
@@ -54,34 +118,15 @@ export default function Login() {
             username: user,
             password: password,
         };
-        toast.info('Đang xử lý...', {
-            position: "top-right",
-            autoClose: false, // Không tự động đóng toast
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        cusToast.showToast("Loading ...", "info");
         await axios
             .post('https://api.fublog.tech/api/v1/auth/login', data)
             .then((response) => {
-                toast.dismiss();
+                cusToast.dismissToast();
                 console.log(response);
                 const userL: userLogin = jwt(response.data.token);
                 console.log(userL);
-                toast.success('Login success!', {
-
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                cusToast.showToast("Đăng nhập thành công", "success")
 
                 { check ? localStorage.setItem('user', JSON.stringify(userL)) : sessionStorage.setItem('user', JSON.stringify(userL)); }
                 setUser(userL);
@@ -91,18 +136,10 @@ export default function Login() {
 
             })
             .catch((error) => {
-                toast.dismiss();
+                cusToast.dismissToast();
                 console.log(error.response);
-                toast.error(error.response.data.message, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                cusToast.showToast("Đăng nhập thất bại", "error");
+                cusToast.showToast(error.response.data.message, "error");
             })
     }
 
@@ -115,20 +152,8 @@ export default function Login() {
     return (
         <>
 
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
-            {/* Same as */}
-            <ToastContainer />
+            <CustomToast />
+
             <form
                 action="post"
                 onSubmit={handleSubmitLogin}
@@ -167,11 +192,11 @@ export default function Login() {
             </form>
             <div className="other-links">
                 <span>Hoặc đăng nhập bằng</span>
-                {/* <a href="#" style={{ color: "#ffa94d" }}>
+                <a onClick={handleClickLoginGG} style={{ color: "#ffa94d" }}>
                     Google
-                </a> */}
+                </a>
 
-                <GoogleOAuthProvider clientId="673525613876-8si0uta7f5u7iq1po5rsj4lsur972vtj.apps.googleusercontent.com"><GoogleLogin
+                {/* <GoogleOAuthProvider clientId="673525613876-8si0uta7f5u7iq1po5rsj4lsur972vtj.apps.googleusercontent.com"><GoogleLogin
                     onSuccess={async credentialResponse => {
                         console.log(credentialResponse);
                         const idToken = credentialResponse?.credential;
@@ -215,8 +240,13 @@ export default function Login() {
                         });
 
                     }}
-                /></GoogleOAuthProvider>
-            </div>
+                /></GoogleOAuthProvider> */}
+                {/* <StyledFirebaseAuth
+                    uiConfig={uiConfig}
+                    firebaseAuth={auth}
+                /> */}
+
+            </div >
         </>
     );
 }

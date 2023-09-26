@@ -15,10 +15,18 @@ export default function Home() {
     const [loading, setLoading] = useState(true);
 
 
-    useEffect(() => {
-        window.onload = () => setLoading(false);
-    }, [])
 
+    useEffect(() => {
+        if (document.readyState === 'complete') {
+            setLoading(false);
+        } else {
+            document.onreadystatechange = function () {
+                if (document.readyState == "complete") {
+                    setLoading(false);
+                }
+            }
+        }
+    }, [setLoading])
 
 
 

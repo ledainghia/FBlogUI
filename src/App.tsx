@@ -1,9 +1,9 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import ProtectedRoute, { ProtectedRoute2 } from './ProtectedRoute'; // Import as a default export
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useUserStore } from './store/store';
 import WritePost from './pages/WritePost';
 
@@ -56,13 +56,15 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route
-          path="/login"
-          element={<ProtectedRoute element={<Login />} />}
-        />
-        <Route path="/" element={<Home />} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/login"
+            element={<ProtectedRoute element={<Login />} />}
+          />
+          <Route path="/" element={<Home />} />
 
+<<<<<<< Updated upstream
         <Route
           path='/writepost'
           element={<ProtectedRoute2 element={<WritePost />} />}
@@ -70,6 +72,18 @@ function App() {
 
 
       </Routes>
+=======
+          <Route
+            path='/writepost'
+            element={<ProtectedRoute2 element={<WritePost />} />}
+          />
+          <Route
+            path='/profile'
+            element={<ProtectedRoute2 element={<Profile />} />}
+          />
+        </Routes>
+      </Suspense>
+>>>>>>> Stashed changes
     </>
   );
 }
