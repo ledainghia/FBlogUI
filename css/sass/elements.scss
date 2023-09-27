@@ -390,8 +390,12 @@
       a {
         color: #0b1a33;
       }
-      .tag {
-        font-size: 12px;
+      .tags {
+        gap: 8px;
+        .el-tag {
+          font-size: 12px;
+          border-radius: 10px;
+        }
       }
     }
   }

@@ -2515,7 +2515,7 @@ button:focus {
 }
 
 .btn {
-  color: #fff;
+  color: #ff922b;
   border: 0;
   border-radius: 25px;
   font-family: "Roboto", sans-serif;
@@ -2637,6 +2637,20 @@ button:focus {
   color: #fff;
   background-color: #5488c7;
   border-radius: 10px;
+  margin: 10px auto;
+}
+
+.btn-approve {
+  color: #fff;
+  background-color: #ff922b;
+  border-radius: 20px;
+  margin: 10px auto;
+}
+
+.btn-deny {
+  color: #fff;
+  background-color: #203656;
+  border-radius: 20px;
   margin: 10px auto;
 }
 
@@ -3011,8 +3025,12 @@ button:focus {
 .card .card-block .post-title-box a {
   color: #0b1a33;
 }
-.card .card-block .post-title-box .tag {
+.card .card-block .post-title-box .tags {
+  gap: 8px;
+}
+.card .card-block .post-title-box .tags .el-tag {
   font-size: 12px;
+  border-radius: 10px;
 }
 .card .post-stats {
   display: flex;
