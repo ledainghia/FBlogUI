@@ -3,13 +3,20 @@ import { useEffect } from 'react';
 import { useUserStore } from '../store/store';
 
 import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 export default function HeaderProfile() {
 
     const { user } = useUserStore();
     const path = useLocation();
     useEffect(() => {
-        console.log(path);
+        axios.get("/api/v1/auth/getUserInfo")
+            .then(response => {
+                console.log(response);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }, []);
 
 
@@ -51,10 +58,12 @@ export default function HeaderProfile() {
                                 /></a>
                             <a href="personal.html" className="d-block text-logo"
                             >{user?.fullname}<span className="dot">.</span></a>
-                            <span className="slogan d-block"
-                            >{user?.email} <strong> {user?.roles.map((index) => (
-                                <span key={index}> | {index}</span>
-                            ))} </strong></span>
+                            {/* <span className="slogan d-block"
+                            >
+                                {user?.email} <strong> {user?.roles.map((index) => (
+                                    <span key={index}> | {index}</span>
+                                ))}
+                                </strong></span> */}
                         </div>
 
                         <div className="col-md-4 col-sm-12 col-xs-12">

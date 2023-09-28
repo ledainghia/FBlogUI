@@ -1,3 +1,4 @@
+import { UserInfo } from 'firebase/auth';
 import { create } from 'zustand';
 
 interface ForgetStore {
@@ -31,11 +32,28 @@ interface userLogin {
 }
 
 interface UserStore {
-  user: userLogin | null;
-  setUser: (user: userLogin | null) => void;
+  user: userLogin | null ;
+  setUser: (user: userLogin | null ) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
+}));
+
+interface userGGLogin {
+  user_id: string,
+  email: string,
+  name: string,
+  picture: string,
+
+}
+interface UserGGStore {
+  userGG: userGGLogin | null;
+  setUserGG: (user: userGGLogin | null) => void;
+}
+
+export const useUserGGStore = create<UserGGStore>((set) => ({
+  userGG: null,
+  setUserGG: (userGG) => set({ userGG }),
 }));

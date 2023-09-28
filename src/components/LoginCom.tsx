@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useToast from '../customHooks/configToast';
-import { useForgetStore, useUserStore } from '../store/store';
+import { useForgetStore, useUserGGStore, useUserStore } from '../store/store';
 
-import { signInWithPopup } from "firebase/auth";
+import { UserInfo, signInWithPopup } from "firebase/auth";
 import jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,10 +15,13 @@ import { auth, provider } from './firebase';
 
 
 
+
 interface userGoogle {
+    user_id: string;
     name: string,
     email: string,
     picture: string,
+
 }
 
 interface userLogin {
@@ -42,10 +45,9 @@ export default function Login() {
     const userRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const cusToast = useToast();
-    const toastId = useRef(null);
-    const handleSignIn = (user: any) => {
-        console.log(user); // Xử lý người dùng sau khi đăng nhập thành công
-    }
+    const { setUser } = useUserStore();
+    const { setUserGG } = useUserGGStore();
+
 
 
 
@@ -56,17 +58,19 @@ export default function Login() {
     const handleForget = () => {
         setForget(true); // Đặt isForgotten thành true
     };
-
+    let userL: userGoogle;
     const handleClickLoginGG = () => {
 
         cusToast.showToast("Loading ...", "info");
+        localStorage.clear();
+        sessionStorage.clear();
         signInWithPopup(auth, provider)
             .then((result) => {
                 // Đăng nhập thành công
                 toast.dismiss();
 
                 const user = result.user;
-                console.log("User:", user.email);
+                console.log("User:", user);
 
 
                 cusToast.showToast("Login success", 'success');
@@ -74,10 +78,39 @@ export default function Login() {
                     cusToast.showToast("Bạn chỉ có thể đăng nhập với google bằng tài khoản mail có đuôi @fpt.edu.vn", "error");
                     return;
                 } else {
-                    // Chuỗi email không kết thúc bằng '@example.com'
+                    user.getIdTokenResult().then(idTokenResult => {
+                        userL = jwt(idTokenResult.token);
+                        const postData = {
+                            fullName: userL.name,
+                            email: userL.email,
+                            picture: userL.picture
+                        };
+
+                        axios.post('/api/v1/auth/google', postData)
+                            .then(response => {
+                                // Xử lý kết quả trả về sau khi gửi request thành công (nếu cần)
+                                console.log('Response:', response.data);
+                                localStorage.setItem('token', response.data.token);
+                                localStorage.setItem('refreshToken', response.data.refreshToken);
+                                navigate("/");
+                            })
+                            .catch(error => {
+                                // Xử lý lỗi khi gửi request
+                                console.error('Error:', error);
+                            });
+                        // console.log(userL);
+                    });
+
+
                 }
 
-                // navigate("/")
+
+                cusToast.showToast("Đăng nhập thành công", "success")
+
+                // localStorage.setItem("user", JSON.stringify(userL));
+                // setUserGG(userL);
+
+                // navigate("/");
 
                 // Tiếp theo, bạn có thể thực hiện xử lý cho người dùng sau khi đăng nhập ở đây
             })
@@ -88,6 +121,8 @@ export default function Login() {
                 cusToast.showToast("Login Google error", 'error');
             });
     };
+
+
 
     // Ví dụ về cách sử dụng useEffect để theo dõi trạng thái đăng nhập
     useEffect(() => {
@@ -107,7 +142,7 @@ export default function Login() {
     }, []);
 
 
-    const { setUser } = useUserStore();
+
 
 
     const handleSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -125,10 +160,9 @@ export default function Login() {
                 cusToast.dismissToast();
                 console.log(response);
                 const userL: userLogin = jwt(response.data.token);
-                console.log(userL);
                 cusToast.showToast("Đăng nhập thành công", "success")
-
-                { check ? localStorage.setItem('user', JSON.stringify(userL)) : sessionStorage.setItem('user', JSON.stringify(userL)); }
+                { check ? localStorage.setItem('token', response.data.token) : sessionStorage.setItem('token', response.data.token) }
+                { check ? localStorage.setItem('refreshToken', response.data.refreshToken) : sessionStorage.setItem('refreshToken', response.data.refreshToken) }
                 setUser(userL);
                 console.log(userL);
                 navigate("/");

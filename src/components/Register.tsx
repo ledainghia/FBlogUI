@@ -38,7 +38,7 @@ export default function Register() {
             console.log(emailPattern.test(newEmail));
         } else {
             cusToast.dismissToast();
-            cusToast.showToast("", null)
+            cusToast.showToast("")
             setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
         }
     };
@@ -52,7 +52,7 @@ export default function Register() {
 
         } else {
             cusToast.dismissToast();
-            cusToast.showToast("", null)
+            cusToast.showToast("")
             setEmailError(null); // Xóa thông báo lỗi nếu email hợp lệ
         }
     };

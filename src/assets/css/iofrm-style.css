@@ -19,9 +19,11 @@
 /* -----------------------------------
     1 - General Styles
 ------------------------------------*/
-html, body {
-    width: 100%;
+html{
     height: 100%;
+}
+ body {
+
     margin: 0;
     padding: 0; 
     /* overflow: hidden; */

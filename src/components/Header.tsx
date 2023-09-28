@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useUserStore } from "../store/store";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useEffect } from "react";
 export default function Header() {
 
     const { user, setUser } = useUserStore();
@@ -11,12 +13,23 @@ export default function Header() {
         setUser(null);
 
         // Remove the user data from localStorage and sessionStorage
-        localStorage.removeItem('user');
-        sessionStorage.removeItem('user');
+        localStorage.clear();
+        sessionStorage.clear();
 
         // Redirect the user to the login page
         navigate('/login');
     };
+
+    useEffect(() => {
+        axios.get("/api/v1/auth/getUserInfo")
+            .then(response => {
+                console.log("userInfor", response);
+                setUser(response.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
 
     return (
         <header className="header-default sticky-top bg-light">

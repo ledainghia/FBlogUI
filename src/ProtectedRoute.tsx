@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useUserStore } from './store/store';
+import { useUserGGStore, useUserStore } from './store/store';
 
 interface ProtectedRouteProps {
   element: React.ReactNode;
@@ -7,8 +7,8 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ element }: ProtectedRouteProps) {
   const { user } = useUserStore();
-
-  if (user) {
+  const { userGG } = useUserGGStore();
+  if (user && userGG) {
     return <Navigate to="/" />;
   }
 
