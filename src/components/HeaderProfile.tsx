@@ -93,7 +93,7 @@ export default function HeaderProfile() {
                         {/* <!-- menus --> */}
                         <ul className="navbar-nav">
                             <li className={`nav-item dropdown ${path.pathname === "/profile" ? "active" : ""}`}>
-                                <a className="nav-link dropdown-toggle" href="home.html">Blog</a>
+                                <Link className="nav-link dropdown-toggle" to={"/"}>Blog</Link>
                                 <ul className="dropdown-menu">
                                     {/* <!-- <li><a className="dropdown-item" href="home.html">Home</a></li> --> */}
                                     <li><Link to={"/profile"} className="dropdown-item">Personal</Link>
