@@ -1,13 +1,13 @@
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
+
 import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useToast from '../customHooks/configToast';
-import { useForgetStore, useUserGGStore, useUserStore } from '../store/store';
+import { useForgetStore, useUserStore } from '../store/store';
 
-import { UserInfo, signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
@@ -47,7 +47,7 @@ export default function Login() {
     const passwordRef = useRef<HTMLInputElement>(null);
     const cusToast = useToast();
     const { setUser } = useUserStore();
-    const { setUserGG } = useUserGGStore();
+
 
 
 
@@ -155,8 +155,8 @@ export default function Login() {
             password: password,
         };
         cusToast.showToast("Loading ...", "info");
-        await axios
-            .post('https://api.fublog.tech/api/v1/auth/login', data)
+        await axiosInstance
+            .post('/api/v1/auth/login', data)
             .then((response) => {
                 cusToast.dismissToast();
                 console.log(response);

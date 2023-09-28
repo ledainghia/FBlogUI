@@ -1,24 +1,24 @@
-import { UserInfo } from 'firebase/auth';
+// import { UserInfo } from 'firebase/auth';
 import { create } from 'zustand';
 
 interface ForgetStore {
   isForgotten: boolean;
-  setForget: (value: boolean) => void; 
+  setForget: (value: boolean) => void;
 }
 
 export const useForgetStore = create<ForgetStore>((set) => ({
   isForgotten: false,
-  setForget: (value: boolean) => set({ isForgotten: value }), 
+  setForget: (value: boolean) => set({ isForgotten: value }),
 }));
 
-interface TabContentStore{
-  isPopular : boolean,
-  setPopular :(value: boolean) => void;
+interface TabContentStore {
+  isPopular: boolean,
+  setPopular: (value: boolean) => void;
 }
 
 export const useTabContentStore = create<TabContentStore>((set) => ({
   isPopular: false,
-  setPopular: (value: boolean) => set({ isPopular: value }), 
+  setPopular: (value: boolean) => set({ isPopular: value }),
 }));
 
 
@@ -32,8 +32,8 @@ interface userLogin {
 }
 
 interface UserStore {
-  user: userLogin | null ;
-  setUser: (user: userLogin | null ) => void;
+  user: userLogin | null;
+  setUser: (user: userLogin | null) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({

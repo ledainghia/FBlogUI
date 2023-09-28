@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useUserStore } from '../store/store';
 
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
+
 import axiosInstance from '../config/axiosConfig';
 
 export default function HeaderProfile() {

@@ -1,5 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosError } from 'axios';
+import axios from 'axios';
 import jwt from 'jwt-decode';
+import { useState } from 'react';
 
 interface User {
     user: string;
@@ -8,16 +9,28 @@ interface User {
 
 const BASE_URL = 'https://api.fublog.tech';
 
-let isRefreshing = false;
+
 
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: 1000,
 });
+var store: boolean = false;
 
 axiosInstance.interceptors.request.use(async (config) => {
-    const token = localStorage.getItem('token');
+
+    let token = null;
+    if (localStorage.getItem('token')) {
+        token = localStorage.getItem('token');
+        store = true;
+    } else {
+        if (sessionStorage.getItem('token')) {
+            token = sessionStorage.getItem('token');
+            store = false;
+        }
+    }
+
     if (token) {
         const exp: User = jwt(token);
         if (exp.exp < Date.now() / 1000) {
@@ -57,7 +70,7 @@ axiosInstance.interceptors.request.use(async (config) => {
 
 
 async function refreshAccessToken(): Promise<string> {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = store ? localStorage.getItem('refreshToken') : sessionStorage.getItem('refreshToken');
     if (!refreshToken) {
         return Promise.reject('No refresh token available');
     }
@@ -65,7 +78,7 @@ async function refreshAccessToken(): Promise<string> {
     return fetch("https://api.fublog.tech/api/v1/auth/refreshToken", {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('refreshToken')}`,
+            'Authorization': `Bearer ${store ? localStorage.getItem('refreshToken') : sessionStorage.getItem('refreshToken')}`,
             'Content-Type': 'application/json'
         }
     })
@@ -80,7 +93,10 @@ async function refreshAccessToken(): Promise<string> {
         })
         .then((data) => {
             const newToken = data.token;
-            localStorage.setItem('token', newToken);
+            if (store === true)
+                localStorage.setItem('token', newToken);
+            else if (store === false)
+                sessionStorage.setItem('token', newToken);
             return newToken;
         })
         .catch((err) => {

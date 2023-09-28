@@ -1,17 +1,16 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 // import './App.css';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import ProtectedRoute, { ProtectedRoute2 } from './ProtectedRoute'; // Import as a default export
-import { useEffect } from 'react';
-import { useUserStore } from './store/store';
+// import { useEffect } from 'react';
+// import { useUserStore } from './store/store';
 import WritePost from './pages/WritePost';
 import Profile from './pages/Profile';
 // import Test from './pages/Test';
 
 function App() {
-  const { setUser } = useUserStore();
-  const navigate = useNavigate();
+
 
   // useEffect(() => {
   //   const userFromLocalStorage = localStorage.getItem('user');

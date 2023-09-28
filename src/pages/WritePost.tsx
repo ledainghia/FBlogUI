@@ -6,7 +6,7 @@ import '../assets/css/writepost.css'
 
 import { useEffect, useState } from 'react';
 import HeaderProfile from '../components/HeaderProfile';
-import WritePost2 from './WritePost2';
+// import WritePost2 from './WritePost2';
 
 export default function WritePost() {
     const [value, setValue] = useState('');
@@ -63,8 +63,8 @@ export default function WritePost() {
                                         </label>
                                     </div>
                                 </div>
-                                {/* <ReactQuill className='editor mb-3 ' theme="snow" value={value} onChange={setValue} modules={modules} /> */}
-                                <WritePost2></WritePost2>
+                                <ReactQuill className='editor mb-3 ' theme="snow" value={value} onChange={setValue} modules={modules} />
+                                {/* <WritePost2></WritePost2> */}
                                 <button type="submit" className="btn btn-primary ">Submit</button>
                             </fieldset>
                         </form>

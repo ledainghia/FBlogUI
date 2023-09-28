@@ -1,9 +1,9 @@
-import React, { StrictMode } from 'react'
+// import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
-import axiosInstance from './config/axiosConfig.ts'
+// import axiosInstance from './config/axiosConfig.ts'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 

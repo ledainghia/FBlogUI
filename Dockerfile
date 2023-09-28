@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Cài đặt các phụ thuộc của ứng dụng
-RUN yarn install
+RUN npm install --force 
 
 # Sao chép tất cả các tệp và thư mục trong thư mục gốc của ứng dụng React vào thư mục làm việc trong container
 COPY . .
 
 # Xây dựng ứng dụng React và sao chép kết quả vào thư mục 'dist'
-RUN yarn run build
+RUN npm run build
 
 
 # Sử dụng hình ảnh Nginx để chạy ứng dụng đã xây dựng

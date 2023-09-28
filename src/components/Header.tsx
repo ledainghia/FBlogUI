@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useUserStore } from "../store/store";
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+
 import { useEffect } from "react";
 import axiosInstance from "../config/axiosConfig";
 export default function Header() {
@@ -30,7 +30,7 @@ export default function Header() {
             .catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [axiosInstance]);
 
     return (
         <header className="header-default sticky-top bg-light">
