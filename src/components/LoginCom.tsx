@@ -12,6 +12,7 @@ import jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
 import { auth, provider } from './firebase';
+import axiosInstance from '../config/axiosConfig';
 
 
 
@@ -86,7 +87,7 @@ export default function Login() {
                             picture: userL.picture
                         };
 
-                        axios.post('/api/v1/auth/google', postData)
+                        axiosInstance.post('/api/v1/auth/google', postData)
                             .then(response => {
                                 // Xử lý kết quả trả về sau khi gửi request thành công (nếu cần)
                                 console.log('Response:', response.data);

@@ -42,7 +42,7 @@ function Login() {
                     :
                     <>
 
-                        <div className="form-body">
+                        <div className="form-body" style={{ height: "100vh" }}>
                             <div className="website-logo">
                                 <a href="index.html">
                                     <div className="logo">
@@ -52,14 +52,14 @@ function Login() {
                             </div>
                             <div className="row">
 
-                                <div className="col-md-3 p-0 img-holder ">
+                                <div className="col-md-4 col-sm-6 p-0 img-holder ">
                                     <div className="bg"></div>
                                     <div className="info-holder">
                                         <img src={file} alt="" />
                                     </div>
                                 </div>
 
-                                <div className='col-md-9 p-0  '>
+                                <div className='col-md-8 col-sm-6 p-0  form-holder'>
                                     {isForgotten ? (< ForgotPassContent />) :
                                         <LoginContent />
                                     }

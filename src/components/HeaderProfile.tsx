@@ -4,20 +4,21 @@ import { useUserStore } from '../store/store';
 
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import axiosInstance from '../config/axiosConfig';
 
 export default function HeaderProfile() {
 
     const { user } = useUserStore();
     const path = useLocation();
     useEffect(() => {
-        axios.get("/api/v1/auth/getUserInfo")
+        axiosInstance.get("/api/v1/auth/getUserInfo")
             .then(response => {
                 console.log(response);
             })
             .catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [axiosInstance]);
 
 
 

@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import ProtectedRoute, { ProtectedRoute2 } from './ProtectedRoute'; // Import as a default export
@@ -13,46 +13,46 @@ function App() {
   const { setUser } = useUserStore();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userFromLocalStorage = localStorage.getItem('user');
-    const userFromSessionStorage = sessionStorage.getItem('user');
-    if (userFromLocalStorage) {
-      const parsedUser = JSON.parse(userFromLocalStorage);
-      setUser(parsedUser);
-    } else {
+  // useEffect(() => {
+  //   const userFromLocalStorage = localStorage.getItem('user');
+  //   const userFromSessionStorage = sessionStorage.getItem('user');
+  //   if (userFromLocalStorage) {
+  //     const parsedUser = JSON.parse(userFromLocalStorage);
+  //     setUser(parsedUser);
+  //   } else {
 
-      if (userFromSessionStorage) {
-        const parsedUser = JSON.parse(userFromSessionStorage);
-        setUser(parsedUser);
-      }
-    }
+  //     if (userFromSessionStorage) {
+  //       const parsedUser = JSON.parse(userFromSessionStorage);
+  //       setUser(parsedUser);
+  //     }
+  //   }
 
 
-    if (userFromLocalStorage) {
-      const tokenExpirationTime = JSON.parse(userFromLocalStorage).exp;
-      const currentTime = Date.now() / 1000;
-      if (tokenExpirationTime < currentTime) {
-        handleLogout();
-      }
-    }
+  //   if (userFromLocalStorage) {
+  //     const tokenExpirationTime = JSON.parse(userFromLocalStorage).exp;
+  //     const currentTime = Date.now() / 1000;
+  //     if (tokenExpirationTime < currentTime) {
+  //       handleLogout();
+  //     }
+  //   }
 
-    if (userFromSessionStorage) {
-      const tokenExpirationTime = JSON.parse(userFromSessionStorage).exp;
-      
-      const currentTime = Date.now() / 1000;
-      if (tokenExpirationTime < currentTime) {
-        handleLogout();
-      }
-    }
+  //   if (userFromSessionStorage) {
+  //     const tokenExpirationTime = JSON.parse(userFromSessionStorage).exp;
 
-  }, [setUser]);
+  //     const currentTime = Date.now() / 1000;
+  //     if (tokenExpirationTime < currentTime) {
+  //       handleLogout();
+  //     }
+  //   }
 
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
-    sessionStorage.removeItem('user');
-    navigate('/login');
-  };
+  // }, [setUser]);
+
+  // const handleLogout = () => {
+  //   setUser(null);
+  //   localStorage.removeItem('user');
+  //   sessionStorage.removeItem('user');
+  //   navigate('/login');
+  // };
 
 
   return (

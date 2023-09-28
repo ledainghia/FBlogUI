@@ -1,105 +1,91 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import jwt from 'jwt-decode';
 
-
-
-interface user {
-    user: string,
-    exp: number,
+interface User {
+    user: string;
+    exp: number;
 }
 
 const BASE_URL = 'https://api.fublog.tech';
 
-export default function axiosConfig() {
+let isRefreshing = false;
 
 
-    axios.defaults.baseURL = BASE_URL;
-    axios.interceptors.request.use(function (config) {
-        if (!localStorage.getItem('token') && !sessionStorage.getItem('token')) {
-            axios.defaults.baseURL = BASE_URL;
+const axiosInstance = axios.create({
+    baseURL: BASE_URL,
+    timeout: 1000,
+});
+
+axiosInstance.interceptors.request.use(async (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        const exp: User = jwt(token);
+        if (exp.exp < Date.now() / 1000) {
+            // Token is expired, refresh it
+
+
+
+            await refreshAccessToken()
+                .then((newToken) => {
+
+                    config.headers.Authorization = `Bearer ${newToken}`;
+                    return config;
+                })
+            // .catch((err) => {
+            //     // Handle token refresh failure, e.g., redirect to login page
+            //     console.error('Failed to refresh token:', err);
+            //     // Clear tokens and redirect to login
+            //     localStorage.clear();
+            //     // You may want to add code here to handle the redirect
+            // })
+
+
+            return config;
+        } else {
+            config.headers['Authorization'] = `Bearer ${token}`;
             return config;
         }
-        if (localStorage.getItem('token')) {
-            const token = localStorage.getItem('token');
-            if (token) {
-
-                const exp: user = jwt(token);
-                if (exp.exp < Date.now() / 1000) {
-                    const refreshToken = localStorage.getItem('refreshToken');
-                    if (refreshToken) {
-                        const expRefreshToken: user = jwt(refreshToken);
-                        if (expRefreshToken.exp < Date.now() / 1000) {
-                            localStorage.clear();
-                            axios.defaults.baseURL = BASE_URL;
-
-                            return config;
-                        } else {
-                            axios.post(axios.defaults.baseURL === BASE_URL ? "/api/v1/auth/refreshToken" : "https://api.fublog.tech/api/v1/auth/refreshToken", {}, {
-                                headers: {
-                                    'Authorization': `Bearer ${refreshToken}`,
-                                    'Content-Type': 'application/json',
-                                }
-                            })
-                                .then(response => {
-                                    localStorage.setItem('token', JSON.stringify(response.data.token));
-                                    config.headers!['Authorization'] = `Bearer ${response.data.token}`;
-
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                })
-                        }
-                    }
-                } else {
-                    config.headers!['Authorization'] = `Bearer ${token}`;
-                    return config;
-                }
-            }
-        }
-
-        if (sessionStorage.getItem('token')) {
-            const token = sessionStorage.getItem('token');
-            if (token) {
-
-                const exp: user = jwt(token);
-                if (exp.exp < Date.now() / 1000) {
-                    const refreshToken = sessionStorage.getItem('refreshToken');
-                    if (refreshToken) {
-                        const expRefreshToken: user = jwt(refreshToken);
-                        if (expRefreshToken.exp < Date.now() / 1000) {
-                            sessionStorage.clear();
-                            axios.defaults.baseURL = BASE_URL;
-
-                            return config;
-                        } else {
-                            axios.post(axios.defaults.baseURL === BASE_URL ? "/api/v1/auth/refreshToken" : "https://api.fublog.tech/api/v1/auth/refreshToken", {}, {
-                                headers: {
-                                    'Authorization': `Bearer ${refreshToken}`,
-                                    'Content-Type': 'application/json',
-                                }
-                            })
-                                .then(response => {
-                                    sessionStorage.setItem('token', JSON.stringify(response.data.token));
-                                    config.headers!['Authorization'] = `Bearer ${response.data.token}`;
-
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                })
-                        }
-                    }
-                } else {
-                    config.headers!['Authorization'] = `Bearer ${token}`;
-
-                    return config;
-                }
-            }
-        }
-
-        return config;
-    }, function (error) {
-        // Do something with request error
-        console.log(error);
+    }
+    return config;
+},
+    (error) => {
+        console.error('Request error:', error);
         return Promise.reject(error);
-    });
+    }
+);
+
+
+
+async function refreshAccessToken(): Promise<string> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) {
+        return Promise.reject('No refresh token available');
+    }
+
+    return fetch("https://api.fublog.tech/api/v1/auth/refreshToken", {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('refreshToken')}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => {
+            if (response.status === 200) {
+                console.log("freshen token successfully");
+                return response.json();
+
+            } else {
+                throw new Error('Failed to refresh token');
+            }
+        })
+        .then((data) => {
+            const newToken = data.token;
+            localStorage.setItem('token', newToken);
+            return newToken;
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
+
+export default axiosInstance;

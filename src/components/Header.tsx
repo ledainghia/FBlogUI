@@ -3,6 +3,7 @@ import { useUserStore } from "../store/store";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useEffect } from "react";
+import axiosInstance from "../config/axiosConfig";
 export default function Header() {
 
     const { user, setUser } = useUserStore();
@@ -21,7 +22,7 @@ export default function Header() {
     };
 
     useEffect(() => {
-        axios.get("/api/v1/auth/getUserInfo")
+        axiosInstance.get("/api/v1/auth/getUserInfo")
             .then(response => {
                 console.log("userInfor", response);
                 setUser(response.data);
