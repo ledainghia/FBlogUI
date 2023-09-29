@@ -22,6 +22,9 @@ FROM nginx:alpine
 
 # Sao chép các tệp đã xây dựng từ bước trước (builder stage) vào thư mục root của Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d
+
 
 # Port mà Nginx sẽ lắng nghe
 EXPOSE 80
