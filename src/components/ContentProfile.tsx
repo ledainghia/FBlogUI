@@ -1,6 +1,8 @@
-
+import { useUserStore } from "../store/store";
+import defaultAvatar from '../assets/images/default-avatar.png';
 
 export default function ContentProfile() {
+    const { user } = useUserStore();
     return (
         <section className="main-content">
             <div className="container-xl">
@@ -744,6 +746,21 @@ export default function ContentProfile() {
                 <!-- widget popular posts -->
 
                 <!-- widget categories --> */}
+                            <div className="widget rounded">
+                                <div className="widget-content text-center">
+                                    <a className="navbar-brand" href="personal.html"
+                                    ><img src={user?.picture ? user?.picture : defaultAvatar} alt="logo"
+                                        /></a>
+                                    <a href="personal.html" className="d-block text-logo"
+                                    >{user?.fullname}<span className="dot">.</span></a>
+                                    <span className="slogan d-block"
+                                    >
+                                        {user?.email} <strong> {user?.role.map((index) => (
+                                            <span key={index}> | {index}</span>
+                                        ))}
+                                        </strong></span>
+                                </div>
+                            </div>
                             <div className="widget rounded">
                                 <div className="widget-content">
                                     <ul className="list" style={{ listStyle: "none" }}>

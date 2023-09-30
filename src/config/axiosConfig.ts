@@ -75,7 +75,7 @@ async function refreshAccessToken(): Promise<string> {
         return Promise.reject('No refresh token available');
     }
 
-    return fetch("https://api.fublog.tech/api/v1/auth/refreshToken", {
+    return await fetch("https://api.fublog.tech/api/v1/auth/refreshToken", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${store ? localStorage.getItem('refreshToken') : sessionStorage.getItem('refreshToken')}`,
