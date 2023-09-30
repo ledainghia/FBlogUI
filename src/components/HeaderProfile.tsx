@@ -1,24 +1,16 @@
 
-import { useEffect } from 'react';
+
 import { useUserStore } from '../store/store';
 
 import { Link, useLocation } from 'react-router-dom';
+import defaultAvatar from '../assets/images/default-avatar.png';
 
-import axiosInstance from '../config/axiosConfig';
 
 export default function HeaderProfile() {
 
     const { user } = useUserStore();
     const path = useLocation();
-    useEffect(() => {
-        axiosInstance.get("/api/v1/auth/getUserInfo")
-            .then(response => {
-                console.log(response);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [axiosInstance]);
+
 
 
 
@@ -55,29 +47,44 @@ export default function HeaderProfile() {
                         <div className="col-md-4 col-sm-12 col-xs-12 text-center">
                             {/* <!-- site logo --> */}
                             <a className="navbar-brand" href="personal.html"
-                            ><img src={user?.picture} alt="logo"
+                            ><img src={user?.picture ? user?.picture : defaultAvatar} alt="logo"
                                 /></a>
                             <a href="personal.html" className="d-block text-logo"
                             >{user?.fullname}<span className="dot">.</span></a>
-                            {/* <span className="slogan d-block"
+                            <span className="slogan d-block"
                             >
-                                {user?.email} <strong> {user?.roles.map((index) => (
+                                {user?.email} <strong> {user?.role.map((index) => (
                                     <span key={index}> | {index}</span>
                                 ))}
-                                </strong></span> */}
+                                </strong></span>
                         </div>
 
                         <div className="col-md-4 col-sm-12 col-xs-12">
                             {/* <!-- header buttons --> */}
                             <div className="header-buttons float-md-end mt-4 mt-md-0">
-                                <button className="search icon-button">
+                                {/* <button className="search icon-button">
                                     <i className="icon-magnifier"></i>
-                                </button>
+                                </button> */}
                                 <button
                                     className="burger-menu icon-button ms-2 float-end float-md-none"
                                 >
                                     <span className=""><i className='icon-bell'></i></span>
                                 </button>
+
+                                <div className="btn-group burger-menu icon-button ms-2 float-end float-md-none">
+
+                                    <i className='icon-user'></i>
+
+
+
+                                    <div className="dropdown-menu2 show2" >
+                                        <a className="dropdown-item" href="#">Menu 1</a>
+                                        <a className="dropdown-item" href="#">Menu item 2</a>
+                                        <div className="dropdown-divider"></div>
+                                        <a className="dropdown-item" href="#">Menu 3 ...</a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -85,7 +92,7 @@ export default function HeaderProfile() {
 
 
 
-            </header>
+            </header >
             <nav className="navbar navbar-expand-lg sticky-top p-3" style={{ backgroundColor: 'white' }}>
                 <div className="container-xl">
                     <div

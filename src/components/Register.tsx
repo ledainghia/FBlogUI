@@ -1,17 +1,17 @@
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
 import jwt from 'jwt-decode';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { useUserStore } from '../store/store';
-
+import axiosInstance from '../config/axiosConfig';
 import useToast from '../customHooks/configToast';
+import { useUserStore } from '../store/store';
+import ReCAPTCHA from 'react-google-recaptcha-enterprise';
 interface userLogin {
     user: string,
     email: string,
-    roles: [],
+    role: [],
     fullname: string,
     picture: string,
 
@@ -93,11 +93,12 @@ export default function Register() {
             password: password,
             fullName: fullName,
             email: mail,
+            picture: null
         };
 
         cusToast.showToast("Đang xử lý...", "error");
 
-        await axios
+        await axiosInstance
             .post('https://api.fublog.tech/api/v1/auth/signup', data)
             .then((response) => {
                 console.log(response);
@@ -113,7 +114,7 @@ export default function Register() {
             .catch((error) => {
                 cusToast.dismissToast();
                 console.log(error.response);
-                toast.error(error.response.data + error.reponse.status, {
+                toast.error(error.response.data, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -193,6 +194,10 @@ export default function Register() {
                             className='fa-eye'
                         />
                     </div>
+                    {/* <ReCAPTCHA
+                        sitekey="Your client site key"
+                        onChange={(value: any) => console.log(value)}
+                    /> */}
                     <div className="form-button">
                         <button id="submit" type="submit" className="ibtn">
                             Register

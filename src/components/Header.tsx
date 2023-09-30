@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { useUserStore } from "../store/store";
 import { useNavigate } from 'react-router-dom';
-
-import { useEffect } from "react";
-import axiosInstance from "../config/axiosConfig";
+// import { Navbar, Nav, Button, Collapse, Container, Dropdown, NavDropdown } from 'react-bootstrap';
+import { useState } from "react";
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 export default function Header() {
 
     const { user, setUser } = useUserStore();
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
     const handleLogout = () => {
         // Clear the user data in the store
@@ -21,156 +22,79 @@ export default function Header() {
         navigate('/login');
     };
 
-    useEffect(() => {
-        axiosInstance.get("/api/v1/auth/getUserInfo")
-            .then(response => {
-                console.log("userInfor", response);
-                setUser(response.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [axiosInstance]);
+
 
     return (
+
         <header className="header-default sticky-top bg-light">
-            <nav className="navbar navbar-expand-lg">
-                <div className="container-xl">
-
-                    <Link className="navbar-brand" to={"/"}
-                    ><img src="images/logo-color.svg" alt="logo"
-                        /></Link>
-
-                    <div className="collapse navbar-collapse">
-
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item dropdown active">
-                                <a className="nav-link dropdown-toggle" href="index.html"
-                                >Category</a>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <a href="" className="dropdown-item">Kĩ Thuận Phần Mềm &gt;</a>
-                                        <ul className="dropdown-menu-left dropdown-submenu">
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 3</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 4</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="" className="dropdown-item">An toàn thông tin &gt;</a>
-                                        <ul className="dropdown-menu-left dropdown-submenu">
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 3</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 4</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 5</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="" className="dropdown-item">Trí tuệ nhân tạo &gt;</a>
-                                        <ul className="dropdown-menu-left dropdown-submenu">
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 2</a>
-                                            </li>
-                                            <li>
-                                                <a href="" className="dropdown-item">Môn 3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a className="dropdown-item" href="classNameic.html">classNameic</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="category.html">About</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="category.html">Inspiration</a>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#">Pages</a>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <a className="dropdown-item" href="category.html">Category</a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="blog-single.html">Blog Single</a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="blog-single-alt.html">Blog Single Alt</a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="about.html">About</a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="contact.html">Contact</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div className="header-right">
-
-
-                        <div className="header-buttons">
-                            <button className="search icon-button">
-                                <i className="icon-magnifier"></i>
-                            </button>
-                            <button className="icon-button" onClick={() => { navigate('/writepost') }}>
-                                <i className="icon-note"></i>
-                            </button>
-                            {/* <!-- <button className="burger-menu icon-button">
-                  <span className="burger-icon"></span>
-                </button> --> */}
-                            {user ? <>
-
-
-                                <div className="btn-group dropdown-center">
-                                    <button type="button" className="btn dropdown-toggle" style={{ color: "orange" }} data-bs-toggle="dropdown" aria-expanded="false">
-                                        Hi, {user.fullname}
+            <Navbar expand="lg ">
+                <Container fluid="xl ">
+                    <Navbar.Brand as={Link} to="/">
+                        <img src="images/logo-color.svg" alt="logo" />
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarCollapse" />
+                    <Navbar.Collapse id="navbarCollapse">
+                        <Nav className="mr-auto ">
+                            <NavDropdown title="Category" id="category-dropdown" className="active">
+                                <NavDropdown.Item as={Link} to="/category/kt-pm">Kĩ Thuật Phần Mềm</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/category/at-tt">An Toàn Thông Tin</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/category/ttnn">Trí Tuệ Nhân Tạo</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item as={Link} to="/category/classic">Classic</NavDropdown.Item>
+                                <NavDropdown title="Nested Dropdown" id="nested-dropdown">
+                                    <NavDropdown.Item as={Link} to="/category/nested1">Nested 1</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/category/nested2">Nested 2</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item as={Link} to="/category/nested3">Nested 3</NavDropdown.Item>
+                                </NavDropdown>
+                            </NavDropdown>
+                            <Nav.Item as={Link} to="/about" className="nav-link">
+                                About
+                            </Nav.Item>
+                            <Nav.Item as={Link} to="/inspiration" className="nav-link">
+                                Inspiration
+                            </Nav.Item>
+                            <NavDropdown title="Pages" id="pages-dropdown">
+                                <NavDropdown.Item as={Link} to="/">Home</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/pages/blog-single">Blog Single</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/pages/blog-single-alt">Blog Single Alt</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/pages/about">About</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/pages/contact">Contact</NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                        <Navbar.Collapse className="header-right justify-content-end mt-4 mb-4">
+                            <div className="header-buttons">
+                                <div className="header-buttons">
+                                    <button className="search icon-button">
+                                        <i className="icon-magnifier"></i>
                                     </button>
-                                    <ul className="dropdown-menu">
-                                        <li><Link className="dropdown-item" to={"/profile"}>Trang cá nhân</Link></li>
-
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li className="logout"><a className="dropdown-item" onClick={handleLogout}>Đăng xuất</a></li>
-                                    </ul>
+                                    <button className="icon-button" onClick={() => { navigate('/writepost') }}>
+                                        <i className="icon-note"></i>
+                                    </button>
+                                    {/* <!-- <button className="burger-menu icon-button">
+                   <span className="burger-icon"></span>
+                 </button> --> */}
+                                    {user ?
+                                        <div className="btn-group dropdown-center">
+                                            <button type="button" className="btn dropdown-toggle" style={{ color: "orange" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                                Hi, {user.fullname}
+                                            </button>
+                                            <ul className="dropdown-menu">
+                                                <li><Link className="dropdown-item" to={"/profile"}>Trang cá nhân</Link></li>
+                                                <li><hr className="dropdown-divider" /></li>
+                                                <li className="logout"><a className="dropdown-item" onClick={handleLogout}>Đăng xuất</a></li>
+                                            </ul>
+                                        </div>
+                                        :
+                                        <span className="px-4 login"><Link to={"/login"} className="login">Đăng nhập</Link> </span>}
                                 </div>
-                            </> :
-                                <span className="px-4 login"><Link to={"/login"} className="login">Đăng nhập</Link> </span>}
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+                            </div>
+                        </Navbar.Collapse>
+                    </Navbar.Collapse>
+
+                </Container>
+            </Navbar>
+        </header >
+
     )
 }

@@ -1,15 +1,20 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 // import './App.css';
-import Login from './pages/Login';
-import Home from './pages/Home';
 import ProtectedRoute, { ProtectedRoute2 } from './ProtectedRoute'; // Import as a default export
+import Home from './pages/Home';
+import Login from './pages/Login';
 // import { useEffect } from 'react';
 // import { useUserStore } from './store/store';
-import WritePost from './pages/WritePost';
+import { useEffect } from 'react';
+
+import axiosInstance from './config/axiosConfig';
 import Profile from './pages/Profile';
+import WritePost from './pages/WritePost';
+import { useUserStore } from './store/store';
 // import Test from './pages/Test';
 
 function App() {
+  const { setUser } = useUserStore();
 
 
   // useEffect(() => {
@@ -52,6 +57,17 @@ function App() {
   //   sessionStorage.removeItem('user');
   //   navigate('/login');
   // };
+
+  useEffect(() => {
+    axiosInstance.get("/api/v1/auth/getUserInfo")
+      .then(response => {
+        console.log("userInfor", response);
+        setUser(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [axiosInstance]);
 
 
   return (

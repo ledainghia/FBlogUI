@@ -2,9 +2,11 @@
 import LoginContent from '../components/LoginContent';
 import logo from '/images/logo-light.svg';
 import file from '/images/graphic3.svg';
+import '../assets/css/home.css'
 import '../assets/css/iofrm-style.css';
 import '../assets/css/iofrm-theme7.css';
-// import '../assets/css/bootstrap.min.css';
+
+import '../assets/css/bootstrap.min.css';
 import '../assets/css/fontawesome-all.min.css';
 import { useEffect, useState } from 'react';
 import { HashLoader } from 'react-spinners';

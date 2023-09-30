@@ -1,14 +1,13 @@
 import { Navigate } from 'react-router-dom';
-import { useUserGGStore, useUserStore } from './store/store';
+
 
 interface ProtectedRouteProps {
   element: React.ReactNode;
 }
 
 export default function ProtectedRoute({ element }: ProtectedRouteProps) {
-  const { user } = useUserStore();
-  const { userGG } = useUserGGStore();
-  if (user && userGG) {
+
+  if (sessionStorage.getItem('token') || localStorage.getItem('token')) {
     return <Navigate to="/" />;
   }
 
@@ -16,9 +15,9 @@ export default function ProtectedRoute({ element }: ProtectedRouteProps) {
 }
 
 export function ProtectedRoute2({ element }: ProtectedRouteProps) {
-  const { user } = useUserStore();
 
-  if (!user) {
+
+  if (!sessionStorage.getItem('token') && !localStorage.getItem('token')) {
     return <Navigate to="/login" />;
 
   }
