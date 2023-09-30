@@ -3,7 +3,6 @@ import HeaderProfile from '../components/HeaderProfile';
 import Footer from '../components/Footer';
 import ContentProfile from '../components/ContentProfile';
 import Loading from '../components/Loading';
-import Header from '../components/Header';
 
 export default function Profile() {
     const [loading, setLoading] = useState(true);
@@ -22,8 +21,7 @@ export default function Profile() {
         <>
             {loading ? <Loading />
                 :
-                <>
-                    {/* <Header></Header> */}
+                <> <HeaderProfile></HeaderProfile>
                     <ContentProfile></ContentProfile>
                     <Footer></Footer>
                 </>

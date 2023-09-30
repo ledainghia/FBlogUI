@@ -28,7 +28,7 @@ interface userGoogle {
 interface userLogin {
     user: string,
     email: string,
-    role: [],
+    roles: [],
     fullname: string,
     picture: string,
 
