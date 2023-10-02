@@ -11,6 +11,16 @@ export const useForgetStore = create<ForgetStore>((set) => ({
   setForget: (value: boolean) => set({ isForgotten: value }),
 }));
 
+interface navbarStore {
+  isNavbar: boolean;
+  setNavbar: (value: boolean) => void;
+}
+
+export const useNavbarStore = create<navbarStore>((set) => ({
+  isNavbar: false,
+  setNavbar: (value: boolean) => set({ isNavbar: value }),
+}));
+
 interface TabContentStore {
   isPopular: boolean,
   setPopular: (value: boolean) => void;

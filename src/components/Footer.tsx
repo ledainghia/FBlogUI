@@ -3,7 +3,7 @@
 export default function Footer() {
     return (
         <footer>
-            <div className="container-xl">
+            <div className="container-fluid">
                 <div className="footer-inner">
                     <div className="row d-flex align-items-center gy-4">
 

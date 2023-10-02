@@ -7,13 +7,15 @@ import Header from '../components/Header'
 import Hero from '../components/Hero';
 import MainContent from '../components/MainContent';
 import Footer from '../components/Footer';
+import { useNavbarStore } from '../store/store';
+import NavbarSlid from '../components/NavbarSlid';
 
 
 
 export default function Home() {
 
     const [loading, setLoading] = useState(true);
-
+    const { isNavbar } = useNavbarStore();
 
 
     useEffect(() => {
@@ -43,13 +45,16 @@ export default function Home() {
                     </div>
                     :
                     <>
-                        <div>
-                            <Header />
-                            <Hero />
-                            <MainContent />
-                            <Footer />
-                        </div>
+                        <div className='site-wrapper'>
+                            <div className={`${isNavbar ? "main-overlay active" : ""}`}>
+                                <Header />
+                                <Hero />
+                                <MainContent />
 
+                                <Footer />
+                            </div>
+                        </div>
+                        <NavbarSlid />
                     </>
             }
         </>

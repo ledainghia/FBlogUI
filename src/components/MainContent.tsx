@@ -1,17 +1,9 @@
-import { useTabContentStore } from "../store/store";
-import TabPopularContent from "./TabPopularContent";
-import TabRecentContent from "./TabRecentContent";
-
 
 export default function MainContent() {
-    const { isPopular, setPopular } = useTabContentStore();
 
-    const handleTabClick = (isPopular: boolean) => {
-        setPopular(isPopular);
-    };
     return (
         <section className="main-content">
-            <div className="container-xl">
+            <div className="container-fluid">
                 <div className="row gy-4">
                     <div className="col-lg-8">
                         {/* <!-- section header --> */}
@@ -281,32 +273,7 @@ export default function MainContent() {
                         <div className="sidebar">
                             {/* <!-- widget about --> */}
 
-                            <div className="post-tabs widget rounded bordered">
 
-                                <ul className="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
-                                    <li className="nav-item" role="presentation">
-                                        <button
-                                            aria-selected={isPopular}
-                                            className={`nav-link ${isPopular ? 'active' : ''}`}
-                                            type="button"
-                                            onClick={() => handleTabClick(true)}
-                                        >
-                                            Popular
-                                        </button>
-                                    </li>
-                                    <li className="nav-item" role="presentation">
-                                        <button
-                                            aria-selected={!isPopular}
-                                            className={`nav-link ${!isPopular ? 'active' : ''}`}
-                                            type="button"
-                                            onClick={() => handleTabClick(false)}
-                                        >
-                                            Recent
-                                        </button>
-                                    </li>
-                                </ul>
-                                {isPopular ? <TabPopularContent /> : <TabRecentContent />}
-                            </div>
                             <div className="widget rounded">
                                 <div className="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
                                     <img src="images/logo.svg" alt="logo" className="mb-4" />

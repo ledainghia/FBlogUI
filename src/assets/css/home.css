@@ -560,7 +560,7 @@ blockquote p {
   width: 100%;
 }
 .header-default .navbar-nav {
-  margin-left: 50px;
+  margin-left: 1rem;
 }
 
 .header-default.clone {
@@ -899,16 +899,16 @@ body.down .header-classic .header-bottom.clone {
   position: fixed;
   right: 0;
   top: 0;
-  width: 300px;
-  z-index: 6;
+  width: 460px;
+  z-index: 9999;
   -webkit-box-shadow: -4px 0px 20px rgba(32, 54, 86, 0.1);
   -moz-box-shadow: -4px 0px 20px rgba(32, 54, 86, 0.1);
   box-shadow: -4px 0px 20px rgba(32, 54, 86, 0.1);
-  -webkit-transform: translateX(350px);
-  -moz-transform: translateX(350px);
-  -ms-transform: translateX(350px);
-  -o-transform: translateX(350px);
-  transform: translateX(350px);
+  -webkit-transform: translateX(500px);
+  -moz-transform: translateX(500px);
+  -ms-transform: translateX(500px);
+  -o-transform: translateX(500px);
+  transform: translateX(500px);
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
