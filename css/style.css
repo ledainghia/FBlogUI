@@ -2642,7 +2642,21 @@ button:focus {
   color: #fff;
   background-color: #5488c7;
   border-radius: 10px;
+  padding: 5px 20px;
   margin: 10px auto;
+}
+.btn-follow i {
+  size: 14px;
+  font-weight: 400;
+}
+.btn-follow span {
+  font-size: 14px;
+  font-weight: 400;
+}
+.btn-follow:hover {
+  color: #5488c7;
+  background-color: #fff;
+  border: #5488c7 1px solid;
 }
 
 .btn-approve {
