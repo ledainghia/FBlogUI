@@ -328,3 +328,204 @@
     }
   }
 }
+///////////////////card
+.card {
+  .card-block {
+    .post-author-avatar {
+      margin: 14px;
+
+      .avatar {
+        &--md {
+          border-radius: 50px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+    .post-header {
+      .post-meta {
+        .user--inline {
+          .el-popover__reference-wrapper {
+            .el-popover__reference {
+              color: #7a8ac7;
+              font-size: 12px;
+            }
+          }
+        }
+        .text-muted {
+          .icon-btn {
+            outline: none;
+            background: none;
+            display: inline-block;
+            padding: 0;
+            border: 0;
+            margin-left: 8px;
+
+            cursor: pointer;
+            text-decoration: none;
+          }
+          .btn-copy {
+            cursor: pointer;
+            font-size: 0.75rem;
+            .fa {
+              font-size: 0.7rem;
+              color: #9b9b9b;
+              transform: rotate(45deg);
+              font-style: normal;
+            }
+          }
+        }
+      }
+    }
+    .post-title-box {
+      flex-direction: column;
+      h1 {
+        padding-right: 0.5rem;
+        color: #0b1a33;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0;
+        width: 80%;
+      }
+      a {
+        color: #0b1a33;
+      }
+      .tags {
+        gap: 8px;
+        .el-tag {
+          font-size: 12px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+  .post-stats {
+    display: flex;
+    align-items: center;
+    line-height: 22px;
+    color: #9b9b9b;
+    gap: 8px;
+  }
+  .commentators {
+    align-self: center;
+    margin-left: 20px;
+    .participants--xs {
+      .participants__item {
+        margin-right: 5px;
+        a img {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
+      }
+    }
+    li:last-child {
+      .el-button {
+        background: none;
+        padding: 7px;
+        border-radius: 50%;
+        border: #9b9b9b 1px solid;
+        width: 30px;
+        height: 30px;
+        line-height: 18px;
+        font-size: 9px;
+      }
+    }
+  }
+  .points {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    .carets {
+      display: inline-flex;
+      flex-direction: column;
+      margin-right: 0.25rem;
+      .fa:first-child {
+        height: 0.5rem;
+        margin-top: -0.25rem;
+        font-size: 1rem;
+        color: #9b9b9b;
+      }
+    }
+  }
+}
+.user-activities {
+  border: solid 1px #ebebeb;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+
+///////////////////////////////////
+///
+//////404//////////////////////////
+///
+#notfound {
+  position: relative;
+  height: 100vh;
+
+  .notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: 520px;
+    width: 100%;
+    line-height: 1.4;
+    text-align: center;
+    .notfound-404 {
+      position: relative;
+      height: 200px;
+      margin: 0px auto 20px;
+      z-index: -1;
+      h1 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 236px;
+        // font-weight: 200;
+        margin: 0px;
+        color: #211b19;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 28px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #211b19;
+        background: #fff;
+        padding: 10px 5px;
+        margin: auto;
+        display: inline-block;
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        opacity: 0.8;
+      }
+    }
+    a {
+      font-family: "Montserrat", sans-serif;
+      display: inline-block;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      text-transform: uppercase;
+      padding: 13px 23px;
+      background: #ff6300;
+      font-size: 18px;
+      -webkit-transition: 0.2s all;
+      transition: 0.2s all;
+    }
+    a:hover {
+      color: #ff6300;
+      background: #f9e2da;
+    }
+  }
+}
