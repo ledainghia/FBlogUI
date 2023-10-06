@@ -32,10 +32,11 @@ export const useTabContentStore = create<TabContentStore>((set) => ({
 }));
 
 
-interface userLogin {
+export interface userLogin {
   user: string,
   email: string,
-  role: [],
+  role: string,
+  roles: [],
   fullname: string,
   picture: string,
 

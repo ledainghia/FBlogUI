@@ -1,4 +1,4 @@
-import { useUserStore } from "../store/store";
+import { useUserStore, userLogin } from "../store/store";
 import defaultAvatar from '../assets/images/default-avatar.png';
 
 export default function ContentProfile() {
@@ -755,7 +755,7 @@ export default function ContentProfile() {
                                     >{user?.fullname}<span className="dot">.</span></a>
                                     <span className="slogan d-block"
                                     >
-                                        {user?.email} <strong> {user?.role.map((index) => (
+                                        {user?.email} <strong> {user?.roles.map((index) => (
                                             <span key={index}> | {index}</span>
                                         ))}
                                         </strong></span>

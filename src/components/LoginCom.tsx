@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useToast from '../customHooks/configToast';
-import { useForgetStore, useUserStore } from '../store/store';
+import { useForgetStore, useUserStore, userLogin } from '../store/store';
 
 import { signInWithPopup } from "firebase/auth";
 import jwt from 'jwt-decode';
@@ -25,14 +25,7 @@ interface userGoogle {
 
 }
 
-interface userLogin {
-    user: string,
-    email: string,
-    role: [],
-    fullname: string,
-    picture: string,
 
-}
 
 
 

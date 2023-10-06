@@ -5,17 +5,10 @@ import jwt from 'jwt-decode';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { useUserStore } from '../store/store';
+import { useUserStore, userLogin  } from '../store/store';
 
 import useToast from '../customHooks/configToast';
-interface userLogin {
-    user: string,
-    email: string,
-    role: [],
-    fullname: string,
-    picture: string,
 
-}
 
 export default function Register() {
     const cusToast = useToast();
