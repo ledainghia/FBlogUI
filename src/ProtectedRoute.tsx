@@ -1,5 +1,4 @@
 import { Navigate } from 'react-router-dom';
-import { useUserGGStore, useUserStore } from './store/store';
 
 interface ProtectedRouteProps {
   element: React.ReactNode;

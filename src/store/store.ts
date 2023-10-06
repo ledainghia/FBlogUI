@@ -1,6 +1,5 @@
 // import { UserInfo } from 'firebase/auth';
 import { create } from 'zustand';
-import { useRef } from 'react';
 
 interface ForgetStore {
   isForgotten: boolean;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useToast from '../customHooks/configToast';
+
 import { useButtonNavRefStore, useNavbarStore } from '../store/store';
 import { Menu, MenuPage } from './Menu';
 
@@ -23,7 +23,7 @@ const page = [
 
 export default function NavbarSlid() {
     const [categories, setCategories] = useState([]);
-    const cusToast = useToast();
+
 
     const [subMenus, setSubMenus] = useState<boolean>(false);
     const [subPages, setSubPages] = useState<boolean>(false);
