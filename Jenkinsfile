@@ -21,7 +21,7 @@ pipeline {
                 sh 'docker image pull chalsfptu/fublogfe:latest'
                 sh 'docker container stop chalsfptu/fublogfe:latest || echo "this container does not exist" '
                 sh 'echo y | docker container prune '
-                sh 'docker container run -d --rm --name fublogfe -p 83:80  chalsfptu/fublogfe'
+                sh 'docker container run -d --rm --name chalsfptu/fublogfe:latest -p 83:80  chalsfptu/fublogfe'
             }
         }
         
