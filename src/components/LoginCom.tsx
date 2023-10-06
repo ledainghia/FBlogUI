@@ -74,7 +74,7 @@ export default function Login() {
                 console.log("User:", user);
 
 
-                cusToast.showToast("Login success", 'success');
+
                 if (user.email && !user.email.endsWith('@fpt.edu.vn')) {
                     cusToast.showToast("Bạn chỉ có thể đăng nhập với google bằng tài khoản mail có đuôi @fpt.edu.vn", "error");
                     return;
@@ -87,17 +87,21 @@ export default function Login() {
                             picture: userL.picture
                         };
 
-                        axiosInstance.post('/api/v1/auth/google', postData)
+                        axiosInstance.post('/api/v1/auth/google', postData, {
+                            timeout: 5000,
+                        })
                             .then(response => {
                                 // Xử lý kết quả trả về sau khi gửi request thành công (nếu cần)
                                 console.log('Response:', response.data);
                                 localStorage.setItem('token', response.data.token);
                                 localStorage.setItem('refreshToken', response.data.refreshToken);
                                 navigate("/");
+                                cusToast.showToast("Login success", 'success');
                             })
                             .catch(error => {
                                 // Xử lý lỗi khi gửi request
                                 console.error('Error:', error);
+                                cusToast.showToast(error.response.data.message, 'error');
                             });
                         // console.log(userL);
                     });

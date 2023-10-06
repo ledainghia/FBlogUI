@@ -6,9 +6,8 @@ interface ProtectedRouteProps {
 }
 
 export default function ProtectedRoute({ element }: ProtectedRouteProps) {
-  const { user } = useUserStore();
-  const { userGG } = useUserGGStore();
-  if (user && userGG) {
+
+  if (sessionStorage.getItem("token") || localStorage.getItem("token")) {
     return <Navigate to="/" />;
   }
 
@@ -16,9 +15,9 @@ export default function ProtectedRoute({ element }: ProtectedRouteProps) {
 }
 
 export function ProtectedRoute2({ element }: ProtectedRouteProps) {
-  const { user } = useUserStore();
 
-  if (!user) {
+
+  if (!sessionStorage.getItem("token") && !localStorage.getItem("token")) {
     return <Navigate to="/login" />;
 
   }

@@ -1,5 +1,6 @@
 // import { UserInfo } from 'firebase/auth';
 import { create } from 'zustand';
+import { useRef } from 'react';
 
 interface ForgetStore {
   isForgotten: boolean;
@@ -66,4 +67,14 @@ interface UserGGStore {
 export const useUserGGStore = create<UserGGStore>((set) => ({
   userGG: null,
   setUserGG: (userGG) => set({ userGG }),
+}));
+
+type ButtonNavRefStore = {
+  buttonNavRef: React.RefObject<HTMLButtonElement> | null;
+  setButtonNavRef: (ref: React.RefObject<HTMLButtonElement>) => void;
+};
+
+export const useButtonNavRefStore = create<ButtonNavRefStore>((set) => ({
+  buttonNavRef: null,
+  setButtonNavRef: (ref) => set({ buttonNavRef: ref }),
 }));

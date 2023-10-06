@@ -14,7 +14,7 @@ const BASE_URL = 'https://api.fublog.tech';
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
-    timeout: 1000,
+    timeout: 5000,
 });
 var store: boolean = false;
 
