@@ -1,4 +1,4 @@
-import { useUserStore, userLogin } from "../store/store";
+import { useUserStore } from "../store/store";
 import defaultAvatar from '../assets/images/default-avatar.png';
 
 export default function ContentProfile() {
