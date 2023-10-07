@@ -24,14 +24,14 @@ interface blog {
     postComments: [],
     postTags: [],
     id: number,
-    authors: userLogin,
+    user: userLogin,
 }
 
 export default function MainContent() {
     let allBlogPosts: blog[] | null = null;
     const [posts, setPosts] = useState<blog[] | null>(null);
     useEffect(() => {
-        axios.get("https://api.fublog.tech/api/v1/auth/blogPosts/getAllBlog/1/2")
+        axios.get("https://api.fublog.tech/api/v1/auth/blogPosts/getAllBlog/1/7")
             .then((response) => {
                 allBlogPosts = response.data;
                 if (allBlogPosts) {
@@ -79,7 +79,7 @@ export default function MainContent() {
                                             <div className="details">
                                                 <ul className="meta list-inline mb-3">
                                                     <li className="list-inline-item">
-                                                        <a href="#"><img src={post.authors ? post.authors.picture : ""} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.authors ? post.authors.fullName : ""}</a>
+                                                        <a href="#"><img src={post.user ? post.user.picture : ""} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.user ? post.user.fullName : ""}</a>
                                                     </li>
                                                     <li className="list-inline-item">
                                                         <a href="#">{post.typePost}</a>
