@@ -1,11 +1,33 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Pagination from '@mui/material/Pagination';
+import { orange } from '@mui/material/colors';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import PostPreview from "./PostPreview";
 
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: orange[300],
+            light: orange[300],
+            dark: orange[300],
+
+
+        },
+        secondary: {
+            main: orange[200],
+        },
+    },
+
+
+
+});
 interface userLogin {
     user: string,
     email: string,
     role: [],
-    fullName: string,
+    fullname: string,
     picture: string,
 
 }
@@ -25,26 +47,47 @@ interface blog {
     postTags: [],
     id: number,
     user: userLogin,
+    blogPostCount: number,
 }
+
 
 export default function MainContent() {
     let allBlogPosts: blog[] | null = null;
-    const [posts, setPosts] = useState<blog[] | null>(null);
+
+    const [posts, setPosts] = useState<blog[]>([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    let limitPostPerPage = 5;
+
+
+
+    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        event.preventDefault();
+        setPage(value);
+    };
+
+
     useEffect(() => {
-        axios.get("https://api.fublog.tech/api/v1/auth/blogPosts/getAllBlog/1/7")
+        axios.get(`https://api.fublog.tech/api/v1/auth/blogPosts/getAllBlog/${page}/${limitPostPerPage}`)
             .then((response) => {
-                allBlogPosts = response.data;
+                allBlogPosts = response.data.blogPostDTOList;
+                const blogPostsCount: number = response.data.blogPostCount;
                 if (allBlogPosts) {
-                    allBlogPosts.map((allBlogPosts: blog) => {
+                    const blogPosts = allBlogPosts.map((allBlogPosts: blog) => {
                         let date: Date = new Date(allBlogPosts.createdDate);
                         const month = date.toLocaleString('vn-vn', { day: '2-digit', month: 'long', year: 'numeric' });
                         allBlogPosts.createdDate = month;
+
+                        return allBlogPosts;
                     })
-                    setPosts(response.data);
+                    setPosts(blogPosts);
+                    setTotalPages(Math.ceil(blogPostsCount / limitPostPerPage));
+                    console.log(blogPostsCount)
                 }
 
             })
-    }, [setPosts])
+    }, [page])
+
 
     return (
         <section className="main-content">
@@ -79,7 +122,7 @@ export default function MainContent() {
                                             <div className="details">
                                                 <ul className="meta list-inline mb-3">
                                                     <li className="list-inline-item">
-                                                        <a href="#"><img src={post.user ? post.user.picture : ""} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.user ? post.user.fullName : ""}</a>
+                                                        <a href="#"><img src={post.user ? post.user.picture : ""} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.user ? post.user.fullname : ""}</a>
                                                     </li>
                                                     <li className="list-inline-item">
                                                         <a href="#">{post.typePost}</a>
@@ -89,9 +132,7 @@ export default function MainContent() {
                                                 <h5 className="post-title">
                                                     <a href="blog-single.html">{post.title}</a>
                                                 </h5>
-                                                <p className="excerpt mb-0">
-                                                    {post.content}
-                                                </p>
+                                                <PostPreview content={post.content} maxLength={100} />
                                                 <div className="post-bottom clearfix d-flex align-items-center">
                                                     <div className="social-share me-auto">
                                                         <button className="toggle-button icon-share"></button>
@@ -129,9 +170,18 @@ export default function MainContent() {
 
                             </div>
                             {/* <!-- load more button --> */}
-                            <div className="text-center">
-                                <button className="btn btn-simple">Load More</button>
-                            </div>
+                            {/* use bootstrap build a paging buttom html */}
+
+
+                            {/* <nav aria-label="Page navigation" style={{ display: 'flex', justifyContent: 'center' }}>
+                                <ul className="pagination">
+                                    {getPageLinks()}
+                                </ul>
+                            </nav> */}
+                            <ThemeProvider theme={theme}>
+                                <Pagination count={totalPages} page={page} onChange={handlePageChange} color="primary" style={{ display: "flex", justifyContent: "center" }} variant="outlined" shape="rounded" />
+                            </ThemeProvider>
+
                         </div>
                     </div>
                     <div className="col-lg-4">
