@@ -79,7 +79,7 @@ export default function MainContent() {
                                             <div className="details">
                                                 <ul className="meta list-inline mb-3">
                                                     <li className="list-inline-item">
-                                                        <a href="#"><img src={post.authors.picture} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.authors.fullName}</a>
+                                                        <a href="#"><img src={post.authors ? post.authors.picture : ""} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.authors ? post.authors.fullName : ""}</a>
                                                     </li>
                                                     <li className="list-inline-item">
                                                         <a href="#">{post.typePost}</a>
