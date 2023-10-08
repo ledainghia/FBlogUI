@@ -56,12 +56,6 @@ export default function NavbarSlid() {
         }
 
         fetchData();
-
-
-
-
-
-
     }, [setCategories]);
     const { buttonNavRef } = useButtonNavRefStore();
     const handleDocumentClick = (e: MouseEvent) => {

@@ -10,9 +10,11 @@ import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { storage } from '../components/firebase';
+import { storage } from '../customHooks/firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import axiosInstance from '../config/axiosConfig';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 // import WritePost2 from './WritePost2';
 
 export default function WritePost() {
@@ -27,6 +29,26 @@ export default function WritePost() {
     const [isCheck, setIsCheck] = useState(false);
 
     const [thumbnail, setThumbnail] = useState<string | null>(null);
+
+    const [categories, setCategories] = useState([]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get("https://api.fublog.tech/api/v1/auth/category/view");
+                console.log("category", response);
+                const category = response.data.data;
+                // cusToast.showToast("Get category successfully", "success");
+                console.log("category", category);
+                setCategories(category);
+            } catch (err) {
+                console.error(err);
+                //cusToast.showToast(String.toString(err), "error");
+            }
+        }
+
+        fetchData();
+    }, [setCategories]);
 
     function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setTitle(event.target.value);
@@ -150,6 +172,7 @@ export default function WritePost() {
                 timeout: 5000,
             });
             console.log(response);
+            navigate('/');
         } catch (error) {
             console.log(error);
 
@@ -201,9 +224,11 @@ export default function WritePost() {
                                         <div className="mb-3">
                                             <label className="form-label">Chọn chuyên ngành</label>
                                             <select id="disabledSelect" className="form-select" onChange={handleCategoryChange} required >
-                                                <option>None</option>
-                                                <option>deptrai</option>
-                                                <option>10 diem</option>
+                                                {categories.map((category: any) => {
+                                                    return (
+                                                        <option value={category.categoryName}>{category.categoryName}</option>
+                                                    )
+                                                })}
                                             </select>
                                         </div>
                                         <div className="mb-3">

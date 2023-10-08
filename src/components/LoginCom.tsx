@@ -11,7 +11,7 @@ import { signInWithPopup } from "firebase/auth";
 import jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
-import { auth, provider } from './firebase';
+import { auth, provider } from '../customHooks/firebase';
 import axiosInstance from '../config/axiosConfig';
 
 
