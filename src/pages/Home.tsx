@@ -8,47 +8,31 @@ import '../assets/css/homeicon.css';
 
 import Header from '../components/Header';
 
+import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import MainContent from '../components/MainContent';
-import Footer from '../components/Footer';
 import NavbarSlid from '../components/NavbarSlid';
-import { useNavbarStore, useUserStore } from '../store/store';
+import { useNavbarStore } from '../store/store';
 
-import axiosInstance from '../config/axiosConfig';
 
 
 export default function Home() {
-    const { setUser } = useUserStore();
+
     const [loading, setLoading] = useState(true);
     const { isNavbar } = useNavbarStore();
+
+
     useEffect(() => {
-
-        const fetchUserInfo = async () => {
-            try {
-                const response = await axiosInstance.get("/api/v1/auth/getUserInfo");
-                console.log("userInfo", response.data);
-                setUser(response.data);
-            } catch (error) {
-                console.error(error);
+        if (document.readyState === 'complete') {
+            setLoading(false);
+        } else {
+            document.onreadystatechange = function () {
+                if (document.readyState == "complete") {
+                    setLoading(false);
+                }
             }
-        };
-        setLoading(true);
-        fetchUserInfo();
-        setLoading(false);
-
-    }, [setUser]);
-
-    // useEffect(() => {
-    //     if (document.readyState === 'complete') {
-    //         setLoading(false);
-    //     } else {
-    //         document.onreadystatechange = function () {
-    //             if (document.readyState == "complete") {
-    //                 setLoading(false);
-    //             }
-    //         }
-    //     }
-    // }, [setLoading])
+        }
+    }, [setLoading])
 
 
 

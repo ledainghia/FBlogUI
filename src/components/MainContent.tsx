@@ -4,6 +4,7 @@ import Pagination from '@mui/material/Pagination';
 import { orange } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PostPreview from "./PostPreview";
+import { Link } from "react-router-dom";
 
 
 const theme = createTheme({
@@ -77,7 +78,7 @@ export default function MainContent() {
                         let date: Date = new Date(allBlogPosts.createdDate);
                         const month = date.toLocaleString('vn-vn', { day: '2-digit', month: 'long', year: 'numeric' });
                         allBlogPosts.createdDate = month;
-
+                        allBlogPosts.content = extractTextFromHtml(allBlogPosts.content);
                         return allBlogPosts;
                     })
                     setPosts(blogPosts);
@@ -87,6 +88,16 @@ export default function MainContent() {
 
             })
     }, [page])
+    function extractTextFromHtml(html: string): string {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const elements = doc.querySelectorAll("h2, div, p, span, h1, h3, h4, h5, h6, ul, li, a, img, iframe, blockquote, pre");
+        let text = "";
+        for (let i = 0; i < elements.length; i++) {
+            text += elements[i].textContent + " ";
+        }
+        return text.trim();
+    }
 
 
     return (
@@ -130,9 +141,9 @@ export default function MainContent() {
                                                     <li className="list-inline-item">{post.createdDate}</li>
                                                 </ul>
                                                 <h5 className="post-title">
-                                                    <a href="blog-single.html">{post.title}</a>
+                                                    <Link to={`/blog/${post.id}`}>{post.title}</Link>
                                                 </h5>
-                                                <PostPreview content={post.content} maxLength={100} />
+                                                <PostPreview content={post.content} maxLength={400} />
                                                 <div className="post-bottom clearfix d-flex align-items-center">
                                                     <div className="social-share me-auto">
                                                         <button className="toggle-button icon-share"></button>

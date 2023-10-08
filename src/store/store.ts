@@ -39,6 +39,8 @@ export interface userLogin {
   roles: [],
   fullname: string,
   picture: string,
+  id: number,
+
 
 }
 
