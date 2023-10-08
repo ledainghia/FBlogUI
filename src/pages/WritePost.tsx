@@ -20,8 +20,8 @@ import { useNavigate } from 'react-router-dom';
 export default function WritePost() {
     const { user } = useUserStore();
 
-    const [title, setTitle] = useState<string>('SE');
-    const [category, setCategory] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const [category, setCategory] = useState<string>('SE');
     const toastId = useRef<string | number>("");
 
     const [value, setValue] = useState('');
