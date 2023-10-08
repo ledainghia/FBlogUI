@@ -16,21 +16,29 @@ import axiosInstance from '../config/axiosConfig';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 // import WritePost2 from './WritePost2';
+interface categories {
+    categoryId: number,
+    categoryName: string,
+    parentCategoryId: number | null,
+}
 
 export default function WritePost() {
     const { user } = useUserStore();
 
     const [title, setTitle] = useState<string>('');
-    const [category, setCategory] = useState<string>('SE');
+    const [category] = useState<string>('SE');
+    // const [categoryParent, setCategoryParent] = useState<number | null>(null);
+    let categoryParent: number | null = null;
     const toastId = useRef<string | number>("");
 
     const [value, setValue] = useState('');
     const { isNavbar } = useNavbarStore();
     const [isCheck, setIsCheck] = useState(false);
-
+    const categoryRef = useRef<HTMLSelectElement>(null);
     const [thumbnail, setThumbnail] = useState<string | null>(null);
 
     const [categories, setCategories] = useState([]);
+
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
@@ -54,8 +62,21 @@ export default function WritePost() {
         setTitle(event.target.value);
     }
 
-    function handleCategoryChange(event: React.ChangeEvent<HTMLSelectElement>) {
-        setCategory(event.target.value);
+    function handleCategoryChange() {
+        // const selectedCategory = event.target.value;
+        const selectCtegory = categoryRef.current?.value;
+        if (selectCtegory) {
+
+            categories.find((cate: categories) => {
+                if (cate.categoryName === selectCtegory) {
+                    console.log(selectCtegory);
+                    categoryParent = cate.parentCategoryId;
+                }
+            })
+            console.log("cas", categoryParent);
+        }
+
+
     }
 
     function handleThumbnailChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -155,10 +176,11 @@ export default function WritePost() {
     async function handleSubmitPost(event: React.FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();
         console.log(event.currentTarget.value);
+
         const postData = {
             title: title,
             categoryName: category,
-            parentCategoryId: null,
+            parentCategoryId: categoryParent,
             image: thumbnail,
             content: value,
             userId: user?.id,
@@ -223,8 +245,8 @@ export default function WritePost() {
                                         </div>
                                         <div className="mb-3">
                                             <label className="form-label">Chọn chuyên ngành</label>
-                                            <select id="disabledSelect" className="form-select" onChange={handleCategoryChange} required >
-                                                {categories.map((category: any) => {
+                                            <select className="form-select" ref={categoryRef} onChange={handleCategoryChange} required >
+                                                {categories.map((category: categories) => {
                                                     return (
                                                         <option value={category.categoryName}>{category.categoryName}</option>
                                                     )

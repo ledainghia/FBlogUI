@@ -43,7 +43,7 @@ export default function NavbarSlid() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get("https://api.fublog.tech/api/v1/auth/category/view");
+                const response = await axios.get("https://api.fublog.tech/api/v1/auth/category/viewAll");
                 console.log("category", response);
                 const category = response.data.data;
                 // cusToast.showToast("Get category successfully", "success");
