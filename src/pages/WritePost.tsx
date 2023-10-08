@@ -157,12 +157,12 @@ export default function WritePost() {
         console.log(event.currentTarget.value);
         const postData = {
             title: title,
-            categoryName: "SE",
+            categoryName: category,
             parentCategoryId: null,
             image: thumbnail,
             content: value,
             userId: user?.id,
-            typePost: "test",
+            typePost: "BLOG",
             tagList: [],
         }
         // get value from input
