@@ -15,30 +15,55 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import axiosInstance from '../config/axiosConfig';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import { Box, Button, Modal } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { orange } from '@mui/material/colors';
 // import WritePost2 from './WritePost2';
+
+
+
+
 interface categories {
     categoryId: number,
     categoryName: string,
     parentCategoryId: number | null,
 }
 
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: orange[300],
+            light: orange[300],
+            dark: orange[300],
+
+
+
+        },
+        secondary: {
+            main: orange[200],
+        },
+    },
+
+
+
+});
+
 export default function WritePost() {
     const { user } = useUserStore();
 
     const [title, setTitle] = useState<string>('');
-    const [category] = useState<string>('SE');
-    // const [categoryParent, setCategoryParent] = useState<number | null>(null);
-    let categoryParent: number | null = null;
+    const [category, setCategory] = useState<string>('SE');
+    const [categoryParent, setCategoryParent] = useState<number | null>(null);
+    // let categoryParent: number | null = null;
     const toastId = useRef<string | number>("");
-
     const [value, setValue] = useState('');
     const { isNavbar } = useNavbarStore();
     const [isCheck, setIsCheck] = useState(false);
-    const categoryRef = useRef<HTMLSelectElement>(null);
     const [thumbnail, setThumbnail] = useState<string | null>(null);
-
     const [categories, setCategories] = useState([]);
-
+    const [modalOpen, setModalOpen] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
         async function fetchData() {
@@ -62,20 +87,20 @@ export default function WritePost() {
         setTitle(event.target.value);
     }
 
-    function handleCategoryChange() {
+    function handleCategoryChange(option: any) {
+        console.log("chang", option);
         // const selectedCategory = event.target.value;
-        const selectCtegory = categoryRef.current?.value;
-        if (selectCtegory) {
 
+        const selectCtegory = option.value;
+        if (selectCtegory) {
             categories.find((cate: categories) => {
-                if (cate.categoryName === selectCtegory) {
-                    console.log(selectCtegory);
-                    categoryParent = cate.parentCategoryId;
+                if (cate.categoryId.toString() === selectCtegory) {
+                    setCategory(cate.categoryName);
+                    setCategoryParent(cate.parentCategoryId);
+                    console.log("paren ", cate.categoryId, " ", selectCtegory, " parent ", cate.parentCategoryId, " ", categoryParent);
                 }
             })
-            console.log("cas", categoryParent);
         }
-
 
     }
 
@@ -175,7 +200,7 @@ export default function WritePost() {
     }
     async function handleSubmitPost(event: React.FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();
-        console.log(event.currentTarget.value);
+        console.log("loz", event.currentTarget.value);
 
         const postData = {
             title: title,
@@ -194,17 +219,26 @@ export default function WritePost() {
                 timeout: 5000,
             });
             console.log(response);
-            navigate('/');
+            setModalOpen(true);
+            // navigate('/');
         } catch (error) {
             console.log(error);
 
         }
 
-
-
-
-        console.log(title, category, thumbnail);
     };
+
+
+    function handleModalClose() {
+        setModalOpen(false);
+        setTitle('');
+        setCategory('');
+        setThumbnail(null);
+        setValue('');
+        setCategoryParent(null);
+        navigate('/');
+    }
+
 
     useEffect(() => {
         document.title = "Write Post";
@@ -227,9 +261,66 @@ export default function WritePost() {
     };
 
 
+
+    interface options {
+        value: string;
+        label: string;
+    }
+    const options: options[] = categories.map((category: categories) => ({
+        value: category.categoryId.toString(),
+        label: category.categoryName
+    }));
+
+
+    const customStyles = {
+        menu: (provided: any) => ({
+            ...provided,
+            zIndex: "999900000"
+        })
+    };
+
+
     return (
         <>
             <ToastContainer />
+            <ThemeProvider theme={theme}>
+                <Modal open={modalOpen} onClose={handleModalClose}>
+                    <Box
+                        sx={{
+                            position: 'absolute' as 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 600,
+                            bgcolor: 'background.paper',
+                            border: '0px solid #fff',
+                            boxShadow: 24,
+                            p: 4,
+                            textAlign: 'center', // Để căn giữa các phần tử theo chiều ngang
+                            borderRadius: '10px',
+                        }}
+                    >
+                        <h2>Post created successfully!</h2>
+                        <p>Do you want to create a new post or return to the home page?</p>
+                        <Button
+                            onClick={() => { setModalOpen(false); }}
+                            variant="contained"
+                            color="primary"
+                            sx={{ margin: '8px' }} // Tạo khoảng cách giữa hai nút
+                        >
+                            Create new post
+                        </Button>
+                        <Button
+                            onClick={handleModalClose}
+                            variant="outlined"
+                            color="primary"
+                            sx={{ margin: '8px' }} // Tạo khoảng cách giữa hai nút
+                        >
+                            Return to home page
+                        </Button>
+                    </Box>
+                </Modal>
+            </ThemeProvider>
             <div className='site-wrapper'>
                 <div className={`${isNavbar ? "main-overlay active" : ""}`}>
                     <Header />
@@ -244,14 +335,23 @@ export default function WritePost() {
                                             <input type="text" id="" onChange={handleTitleChange} className="form-control" placeholder="Nhập tiêu đề cho bài viết" required />
                                         </div>
                                         <div className="mb-3">
-                                            <label className="form-label">Chọn chuyên ngành</label>
-                                            <select className="form-select" ref={categoryRef} onChange={handleCategoryChange} required >
+                                            <label className="form-label">Chọn chuyên ngành hoạc môn học</label>
+                                            {/* <select className="form-select" ref={categoryRef} onChange={handleCategoryChange} required >
                                                 {categories.map((category: categories) => {
                                                     return (
                                                         <option value={category.categoryName}>{category.categoryName}</option>
                                                     )
                                                 })}
-                                            </select>
+                                            </select> */}
+
+                                            <ThemeProvider theme={theme}>
+                                                <Select
+                                                    // value={category}
+                                                    onChange={handleCategoryChange}
+                                                    options={options}
+                                                    styles={customStyles}
+                                                />
+                                            </ThemeProvider >
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="formFile" className="form-label">Upload thumbnail</label>
