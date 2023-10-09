@@ -4,7 +4,7 @@ import '../assets/css/writepost.css';
 import Footer from '../components/Footer';
 import { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
-import NavbarSlid from '../components/NavbarSlid';
+
 import { useNavbarStore, useUserStore } from '../store/store';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
@@ -389,7 +389,7 @@ export default function WritePost() {
                     </div>
                 </div>
             </div>
-            <NavbarSlid />
+
         </>
     );
 }

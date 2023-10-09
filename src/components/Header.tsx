@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { ToastContainer } from "react-toastify";
 
 import { useNavbarStore } from "../store/store";
+import NavbarSlid from "./NavbarSlid";
 
 export interface categories {
     categoryId: number,
@@ -61,7 +62,7 @@ export default function Header() {
     return (
         <>
             <ToastContainer />
-
+            <NavbarSlid />
             <header className="header-default bg-light sticky-top">
                 <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">

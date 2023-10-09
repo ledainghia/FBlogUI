@@ -1,77 +1,90 @@
+import Header from "../components/Header";
+import Footer from '../components/Footer';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { blog } from "../components/MainContent";
 
 export default function BlogSingle() {
+    const { idPost } = useParams<{ idPost: string }>();
+
+    const [post, setPost] = useState<blog | null>(null);
+    const [content, setContent] = useState<string | TrustedHTML>("");
+
+    useEffect(() => {
+        async function fetchPost() {
+            try {
+                const response = await axios.get(`https://api.fublog.tech/api/v1/auth/blogPosts/getBlogById/${idPost}`);
+                setPost(response.data.data);
+                setContent(response.data.data.content);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchPost();
+    }, [idPost]);
     return (
         <>
+            <Header />
+
             <section className="main-content mt-3">
                 <div className="container-xl">
-                    <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="#">Home</a></li>
-                            <li className="breadcrumb-item"><a href="#">Inspiration</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">
-                                Your choice. Your world
-                            </li>
-                        </ol>
-                    </nav>
+
 
                     <div className="row gy-4 justify-content-end">
-                        <div className="post-actions d-flex flex-column align-items-center mx-auto col-lg-1 position-fixed">
-
-
-                            <div className="votes votes--side post-actions__vote mb-1">
-                                <button
-                                    className="icon-button vote"
-
-                                >
-                                    <i aria-hidden="true" className="fa fa-caret-up"></i>
-                                </button>
-                                <div className="points text-muted">+89</div>
-                                <button
-                                    className="icon-button vote"
-
-                                >
-                                    <i aria-hidden="true" className="fa fa-caret-down"></i>
-                                </button>
+                        <div className="col-lg-1" style={{ position: "relative" }}>
+                            <div className="post-actions d-flex flex-column align-items-center mx-auto " style={{ position: "fixed", top: "20vh" }}>
+                                <div className="votes votes--side post-actions__vote mb-1">
+                                    <button className="icon-button vote">
+                                        <i aria-hidden="true" className="fa fa-caret-up"></i>
+                                    </button>
+                                    <div className="points text-muted" style={{
+                                        display: "flex",
+                                        justifyContent: "center"
+                                    }}
+                                    >{post?.voteCount}</div>
+                                    <button className="icon-button vote">
+                                        <i aria-hidden="true" className="fa fa-caret-down"></i>
+                                    </button>
+                                </div>
+                                <div className="subscribe mb-2" >
+                                    <button
+                                        type="button"
+                                        className="icon-button post-actions__clip el-button--default clipped"
+                                        data-original-title="Bỏ bookmark bài viết này">
+                                        <i className="fa fa-bookmark"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div className="subscribe mb-2" >
-                                <button
-                                    type="button"
-                                    className="icon-button post-actions__clip el-button--default clipped"
-
-                                    data-original-title="Bỏ bookmark bài viết này">
-                                    <i className="fa fa-bookmark"></i>
-
-                                </button>
-                            </div>
-
-
                         </div>
                         <div className="col-lg-7">
 
                             <div className="post post-single">
 
                                 <div className="post-header">
-                                    <h1 className="title mt-0 mb-3">Your choice. Your world</h1>
+                                    <h1 className="title mt-0 mb-3">{post?.title}</h1>
                                     <ul className="meta list-inline mb-0">
                                         <li className="list-inline-item">
                                             <a href="#"
                                             ><img
-                                                    src="images/other/author-sm.png"
+                                                    src={post?.user.picture}
+                                                    style={{ width: "30px", height: "30px", borderRadius: "50%" }}
                                                     className="author"
                                                     alt="author"
-                                                />FuBlog Doe</a>
+                                                />{post?.user.fullname}</a>
                                         </li>
-                                        <li className="list-inline-item"><a href="#">Trending</a></li>
-                                        <li className="list-inline-item">29 March 2021</li>
+                                        <li className="list-inline-item"><a href="#">{post?.categoryName}</a></li>
+                                        <li className="list-inline-item">{post ? new Date(post.createdDate).toLocaleDateString('vn-VN') : null}</li>
                                     </ul>
                                 </div>
 
                                 <div className="featured-image">
-                                    <img src="images/posts/test.png" alt="post-title" />
+                                    <img src={post?.image} alt="post-title" />
                                 </div>
 
                                 <div className="post-content clearfix">
-                                    ...........................
+                                    <div dangerouslySetInnerHTML={{ __html: content }} />
                                 </div>
 
                                 <div className="post-bottom">
@@ -559,6 +572,7 @@ export default function BlogSingle() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

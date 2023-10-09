@@ -11,7 +11,6 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import MainContent from '../components/MainContent';
-import NavbarSlid from '../components/NavbarSlid';
 import { useNavbarStore } from '../store/store';
 
 
@@ -48,17 +47,17 @@ export default function Home() {
                         />
                     </div>
                     :
-                    <>
+                    <><Header />
                         <div className='site-wrapper'>
                             <div className={`${isNavbar ? "main-overlay active" : ""}`}>
-                                <Header />
+
                                 <Hero />
                                 <MainContent />
 
                                 <Footer />
                             </div>
                         </div>
-                        <NavbarSlid />
+
                     </>
             }
         </>

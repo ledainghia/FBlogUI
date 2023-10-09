@@ -32,10 +32,11 @@ interface userLogin {
     picture: string,
 
 }
-interface blog {
+export interface blog {
     typePost: string,
     title: string,
     content: string,
+    categoryName: string,
     createdDate: string,
     modifiedDate: Date,
     approvedBy: number,
@@ -43,10 +44,10 @@ interface blog {
     isApproved: boolean,
     image: string,
     views: number,
-    votes: number,
+    voteCount: number,
     postComments: [],
     postTags: [],
-    id: number,
+    postId: number,
     user: userLogin,
     blogPostCount: number,
 }
@@ -72,6 +73,7 @@ export default function MainContent() {
         axios.get(`https://api.fublog.tech/api/v1/auth/blogPosts/getAllBlog/${page}/${limitPostPerPage}`)
             .then((response) => {
                 allBlogPosts = response.data.blogPostDTOList;
+                console.log(allBlogPosts)
                 const blogPostsCount: number = response.data.blogPostCount;
                 if (allBlogPosts) {
                     const blogPosts = allBlogPosts.map((allBlogPosts: blog) => {
@@ -119,7 +121,7 @@ export default function MainContent() {
                         <div className="padding-30 rounded bordered">
                             <div className="row">
                                 {posts && posts.map(post => (
-                                    <div className="col-md-12 col-sm-6" key={post.id}>
+                                    <div className="col-md-12 col-sm-6" key={post.postId}>
                                         {/* <!-- post --> */}
                                         <div className="post post-list clearfix">
                                             <div className="thumb rounded">
@@ -141,7 +143,7 @@ export default function MainContent() {
                                                     <li className="list-inline-item">{post.createdDate}</li>
                                                 </ul>
                                                 <h5 className="post-title">
-                                                    <Link to={`/blog/${post.id}`}>{post.title}</Link>
+                                                    <Link to={`/blog/${post.postId}`}>{post.title}</Link>
                                                 </h5>
                                                 <PostPreview content={post.content} maxLength={400} />
                                                 <div className="post-bottom clearfix d-flex align-items-center">

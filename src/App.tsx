@@ -43,7 +43,7 @@ function App() {
           path='/writepost'
           element={<ProtectedRoute2 element={<WritePost />} />}
         />
-        <Route path="/blog/:id" element={<BlogSingle />} />
+        <Route path="/blog/:idPost" element={<BlogSingle />} />
         <Route
           path='/profile'
           element={<ProtectedRoute2 element={<Profile />} />}
