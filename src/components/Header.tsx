@@ -7,7 +7,8 @@ import { ToastContainer } from "react-toastify";
 
 import { useNavbarStore } from "../store/store";
 import NavbarSlid from "./NavbarSlid";
-
+import LOGO from "../assets/images/logo.svg";
+import axiosInstance from "../config/axiosConfig";
 export interface categories {
     categoryId: number,
     categoryName: string,
@@ -29,6 +30,24 @@ export default function Header() {
     const { setButtonNavRef } = useButtonNavRefStore();
     // Sử dụng useRef để tạo một ref cho buttonNav
     const buttonNavRefs = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+
+        const fetchUserInfo = async () => {
+            try {
+                const response = await axiosInstance.get("/api/v1/auth/getUserInfo");
+                console.log("userInfo", response.data);
+                console.log("user", user);
+                setUser(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchUserInfo();
+
+
+    }, [setUser]);
     useEffect(() => {
         // Gán giá trị cho buttonNavRef sau khi component đã render
         setButtonNavRef(buttonNavRefs);
@@ -67,7 +86,7 @@ export default function Header() {
                 <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
 
-                        <a className="navbar-brand" href="index.html"><img src="images/logo.svg" alt="logo" /></a>
+                        <Link className="navbar-brand" to="/"><img src={LOGO} alt="logo" /></Link>
 
                         <div className="collapse navbar-collapse">
 

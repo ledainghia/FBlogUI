@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { blog } from "../components/MainContent";
-
+import WAVE from "../assets/images/wave.svg";
 export default function BlogSingle() {
     const { idPost } = useParams<{ idPost: string }>();
 
@@ -164,9 +164,9 @@ export default function BlogSingle() {
                             <div className="spacer" data-height="50"></div>
 
 
-                            <div className="section-header">
+                            <div className="section-header mt-3">
                                 <h3 className="section-title">Comments (3)</h3>
-                                <img src="images/wave.svg" className="wave" alt="wave" />
+                                <img src={WAVE} className="wave" alt="wave" />
                             </div>
 
                             <div className="comments bordered padding-30 rounded">
@@ -222,11 +222,11 @@ export default function BlogSingle() {
                                 </ul>
                             </div>
 
-                            <div className="spacer" data-height="50"></div>
 
-                            <div className="section-header">
+
+                            <div className="section-header mt-3">
                                 <h3 className="section-title">Leave Comment</h3>
-                                <img src="images/wave.svg" className="wave" alt="wave" />
+                                <img src={WAVE} className="wave" alt="wave" />
                             </div>
 
                             <div className="comment-form rounded bordered padding-30">
@@ -310,7 +310,7 @@ export default function BlogSingle() {
                                 <div className="widget rounded">
                                     <div className="widget-header text-center">
                                         <h3 className="widget-title">Mục lục</h3>
-                                        <img src="images/wave.svg" className="wave" alt="wave" />
+                                        <img src={WAVE} className="wave" alt="wave" />
                                     </div>
                                     <div className="widget-content">
                                         <ul className="list">
@@ -345,7 +345,7 @@ export default function BlogSingle() {
                                 <div className="widget rounded">
                                     <div className="widget-header text-center">
                                         <h3 className="widget-title">Popular Posts</h3>
-                                        <img src="images/wave.svg" className="wave" alt="wave" />
+                                        <img src={WAVE} className="wave" alt="wave" />
                                     </div>
                                     <div className="widget-content">
 
@@ -423,7 +423,7 @@ export default function BlogSingle() {
                                 <div className="widget rounded">
                                     <div className="widget-header text-center">
                                         <h3 className="widget-title">Explore Topics</h3>
-                                        <img src="images/wave.svg" className="wave" alt="wave" />
+                                        <img src={WAVE} className="wave" alt="wave" />
                                     </div>
                                     <div className="widget-content">
                                         <ul className="list">
@@ -443,7 +443,7 @@ export default function BlogSingle() {
                                 <div className="widget rounded">
                                     <div className="widget-header text-center">
                                         <h3 className="widget-title">Celebration</h3>
-                                        <img src="images/wave.svg" className="wave" alt="wave" />
+                                        <img src={WAVE} className="wave" alt="wave" />
                                     </div>
                                     <div className="widget-content">
                                         <div className="post-carousel-widget">
@@ -557,7 +557,7 @@ export default function BlogSingle() {
                                 <div className="widget rounded">
                                     <div className="widget-header text-center">
                                         <h3 className="widget-title">Tag Clouds</h3>
-                                        <img src="images/wave.svg" className="wave" alt="wave" />
+                                        <img src={WAVE} className="wave" alt="wave" />
                                     </div>
                                     <div className="widget-content">
                                         <a href="#" className="tag">#Trending</a>

@@ -106,7 +106,7 @@ export default function MainContent() {
         <section className="main-content">
             <div className="container-fluid">
                 <div className="row gy-4">
-                    <div className="col-lg-8">
+                    <div className="col-lg-9">
                         {/* <!-- section header --> */}
 
 
@@ -197,11 +197,26 @@ export default function MainContent() {
 
                         </div>
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-lg-3">
                         {/* <!-- sidebar --> */}
                         <div className="sidebar">
                             {/* <!-- widget about --> */}
-
+                            <div className="widget rounded">
+                                <div className="widget-header text-center">
+                                    <h3 className="widget-title">Explore Topics</h3>
+                                    <img src="images/wave.svg" className="wave" alt="wave" />
+                                </div>
+                                <div className="widget-content">
+                                    <ul className="list">
+                                        <li><a href="#">Lifestyle</a><span>(5)</span></li>
+                                        <li><a href="#">Inspiration</a><span>(2)</span></li>
+                                        <li><a href="#">Fashion</a><span>(4)</span></li>
+                                        <li><a href="#">Politic</a><span>(1)</span></li>
+                                        <li><a href="#">Trending</a><span>(7)</span></li>
+                                        <li><a href="#">Culture</a><span>(3)</span></li>
+                                    </ul>
+                                </div>
+                            </div>
 
                             <div className="widget rounded">
                                 <div className="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
@@ -233,30 +248,6 @@ export default function MainContent() {
                                     </ul>
                                 </div>
                             </div>
-
-
-                            {/* <!-- widget categories --> */}
-                            <div className="widget rounded">
-                                <div className="widget-header text-center">
-                                    <h3 className="widget-title">Explore Topics</h3>
-                                    <img src="images/wave.svg" className="wave" alt="wave" />
-                                </div>
-                                <div className="widget-content">
-                                    <ul className="list">
-                                        <li><a href="#">Lifestyle</a><span>(5)</span></li>
-                                        <li><a href="#">Inspiration</a><span>(2)</span></li>
-                                        <li><a href="#">Fashion</a><span>(4)</span></li>
-                                        <li><a href="#">Politic</a><span>(1)</span></li>
-                                        <li><a href="#">Trending</a><span>(7)</span></li>
-                                        <li><a href="#">Culture</a><span>(3)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* <!-- widget newsletter -->
-
-            <!-- widget post carousel --> */}
-
                         </div>
                     </div>
                 </div>

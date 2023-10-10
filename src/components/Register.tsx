@@ -5,7 +5,7 @@ import jwt from 'jwt-decode';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { useUserStore, userLogin  } from '../store/store';
+import { useUserStore, userLogin } from '../store/store';
 
 import useToast from '../customHooks/configToast';
 
@@ -95,6 +95,8 @@ export default function Register() {
             .then((response) => {
                 console.log(response);
                 cusToast.dismissToast();
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
                 const userL: userLogin = jwt(response.data.token);
                 cusToast.showToast("Đăng kí thành công", "success");
                 localStorage.setItem('user', JSON.stringify(userL));
