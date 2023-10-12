@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useButtonNavRefStore, useNavbarStore } from '../store/store';
 import { Menu, MenuPage } from './Menu';
 
-const page = [
+export const page = [
     {
         "id": 1,
         "name": "Home",
@@ -17,18 +17,23 @@ const page = [
         "name": "Write blog",
         "url": "/writepost",
         "subPages": [],
+    },
+    {
+        "id": 3,
+        "name": "Profile",
+        "url": "/profile",
+        "subPages": [],
     }
 ]
 
 
 export default function NavbarSlid() {
     const [categories, setCategories] = useState([]);
-
-
     const [subMenus, setSubMenus] = useState<boolean>(false);
     const [subPages, setSubPages] = useState<boolean>(false);
     const { isNavbar, setNavbar } = useNavbarStore();
     const navbarRef = useRef<HTMLDivElement>(null);
+    const { buttonNavRef } = useButtonNavRefStore();
 
     const toggleSubMenu = () => {
         setSubMenus(!subMenus);
@@ -57,7 +62,7 @@ export default function NavbarSlid() {
 
         fetchData();
     }, [setCategories]);
-    const { buttonNavRef } = useButtonNavRefStore();
+
     const handleDocumentClick = (e: MouseEvent) => {
 
         if (isNavbar)

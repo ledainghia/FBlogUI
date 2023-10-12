@@ -2,15 +2,13 @@ import { useTabContentStore } from "../store/store";
 import TabPopularContent from "./TabPopularContent";
 import TabRecentContent from "./TabRecentContent";
 
-
-
-
 export default function Hero() {
     const { isPopular, setPopular } = useTabContentStore();
 
     const handleTabClick = (isPopular: boolean) => {
         setPopular(isPopular);
     };
+
     return (
         <section id="hero">
             <div className="container-fluid">
@@ -62,7 +60,7 @@ export default function Hero() {
                                         type="button"
                                         onClick={() => handleTabClick(false)}
                                     >
-                                        Recent
+                                        Best pick
                                     </button>
                                 </li>
                             </ul>

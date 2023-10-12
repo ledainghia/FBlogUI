@@ -1,14 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useButtonNavRefStore, useUserStore } from "../store/store";
-
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
-
 import { useNavbarStore } from "../store/store";
-import NavbarSlid from "./NavbarSlid";
+import NavbarSlid, { page } from "./NavbarSlid";
 import LOGO from "../assets/images/logo.svg";
 import axiosInstance from "../config/axiosConfig";
+import axios from "axios";
+
+import CategoryDropdown from "./CategoriewDropdown";
+
 export interface categories {
     categoryId: number,
     categoryName: string,
@@ -22,14 +23,50 @@ export interface pages {
     subPages: pages[],
 }
 
-
+// const host = "https://api.fublog.tech/push-notifications/4";
 export default function Header() {
-
+    const [isMobile, setIsMobile] = useState<boolean>(false);
     const { user, setUser } = useUserStore();
     const navigate = useNavigate();
     const { setButtonNavRef } = useButtonNavRefStore();
-    // Sử dụng useRef để tạo một ref cho buttonNav
     const buttonNavRefs = useRef<HTMLButtonElement>(null);
+    const [categories, setCategories] = useState([]);
+
+    // useEffect(() => {
+
+
+
+
+    //     const sse = new EventSource(host);
+    //     console.log(sse);
+    //     sse.addEventListener("user-list-event", (event) => {
+    //         const data = JSON.parse(event.data);
+
+    //     });
+
+    //     sse.onerror = () => {
+    //         sse.close();
+    //         console.log("data");
+    //     };
+    //     return () => {
+    //         sse.close();
+    //         console.log("data2");
+    //     };
+
+    // },);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get("https://api.fublog.tech/api/v1/auth/category/viewAll");
+                const category = response.data.data;
+                setCategories(category);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        fetchData();
+    }, [setCategories]);
 
     useEffect(() => {
 
@@ -48,10 +85,35 @@ export default function Header() {
 
 
     }, [setUser]);
+
     useEffect(() => {
         // Gán giá trị cho buttonNavRef sau khi component đã render
         setButtonNavRef(buttonNavRefs);
     }, [setButtonNavRef]);
+
+    useEffect(() => {
+        // Sử dụng window.innerWidth hoặc media queries để kiểm tra kích thước màn hình
+        const checkIsMobile = () => {
+            if (window.innerWidth <= 987) { // Thay 768 bằng ngưỡng phù hợp cho mobile của bạn
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        };
+
+        // Gọi hàm kiểm tra lần đầu khi component mount
+        checkIsMobile();
+
+        // Lắng nghe sự thay đổi kích thước màn hình
+        window.addEventListener('resize', checkIsMobile);
+
+        // Xóa lắng nghe khi component bị hủy
+        return () => {
+            window.removeEventListener('resize', checkIsMobile);
+        };
+    }, []);
+
+
 
 
     const { isNavbar, setNavbar } = useNavbarStore();
@@ -90,38 +152,33 @@ export default function Header() {
 
                         <div className="collapse navbar-collapse">
 
-                            {/* <ul className="navbar-nav mr-auto">
+                            <ul className="navbar-nav mr-auto">
                                 <li className="nav-item dropdown active">
-                                    <a className="nav-link dropdown-toggle" href="index.html">Pages</a>
+                                    <Link className="nav-link dropdown-toggle" to={"/"}>Pages</Link>
                                     <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="index.html">Magazine</a></li>
-                                        <li><a className="dropdown-item" href="personal.html">Personal</a></li>
-                                        <li><a className="dropdown-item" href="personal-alt.html">Personal Alt</a></li>
-                                        <li><a className="dropdown-item" href="minimal.html">Minimal</a></li>
-                                        <li><a className="dropdown-item" href="classNameic.html">classNameic</a></li>
+                                        {page.map((page, index) => (
+                                            <li key={index}><Link className="dropdown-item" to={page.url}>{page.name}</Link></li>
+                                        ))}
                                     </ul>
                                 </li>
+
                                 <li className="nav-item">
                                     <a className="nav-link" href="category.html">Lifestyle</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="category.html">Inspiration</a>
                                 </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="#">Pages</a>
-                                    <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="category.html">Category</a></li>
-                                        <li><a className="dropdown-item" href="blog-single.html">Blog Single</a></li>
-                                        <li><a className="dropdown-item" href="blog-single-alt.html">Blog Single Alt</a></li>
-                                        <li><a className="dropdown-item" href="about.html">About</a></li>
-                                        <li><a className="dropdown-item" href="contact.html">Contact</a></li>
-                                    </ul>
+
+                                <li className="nav-item dropdown ">
+                                    <CategoryDropdown categories={categories} />
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="contact.html">Contact</a>
                                 </li>
-                            </ul> */}
+                            </ul>
                         </div>
+
+
 
 
                         <div className="header-right">
@@ -135,15 +192,16 @@ export default function Header() {
                                     <button className="icon-button" onClick={() => { navigate('/writepost') }}>
                                         <i className="icon-bell"></i>
                                     </button>
-                                    <button className="icon-button" onClick={toggleNavbar} ref={buttonNavRefs} >
-                                        <i className="icon-menu"></i>
-                                    </button>
+                                    {isMobile && (
+                                        <button className="icon-button" onClick={toggleNavbar}>
+                                            <i className="icon-menu"></i>
+                                        </button>)}
                                     {user ?
                                         <div className="btn-group dropdown-center">
                                             <button type="button" className="btn dropdown-toggle" style={{ color: "orange" }} data-bs-toggle="dropdown" aria-expanded="false">
                                                 Hi, {user.fullname}
                                             </button>
-                                            <ul className="dropdown-menu">
+                                            <ul className="dropdown-menu" style={{ left: "-20px " }}>
                                                 <li><Link className="dropdown-item" to={"/profile"}>Trang cá nhân</Link></li>
                                                 <li><hr className="dropdown-divider" /></li>
                                                 <li className="logout"><a className="dropdown-item" onClick={handleLogout}>Đăng xuất</a></li>
@@ -156,8 +214,8 @@ export default function Header() {
                             </div>
                         </div>
                     </div>
-                </nav>
-            </header>
+                </nav >
+            </header >
 
 
 

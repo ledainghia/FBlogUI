@@ -49,6 +49,17 @@ const theme = createTheme({
 
 
 });
+export function extractHashtags(text: string) {
+    // Use a regular expression to find hashtags
+    const hashtags = text.match(/#(\S+?)(?=\s|<|$)/g);
+
+    if (hashtags) {
+        // Remove the "#" symbol from each hashtag
+        return hashtags.map((hashtag: string) => hashtag.substring(1));
+    } else {
+        return [];
+    }
+}
 
 export default function WritePost() {
     const { user } = useUserStore();
@@ -63,6 +74,7 @@ export default function WritePost() {
     const [isCheck, setIsCheck] = useState(false);
     const [thumbnail, setThumbnail] = useState<string | null>(null);
     const [categories, setCategories] = useState([]);
+
     const [modalOpen, setModalOpen] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
@@ -108,7 +120,7 @@ export default function WritePost() {
         const file = event.target.files?.[0];
         console.log(event.target.files)
         if (file && file.type.startsWith('image/')) {
-            if (file?.size && file?.size > 1000000) {
+            if (file?.size && file?.size > 10000000) {
 
                 event.target.value = ''; // Clear the input field
                 event.target.files = null;
@@ -200,7 +212,6 @@ export default function WritePost() {
     }
     async function handleSubmitPost(event: React.FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();
-        console.log("loz", event.currentTarget.value);
 
         const postData = {
             title: title,
@@ -210,7 +221,7 @@ export default function WritePost() {
             content: value,
             userId: user?.id,
             typePost: "BLOG",
-            tagList: [],
+            tagList: extractHashtags(value),
         }
         // get value from input
         console.log(postData);
@@ -240,8 +251,10 @@ export default function WritePost() {
     }
 
 
+
     useEffect(() => {
         document.title = "Write Post";
+        console.log(extractHashtags(value));
         console.log(value);
     }, [value])
 
@@ -358,6 +371,11 @@ export default function WritePost() {
                                             <input className="form-control" style={{ borderRadius: "10px" }} type="file" id="formFile" onChange={handleThumbnailChange} required />
                                         </div>
                                         <div className="mb-3">
+                                            <label className="form-label">Nội dung bài viết</label>
+                                            <ReactQuill className='editor mb-3 ' theme="snow" value={value} onChange={setValue} modules={modules} />
+                                        </div>
+
+                                        <div className="mb-3">
                                             <div className="form-check">
                                                 <input className="form-check-input" type="checkbox" required onChange={handleCheck} id="disabledFieldsetCheck" />
                                                 <label className="form-check-label" >
@@ -365,12 +383,7 @@ export default function WritePost() {
                                                 </label>
                                             </div>
                                         </div>
-                                        <div className="mb-3">
-                                            <label className="form-label">Nội dung bài viết</label>
-                                            <ReactQuill className='editor mb-3 ' theme="snow" value={value} onChange={setValue} modules={modules} />
-                                            {/* <WritePost2></WritePost2> */}
-                                        </div>
-                                        <button type="submit" className="btn btn-primary ">Submit</button>
+                                        <button type="submit" style={{ background: "orange" }} className="btn btn-primary mt-3 ">Submit</button>
                                     </fieldset>
                                 </form>
 
