@@ -5,6 +5,7 @@ import { orange } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PostPreview from "./PostPreview";
 import { Link } from "react-router-dom";
+import EstimatedReadingTime from './EstimatedReadingTime';
 
 
 
@@ -94,6 +95,7 @@ export default function MainContent() {
                         allBlogPosts.content = extractTextFromHtml(allBlogPosts.content);
                         return allBlogPosts;
                     })
+
                     setPosts(blogPosts);
                     setTotalPages(Math.ceil(blogPostsCount / limitPostPerPage));
                     console.log(blogPostsCount)
@@ -145,6 +147,7 @@ export default function MainContent() {
                                                         <a href="#">{post.typePost}</a>
                                                     </li>
                                                     <li className="list-inline-item">{post.createdDate}</li>
+                                                    <EstimatedReadingTime articleText={post.content} />
                                                 </ul>
                                                 <h5 className="post-title">
                                                     <Link to={`/blog/${post.postId}`}>{post.title}</Link>

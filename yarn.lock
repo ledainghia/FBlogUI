@@ -3280,6 +3280,11 @@ read-cache@^1.0.0:
   dependencies:
     pify "^2.3.0"
 
+reading-time@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmjs.org/reading-time/-/reading-time-1.5.0.tgz"
+  integrity sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==
+
 regenerator-runtime@^0.14.0:
   version "0.14.0"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.14.0.tgz"

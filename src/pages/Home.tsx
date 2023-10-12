@@ -50,10 +50,8 @@ export default function Home() {
                     <><Header />
                         <div className='site-wrapper'>
                             <div className={`${isNavbar ? "main-overlay active" : ""}`}>
-
                                 <Hero />
                                 <MainContent />
-
                                 <Footer />
                             </div>
                         </div>
