@@ -16,6 +16,7 @@ export default function BlogSingle() {
             try {
                 const response = await axios.get(`https://api.fublog.tech/api/v1/auth/blogPosts/getBlogById/${idPost}`);
                 setPost(response.data.data);
+                console.log(response.data.data.tagList)
                 setContent(response.data.data.content);
             } catch (error) {
                 console.error(error);
@@ -68,11 +69,11 @@ export default function BlogSingle() {
                                         <li className="list-inline-item">
                                             <a href="#"
                                             ><img
-                                                    src={post?.user.picture}
+                                                    src={post?.user.image}
                                                     style={{ width: "30px", height: "30px", borderRadius: "50%" }}
                                                     className="author"
                                                     alt="author"
-                                                />{post?.user.fullname}</a>
+                                                />{post?.user.fullName}</a>
                                         </li>
                                         <li className="list-inline-item"><a href="#">{post?.categoryName}</a></li>
                                         <li className="list-inline-item">{post ? new Date(post.createdDate).toLocaleDateString('vn-VN') : null}</li>
@@ -91,11 +92,11 @@ export default function BlogSingle() {
                                     <div className="row d-flex align-items-center">
                                         <div className="col-md-6 col-12 text-center text-md-start">
 
-                                            <a href="#" className="tag">#Trending</a>
-                                            <a href="#" className="tag">#Video</a>
-                                            <a href="#" className="tag">#Featured</a>
+                                            {post?.tagList.map((tag) => (
+                                                <a href="#" className="tag" key={tag.tagId}>{tag.tagName}</a>
+                                            ))}
                                         </div>
-                                        <div className="col-md-6 col-12">
+                                        {/* <div className="col-md-6 col-12 mt-3">
 
                                             <ul
                                                 className="social-icons list-unstyled list-inline mb-0 float-md-end"
@@ -119,14 +120,13 @@ export default function BlogSingle() {
                                                     <a href="#"><i className="far fa-envelope"></i></a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="spacer" data-height="50"></div>
 
-                            <div className="about-author padding-30 rounded">
+                            <div className="about-author padding-30 rounded mt-3">
                                 <div className="thumb">
                                     <img src="images/other/avatar-about.png" alt="FuBlog Doe" />
                                 </div>
@@ -165,7 +165,7 @@ export default function BlogSingle() {
 
 
                             <div className="section-header mt-3">
-                                <h3 className="section-title">Comments (3)</h3>
+                                <h3 className="section-title">Comments ({post?.commentCount})</h3>
                                 <img src={WAVE} className="wave" alt="wave" />
                             </div>
 
@@ -560,11 +560,14 @@ export default function BlogSingle() {
                                         <img src={WAVE} className="wave" alt="wave" />
                                     </div>
                                     <div className="widget-content">
-                                        <a href="#" className="tag">#Trending</a>
+                                        {post?.tagList.map((tag) => (
+                                            <a href="#" className="tag" key={tag.tagId}>{tag.tagName}</a>
+                                        ))}
+                                        {/* <a href="#" className="tag">#Trending</a>
                                         <a href="#" className="tag">#Video</a>
                                         <a href="#" className="tag">#Featured</a>
                                         <a href="#" className="tag">#Gallery</a>
-                                        <a href="#" className="tag">#Celebrities</a>
+                                        <a href="#" className="tag">#Celebrities</a> */}
                                     </div>
                                 </div>
                             </div>

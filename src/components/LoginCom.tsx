@@ -160,6 +160,7 @@ export default function Login() {
                 const userL: userLogin = jwt(response.data.token);
                 cusToast.showToast("Đăng nhập thành công", "success")
                 { check ? localStorage.setItem('token', response.data.token) : sessionStorage.setItem('token', response.data.token) }
+                
                 { check ? localStorage.setItem('refreshToken', response.data.refreshToken) : sessionStorage.setItem('refreshToken', response.data.refreshToken) }
                 setUser(userL);
                 console.log(userL);

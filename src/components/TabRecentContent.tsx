@@ -41,7 +41,7 @@ export default function TabRecentContent() {
                                 <a href="blog-single.html">{post.title}</a>
                             </h6>
                             <ul className="meta list-inline mt-1 mb-0">
-                                <li className="list-inline-item">{post.user.fullname}</li>
+                                <li className="list-inline-item">{post.user.fullName}</li>
                                 <li className="list-inline-item">{post ? new Date(post.createdDate).toLocaleDateString('vn-VN') : null}</li>
                             </ul>
                         </div>

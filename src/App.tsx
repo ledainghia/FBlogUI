@@ -28,7 +28,8 @@ function App() {
         />
         <Route path="/blog/:idPost" element={<BlogSingle />} />
         <Route
-          path='/profile'
+          path='/profile/:userID'
+          
           element={<ProtectedRoute2 element={<Profile />} />}
         />
       </Routes>

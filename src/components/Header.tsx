@@ -75,6 +75,7 @@ export default function Header() {
                 const response = await axiosInstance.get("/api/v1/auth/getUserInfo");
                 console.log("userInfo", response.data);
                 console.log("user", user);
+                localStorage.setItem('user', JSON.stringify(response.data));
                 setUser(response.data);
             } catch (error) {
                 console.error(error);
@@ -202,7 +203,7 @@ export default function Header() {
                                                 Hi, {user.fullname}
                                             </button>
                                             <ul className="dropdown-menu" style={{ left: "-20px " }}>
-                                                <li><Link className="dropdown-item" to={"/profile"}>Trang cá nhân</Link></li>
+                                                <li><Link className="dropdown-item" to={`/profile/${user.id}`}>Trang cá nhân</Link></li>
                                                 <li><hr className="dropdown-divider" /></li>
                                                 <li className="logout"><a className="dropdown-item" onClick={handleLogout}>Đăng xuất</a></li>
                                             </ul>

@@ -25,9 +25,11 @@ function PostPreview({ content, maxLength }: Props) {
 
     const truncatedBody = content.slice(0, maxLength) + '...';
     return (
-        <p className="excerpt mb-0">
-            {truncatedBody}
-        </p>
+        <>
+            <p className="excerpt mb-0">
+                {truncatedBody}
+            </p>
+        </>
     );
 }
 

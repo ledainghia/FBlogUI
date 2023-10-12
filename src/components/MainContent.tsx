@@ -9,7 +9,7 @@ import EstimatedReadingTime from './EstimatedReadingTime';
 
 
 
-const theme = createTheme({
+export const theme = createTheme({
     palette: {
         primary: {
             main: orange[300],
@@ -27,12 +27,18 @@ const theme = createTheme({
 
 });
 interface userLogin {
+    id: number,
     user: string,
     email: string,
-    role: [],
-    fullname: string,
-    picture: string,
+    role: string,
+    roles: [],
+    fullName: string,
+    image: string,
 
+}
+interface tagList {
+    tagId: number,
+    tagName: string,
 }
 export interface blog {
     typePost: string,
@@ -48,10 +54,13 @@ export interface blog {
     views: number,
     voteCount: number,
     postComments: [],
-    postTags: [],
+    tagList: tagList[],
     postId: number,
     user: userLogin,
     blogPostCount: number,
+    commentCount: number,
+
+
 }
 
 export function extractTextFromHtml(html: string): string {
@@ -84,9 +93,10 @@ export default function MainContent() {
     useEffect(() => {
         axios.get(`https://api.fublog.tech/api/v1/auth/blogPosts/getAllBlog/${page}/${limitPostPerPage}`)
             .then((response) => {
-                allBlogPosts = response.data.blogPostDTOList;
-                console.log(allBlogPosts)
-                const blogPostsCount: number = response.data.blogPostCount;
+                allBlogPosts = response.data.data.dtoList;
+                console.log("allBlogPosts", allBlogPosts)
+                const blogPostsCount: number = response.data.data.elementCount;;
+                console.log("blogPostsCount", response.data);
                 if (allBlogPosts) {
                     const blogPosts = allBlogPosts.map((allBlogPosts: blog) => {
                         let date: Date = new Date(allBlogPosts.createdDate);
@@ -141,7 +151,7 @@ export default function MainContent() {
                                             <div className="details">
                                                 <ul className="meta list-inline mb-3">
                                                     <li className="list-inline-item">
-                                                        <a href="#"><img src={post.user ? post.user.picture : ""} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.user ? post.user.fullname : ""}</a>
+                                                        <Link to={`/profile/${post.user.id}`}><img src={post.user ? post.user.image : ""} className="author" alt="author" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />{post.user ? post.user.fullName : ""}</Link>
                                                     </li>
                                                     <li className="list-inline-item">
                                                         <a href="#">{post.typePost}</a>
@@ -189,15 +199,7 @@ export default function MainContent() {
 
 
                             </div>
-                            {/* <!-- load more button --> */}
-                            {/* use bootstrap build a paging buttom html */}
 
-
-                            {/* <nav aria-label="Page navigation" style={{ display: 'flex', justifyContent: 'center' }}>
-                                <ul className="pagination">
-                                    {getPageLinks()}
-                                </ul>
-                            </nav> */}
                             <ThemeProvider theme={theme}>
                                 <Pagination count={totalPages} page={page} onChange={handlePageChange} color="primary" style={{ display: "flex", justifyContent: "center" }} variant="outlined" shape="rounded" />
                             </ThemeProvider>
