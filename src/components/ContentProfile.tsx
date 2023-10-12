@@ -1,7 +1,7 @@
 import { userLogin } from "../store/store";
 import defaultAvatar from '../assets/images/default-avatar.png';
 import { useEffect, useState } from "react";
-import { getBlogPostByAuthor, getFollowerCount, getFollowingCount } from "../APICall/apiConfig";
+import { getBlogPostByAuthor, getCountPostMarkByUser, getCountViewOfBlogByUser, getFollowerCount, getFollowingCount } from '../APICall/apiConfig';
 import { blog, extractTextFromHtml, theme } from "./MainContent";
 
 import { PostPreview2 } from "./PostPreview";
@@ -18,6 +18,8 @@ export default function ContentProfile() {
     const { userID } = useParams<{ userID: string }>();
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [countViewOfBlog, setCountViewOfBlog] = useState<number>(0);
+    const [countPostMark, setCountPostMark] = useState<number>(0);
     let limitPostPerPage = 5;
     const [blogPostsCount, setBlogPostsCount] = useState<number>(0);
     const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -33,6 +35,23 @@ export default function ContentProfile() {
                 console.log("dataBlog", response.data)
                 setBlogPostsCount(response.data.data.elementCount);
                 setTotalPages(Math.ceil(response.data.data.elementCount / limitPostPerPage));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        getCountViewOfBlogByUser(userID)
+            .then((response) => {
+                console.log("getCountViewOfBlog", response.data)
+                setCountViewOfBlog(response.data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        getCountPostMarkByUser(userID)
+            .then((response) => {
+                console.log("getCountPostMarkByUser", response.data)
+                setCountPostMark(response.data.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -166,7 +185,7 @@ export default function ContentProfile() {
                                 <div className="widget-content">
                                     <ul className="list" style={{ listStyle: "none" }}>
                                         <li>
-                                            <a href="#">Tổng số lượt xem bài viết</a><span>(5)</span>
+                                            <a href="#">Tổng số lượt xem bài viết</a><span>({countViewOfBlog})</span>
                                         </li>
                                         <li>
                                             <a href="#">Đang theo dõi các người dùng</a><span>({followingCount})</span>
@@ -175,7 +194,7 @@ export default function ContentProfile() {
                                             <a href="#">Các người dùng đang theo dõi</a><span>({followerCount})</span>
                                         </li>
                                         <li><a href="#">Bài viết</a><span>({blogPostsCount})</span></li>
-                                        <li><a href="#">Bookmark</a><span>(7)</span></li>
+                                        <li><a href="#">Bookmark</a><span>({countPostMark})</span></li>
                                         <li><a href="#">Tổng số câu hỏi</a><span>(3)</span></li>
                                         <li>
                                             <a href="#">Tổng số câu trả lời</a><span>(3)</span>

@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import WritePost from './pages/WritePost';
-
+import Error from './pages/Error';
 import BlogSingle from './pages/BlogSingle';
 
 // import Test from './pages/Test';
@@ -26,10 +26,13 @@ function App() {
           path='/writepost'
           element={<ProtectedRoute2 element={<WritePost />} />}
         />
+        <Route
+          path='*' element={<Error />}
+        />
         <Route path="/blog/:idPost" element={<BlogSingle />} />
         <Route
           path='/profile/:userID'
-          
+
           element={<ProtectedRoute2 element={<Profile />} />}
         />
       </Routes>

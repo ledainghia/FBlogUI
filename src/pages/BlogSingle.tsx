@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Footer from '../components/Footer';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { blog } from "../components/MainContent";
@@ -67,13 +67,13 @@ export default function BlogSingle() {
                                     <h1 className="title mt-0 mb-3">{post?.title}</h1>
                                     <ul className="meta list-inline mb-0">
                                         <li className="list-inline-item">
-                                            <a href="#"
+                                            <Link to={`/profile/${post?.user.id}`}
                                             ><img
                                                     src={post?.user.image}
                                                     style={{ width: "30px", height: "30px", borderRadius: "50%" }}
                                                     className="author"
                                                     alt="author"
-                                                />{post?.user.fullName}</a>
+                                                />{post?.user.fullName}</Link>
                                         </li>
                                         <li className="list-inline-item"><a href="#">{post?.categoryName}</a></li>
                                         <li className="list-inline-item">{post ? new Date(post.createdDate).toLocaleDateString('vn-VN') : null}</li>

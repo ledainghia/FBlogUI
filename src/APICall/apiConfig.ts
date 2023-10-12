@@ -20,3 +20,10 @@ export const getFollowerCount = (authorID: string | undefined) => {
 export const getFollowingCount = (authorID: string | undefined) => {
     return axios.get(BASE_URL + "/api/v1/auth/user/following/count/" + authorID);
 }
+
+export const getCountViewOfBlogByUser = (authorID: string | undefined) => {
+    return axios.get(BASE_URL + "/api/v1/auth/user/countViewOfBlog/" + authorID);
+}
+export const getCountPostMarkByUser = (authorID: string | undefined) => {
+    return axios.get(BASE_URL + "/api/v1/auth/user/countPostMarkByUser/" + authorID);
+}
