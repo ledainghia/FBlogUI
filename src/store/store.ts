@@ -1,5 +1,5 @@
 // import { UserInfo } from 'firebase/auth';
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface ForgetStore {
   isForgotten: boolean;
@@ -22,7 +22,7 @@ export const useNavbarStore = create<navbarStore>((set) => ({
 }));
 
 interface TabContentStore {
-  isPopular: boolean,
+  isPopular: boolean;
   setPopular: (value: boolean) => void;
 }
 
@@ -31,17 +31,14 @@ export const useTabContentStore = create<TabContentStore>((set) => ({
   setPopular: (value: boolean) => set({ isPopular: value }),
 }));
 
-
 export interface userLogin {
-  user: string,
-  email: string,
-  role: string,
-  roles: [],
-  fullname: string,
-  picture: string,
-  id: number,
-
-
+  user: string;
+  email: string;
+  role: string;
+  roles: string[];
+  fullName: string;
+  image: string;
+  id: number;
 }
 
 interface UserStore {
@@ -55,11 +52,10 @@ export const useUserStore = create<UserStore>((set) => ({
 }));
 
 interface userGGLogin {
-  user_id: string,
-  email: string,
-  name: string,
-  picture: string,
-
+  user_id: string;
+  email: string;
+  name: string;
+  picture: string;
 }
 interface UserGGStore {
   userGG: userGGLogin | null;

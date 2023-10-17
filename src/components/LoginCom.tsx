@@ -88,6 +88,7 @@ export default function Login() {
                                 console.log('Response:', response.data);
                                 localStorage.setItem('token', response.data.token);
                                 localStorage.setItem('refreshToken', response.data.refreshToken);
+                                localStorage.setItem('user', JSON.stringify(userL));
                                 navigate("/");
                                 cusToast.showToast("Login success", 'success');
                             })

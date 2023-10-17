@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getPopularBlogPostByView } from "../APICall/apiConfig";
 import { blog } from "./MainContent";
+import { Link } from "react-router-dom";
 
 export default function TabRecentContent() {
 
@@ -38,7 +39,7 @@ export default function TabRecentContent() {
                         </div>
                         <div className="details clearfix">
                             <h6 className="post-title my-0">
-                                <a href="blog-single.html">{post.title}</a>
+                                <Link to={`/blog/${post.postId}`}>{post.title}</Link>
                             </h6>
                             <ul className="meta list-inline mt-1 mb-0">
                                 <li className="list-inline-item">{post.user.fullName}</li>

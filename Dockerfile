@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Cài đặt các phụ thuộc của ứng dụng
-RUN npm install 
+RUN npm install  --force
 
 # Sao chép tất cả các tệp và thư mục trong thư mục gốc của ứng dụng React vào thư mục làm việc trong container
 COPY . .
