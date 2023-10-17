@@ -159,7 +159,7 @@ export default function MyWall() {
                           <span className="post-format">
                             <i className="icon-picture"></i>
                           </span>
-                          <a href="blog-single.html">
+                          <Link to={`/blog/${post.postId}`}>
                             <div className="inner">
                               <img
                                 style={{
@@ -171,7 +171,7 @@ export default function MyWall() {
                                 alt="post-title"
                               />
                             </div>
-                          </a>
+                          </Link>
                         </div>
                         <div className="details">
                           {userCurrent &&
