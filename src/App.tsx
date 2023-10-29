@@ -1,69 +1,55 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import './App.css';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import ProtectedRoute from './ProtectedRoute'; // Import as a default export
-import { useEffect } from 'react';
-import { useUserStore } from './store/store';
+import Home from "./pages/home/Home";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Products from "./pages/products/Products";
+import Users from "./pages/users/Users";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import Menu from "./components/menu/Menu";
+import Login from "./pages/login/Login";
+import "./styles/global.scss";
 
 function App() {
-  const { setUser } = useUserStore();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const userFromLocalStorage = localStorage.getItem('user');
-    const userFromSessionStorage = sessionStorage.getItem('user');
-    if (userFromLocalStorage) {
-      const parsedUser = JSON.parse(userFromLocalStorage);
-      setUser(parsedUser);
-    } else {
-
-      if (userFromSessionStorage) {
-        const parsedUser = JSON.parse(userFromSessionStorage);
-        setUser(parsedUser);
-      }
-    }
-
-
-    if (userFromLocalStorage) {
-      const tokenExpirationTime = JSON.parse(userFromLocalStorage).exp;
-      const currentTime = Date.now() / 1000;
-      if (tokenExpirationTime < currentTime) {
-        handleLogout();
-      }
-    }
-
-    if (userFromSessionStorage) {
-      const tokenExpirationTime = JSON.parse(userFromSessionStorage).exp;
-      console.log("cccccccc " + JSON.parse(userFromSessionStorage).exp);
-      const currentTime = Date.now() / 1000;
-      console.log("NOW " + currentTime);
-      if (tokenExpirationTime < currentTime) {
-        handleLogout();
-      }
-    }
-
-  }, [setUser]);
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
-    sessionStorage.removeItem('user');
-    navigate('/login');
+  const Layout = () => {
+    return (
+      <div className="main">
+        <Navbar />
+        <div className="container">
+          <div className="menuContainer">
+            <Menu />
+          </div>
+          <div className="contentContainer">
+            <Outlet />
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
   };
-
-
-  return (
-    <>
-      <Routes>
-        <Route
-          path="/login"
-          element={<ProtectedRoute element={<Login />} />} 
-        />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "users",
+          element: <Users />,
+        },
+        {
+          path: "products",
+          element: <Products />,
+        },
+      ],
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
 export default App;
