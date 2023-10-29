@@ -30,8 +30,18 @@
                     }
                 }
             }
-            .amount {
-                font-weight: 500;
+            .userContribute {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+                .post {
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+                .vote {
+                    font-size: 12px;
+                    font-weight: 500;
+                }
             }
         }
     }
