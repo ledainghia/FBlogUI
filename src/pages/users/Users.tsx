@@ -17,19 +17,13 @@ const columns: GridColDef[] = [
   // {field:"status",headerName:"Status",width:100,type:"boolean"},
 
   {
-    field: 'firstName',
-    headerName: 'First name',
+    field: 'fullname',
+    headerName: 'Full name',
     type: "string",
     width: 150,
     editable: true,
   },
-  {
-    field: 'lastName',
-    headerName: 'Last name',
-    type: "string",
-    width: 150,
-    editable: true,
-  },
+
   {
     field: 'email',
     headerName: 'Email',
@@ -55,6 +49,13 @@ const columns: GridColDef[] = [
     field: 'verified',
     headerName: 'Verified',
     type: "boolean",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: 'role',
+    headerName: 'Role',
+    type: "string",
     width: 100,
     editable: true,
   },

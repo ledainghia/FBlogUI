@@ -8,6 +8,7 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 30px;
+            gap: 20px;
             .user {
                 display: flex;
                 gap: 20px;
@@ -30,8 +31,16 @@
                     }
                 }
             }
-            .amount {
-                font-weight: 500;
+            .contributes {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .votes {
+                    font-size: 12px;
+                }
+                .posts {
+                    font-size: 12px;
+                }
             }
         }
     }

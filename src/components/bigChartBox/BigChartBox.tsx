@@ -11,45 +11,45 @@ import "./bigChartBox.scss";
 const data = [
   {
     name: "Sun",
-    books: 4000,
-    clothes: 2400,
-    electronic: 2400,
+    morning: 4000,
+    afternoon: 2400,
+    evening: 2400,
   },
   {
     name: "Mon",
-    books: 3000,
-    clothes: 1398,
-    electronic: 2210,
+    morning: 3000,
+    afternoon: 1398,
+    evening: 2210,
   },
   {
     name: "Tue",
-    books: 2000,
-    clothes: 9800,
-    electronic: 2290,
+    morning: 2000,
+    afternoon: 9800,
+    evening: 2290,
   },
   {
     name: "Wed",
-    books: 2780,
-    clothes: 3908,
-    electronic: 2000,
+    morning: 2780,
+    afternoon: 3908,
+    evening: 2000,
   },
   {
     name: "Thu",
-    books: 1890,
-    clothes: 4800,
-    electronic: 2181,
+    morning: 1890,
+    afternoon: 4800,
+    evening: 2181,
   },
   {
     name: "Fri",
-    books: 2390,
-    clothes: 3800,
-    electronic: 2500,
+    morning: 2390,
+    afternoon: 3800,
+    evening: 2500,
   },
   {
     name: "Sat",
-    books: 3490,
-    clothes: 4300,
-    electronic: 2100,
+    morning: 3490,
+    afternoon: 4300,
+    evening: 2100,
   },
 ];
 
@@ -73,21 +73,21 @@ const BigChartBox = () => {
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="electronic"
+              dataKey="morning"
               stackId="1"
               stroke="#8884d8"
               fill="#8884d8"
             />
             <Area
               type="monotone"
-              dataKey="clothes"
+              dataKey="afternoon"
               stackId="1"
               stroke="#82ca9d"
               fill="#82ca9d"
             />
             <Area
               type="monotone"
-              dataKey="books"
+              dataKey="evening"
               stackId="1"
               stroke="#ffc658"
               fill="#ffc658"

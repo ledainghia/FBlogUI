@@ -16,7 +16,12 @@ const TopBox = () => {
                                 <span className="email">{user.email}</span>
                             </div>
                         </div>
-                        <span className="amount">${user.amount}</span>
+                        <div className="contributes">
+
+                            <span className="votes">Vote:
+                                {user.votes}</span>
+                            <span className="posts">Posts:{user.posts}</span>
+                        </div>
                     </div>
                 ))}
             </div>
