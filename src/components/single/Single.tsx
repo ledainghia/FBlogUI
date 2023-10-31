@@ -1,4 +1,4 @@
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Legend, Line, LineChart, ResponsiveContainer, Tooltip } from "recharts"
 import "./single.scss"
 import { Props } from "recharts/types/container/Surface";
 type Props = {
