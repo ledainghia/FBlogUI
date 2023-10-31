@@ -2,7 +2,7 @@ import { useState } from "react";
 import Add from "../../components/Add/Add";
 import DataTable from "../../components/dataTable/DataTable";
 import { posts } from "../../data";
-import "./posts.scss";
+import "./reports.scss";
 import { GridColDef } from "@mui/x-data-grid";
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
@@ -13,18 +13,7 @@ const columns: GridColDef[] = [
     renderCell: (params) => {
       return <img src={params.row.img || "/noavatar.png"} alt="" />;
     },
-  },
-  {
-    field: "title",
-    type: "string",
-    headerName: "Title",
-    width: 250,
-  },
-  {
-    field: "category",
-    type: "string",
-    headerName: "Category",
-    width: 100,
+
   },
   {
     field: "author",
@@ -33,10 +22,17 @@ const columns: GridColDef[] = [
     width: 100,
   },
   {
-    field: "votes",
-    headerName: "Votes",
+    field: "title",
     type: "string",
-    width: 100,
+    headerName: "Title",
+    width: 250,
+  },
+  {
+    field: "content",
+    headerName: "Content",
+    type: "string",
+    width: 250,
+
   },
   {
     field: "createdAt",
@@ -48,21 +44,21 @@ const columns: GridColDef[] = [
 
 ];
 
-const Posts = () => {
-  const [open, setOpen] = useState(false);
+const Reports = () => {
+
   return (
 
 
 
-    <div className="posts">
+    <div className="reports">
       <div className="info">
-        <h1>Posts</h1>
-        <button onClick={() => setOpen(true)}>Add new Posts</button>
+        <h1>Reports</h1>
+
       </div>
-      <DataTable slug="posts" columns={columns} rows={posts} />
-      {open && <Add slug="post" columns={columns} setOpen={setOpen} />}
+      <DataTable slug="reports" columns={columns} rows={posts} />
+
     </div>
   )
 };
 
-export default Posts;
+export default Reports;

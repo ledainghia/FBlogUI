@@ -34,6 +34,12 @@ export const menu = [
                 url: "/posts",
                 icon: "post2.svg",
             },
+            {
+                id: 3,
+                title: "Reports",
+                url: "/reports",
+                icon: "report2.svg",
+            },
         ],
     },
     {

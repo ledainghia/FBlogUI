@@ -50,6 +50,7 @@ const columns: GridColDef[] = [
     width: 100,
     type: "boolean",
   },
+
 ];
 
 const Products = () => {

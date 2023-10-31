@@ -21,6 +21,11 @@
             &:hover {
                 background-color: $soft-bg;
             }
+            img {
+                color: white;
+                width: 20px;
+                height: 20px;
+            }
         }
     }
 }
