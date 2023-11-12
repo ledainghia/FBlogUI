@@ -2,7 +2,7 @@ import { useState } from "react";
 import Add from "../../components/Add/Add";
 import DataTable from "../../components/dataTable/DataTable";
 import { posts } from "../../data";
-import "./reports.scss";
+import "./reportUsers.scss";
 import { GridColDef } from "@mui/x-data-grid";
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -35,13 +35,6 @@ const columns: GridColDef[] = [
 
   },
   {
-    field: "blogReported",
-    headerName: "Blog Reported",
-    type: "string",
-    width: 250,
-
-  },
-  {
     field: "createdAt",
     headerName: "Created At",
     width: 150,
@@ -51,7 +44,7 @@ const columns: GridColDef[] = [
 
 ];
 
-const Reports = () => {
+const ReportUsers = () => {
 
   return (
 
@@ -59,7 +52,7 @@ const Reports = () => {
 
     <div className="reports">
       <div className="info">
-        <h1>Reports</h1>
+        <h1>Report Users</h1>
 
       </div>
       <DataTable slug="reports" columns={columns} rows={posts} />
@@ -68,4 +61,4 @@ const Reports = () => {
   )
 };
 
-export default Reports;
+export default ReportUsers;

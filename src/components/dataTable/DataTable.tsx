@@ -30,6 +30,10 @@ const DataTable = (props: Props) => {
           <div className="delete" onClick={() => handleDelete(params.row.id)}>
             <img src="./delete.svg" alt="" />
           </div>
+          {props.slug == "users" && <div className="ban" >
+            <img src="./ban.svg" alt="" />
+          </div>}
+
         </div>
       )
     },
@@ -53,6 +57,7 @@ const DataTable = (props: Props) => {
           toolbar: {
             showQuickFilter: true,
             quickFilterProps: { debounceMs: 500 },
+
           }
         }}
         pageSizeOptions={[5]}

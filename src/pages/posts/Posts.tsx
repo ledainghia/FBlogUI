@@ -39,6 +39,19 @@ const columns: GridColDef[] = [
     width: 100,
   },
   {
+    field: "isApproved",
+    headerName: "Is Approved",
+    type: "boolean",
+    width: 100,
+  },
+  {
+    field: "approvedBy",
+    headerName: "Approved by",
+    type: "string",
+    width: 100,
+  },
+
+  {
     field: "createdAt",
     headerName: "Created At",
     width: 150,

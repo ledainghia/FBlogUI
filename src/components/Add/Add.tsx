@@ -15,8 +15,10 @@ const Add = (props: Props) => {
   return (
     <div className="add">
       <div className="modal">
-        <span className="close">X</span>
+
         <h1>Add new {props.slug}</h1>
+        <span className="close" onClick={() => props.setOpen(false)}>X</span>
+
         <form onSubmit={handleSubmit}>
           {props.columns.filter(item => item.field !== "id" && item.field !== "img")
             .map(column => (

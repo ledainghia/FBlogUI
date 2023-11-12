@@ -9,12 +9,6 @@ export const menu = [
                 url: "/",
                 icon: "home.svg",
             },
-            {
-                id: 2,
-                title: "Profile",
-                url: "/users/1",
-                icon: "user.svg",
-            },
         ],
     },
     {
@@ -36,75 +30,15 @@ export const menu = [
             },
             {
                 id: 3,
-                title: "Reports",
+                title: "Report Blogs",
                 url: "/reports",
                 icon: "report2.svg",
             },
-        ],
-    },
-    {
-        id: 3,
-        title: "general",
-        listItems: [
-            {
-                id: 1,
-                title: "Elements",
-                url: "/",
-                icon: "element.svg",
-            },
-            {
-                id: 2,
-                title: "Notes",
-                url: "/",
-                icon: "note.svg",
-            },
-            {
-                id: 3,
-                title: "Forms",
-                url: "/",
-                icon: "form.svg",
-            },
             {
                 id: 4,
-                title: "Calendar",
-                url: "/",
-                icon: "calendar.svg",
-            },
-        ],
-    },
-    {
-        id: 4,
-        title: "Maintenance",
-        listItems: [
-            {
-                id: 1,
-                title: "Settings",
-                url: "/",
-                icon: "setting.svg",
-            },
-            {
-                id: 2,
-                title: "Backups",
-                url: "/",
-                icon: "backup.svg",
-            },
-        ],
-    },
-    {
-        id: 5,
-        title: "analytics",
-        listItems: [
-            {
-                id: 1,
-                title: "Charts",
-                url: "/",
-                icon: "chart.svg",
-            },
-            {
-                id: 2,
-                title: "Logs",
-                url: "/",
-                icon: "log.svg",
+                title: "Report Users",
+                url: "/reportUsers",
+                icon: "user-ban.svg",
             },
         ],
     },
@@ -318,7 +252,7 @@ export const userRows = [
         fullname: "Hufull",
         email: "kewez@@gmail.com",
         phone: "123 456 789",
-        createdAt: "01.02.2023",
+
         verified: true,
         role: "admin",
     },
@@ -329,7 +263,7 @@ export const userRows = [
 
         email: "comhuhmit@gmail.com",
         phone: "123 456 789",
-        createdAt: "01.02.2023",
+
         verified: true,
         role: "admin",
     },
@@ -471,6 +405,105 @@ export const userRows = [
     },
 ];
 export const posts = [
+    {
+        id: 1,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Sony",
+        votes: "1234",
+        isApproved: "true",
+        approvedBy: "HoangNT",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 2,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Dell",
+        votes: "1234",
+        isApproved: "true",
+        approvedBy: "HoangNT",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 3,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Samsung",
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 4,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Apple",
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 5,
+        img: "https://www.signify.com/b-dam/signify/en-aa/about/news/2020/20200903-movie-night-essentials-popcorn-ice-cream-and-the-new-philips-hue-play-gradient-lightstrip/packaging-lighstrip.pnghttps://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Philips",
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 6,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Logitech",
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 7,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Rode",
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 8,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Toshiba",
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 9,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Sony",
+
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+    {
+        id: 10,
+        img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",
+        title: "day la title 1",
+        category: "SE",
+        author: "Acer",
+        votes: "1234",
+        createdAt: "01.02.2023",
+    },
+];
+
+////////////////////
+export const reports = [
     {
         id: 1,
         img: "https://pbs.twimg.com/profile_images/1235868806079057921/fTL08u_H_400x400.png",

@@ -1,6 +1,6 @@
 import Home from "./pages/home/Home";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Products from "./pages/products/Products";
+
 import Users from "./pages/users/Users";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
@@ -8,9 +8,10 @@ import Menu from "./components/menu/Menu";
 import Login from "./pages/login/Login";
 import "./styles/global.scss";
 import User from "./pages/user/User";
-import Product from "./pages/product/Product";
+
 import Posts from "./pages/posts/Posts";
 import Reports from "./pages/reports/Reports";
+import ReportSingle from "./components/reportSingle/ReportSingle";
 
 function App() {
   const Layout = () => {
@@ -56,10 +57,13 @@ function App() {
           element: <User />,
         },
         {
-          path: "posts/:id",
-          element: <Product />,
+          path: "reports/:id",
+          element: <ReportSingle />,
         },
+
+
       ],
+
     },
     {
       path: "/login",

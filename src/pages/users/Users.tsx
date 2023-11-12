@@ -4,7 +4,10 @@ import "./users.scss";
 import { userRows } from "../../data";
 import { useState } from "react";
 import Add from "../../components/Add/Add";
+import Popup from "../../components/popUp/PopUp";
+import { Button } from "@mui/material";
 
+import AddIcon from '@mui/icons-material/Add';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -38,13 +41,7 @@ const columns: GridColDef[] = [
     width: 150,
     editable: true,
   },
-  {
-    field: 'createdAt',
-    headerName: 'Create At',
-    type: "string",
-    width: 100,
-    editable: true,
-  },
+
   {
     field: 'verified',
     headerName: 'Verified',
@@ -75,6 +72,7 @@ const columns: GridColDef[] = [
 
 const Users = () => {
   const [open, setOpen] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
 
 
   return (
@@ -88,7 +86,11 @@ const Users = () => {
       </div>
       <DataTable slug="users" columns={columns} rows={userRows} />
       {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
+
     </div>
+
+
+
   )
 }
 
