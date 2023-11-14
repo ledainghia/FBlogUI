@@ -85,22 +85,6 @@ export const topDealUsers = [
         votes: 99,
         posts: 99,
     },
-    {
-        id: 6,
-        img: "https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/92386775_2951095991783324_1774583278712389632_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=7a1959&_nc_ohc=6029V4qBsjIAX9jOgpd&_nc_ht=scontent-hkg4-1.xx&oh=00_AfCLAD2b2uLPCHR92t2lowwo1UC33td95f7oKS31mGaAkQ&oe=6567CBA6",
-        username: "Nghia Le",
-        email: "mailtest@gmail.com",
-        votes: 99,
-        posts: 99,
-    },
-    {
-        id: 7,
-        img: "https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/92386775_2951095991783324_1774583278712389632_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=7a1959&_nc_ohc=6029V4qBsjIAX9jOgpd&_nc_ht=scontent-hkg4-1.xx&oh=00_AfCLAD2b2uLPCHR92t2lowwo1UC33td95f7oKS31mGaAkQ&oe=6567CBA6",
-        username: "Nghia Le",
-        email: "mailtest@gmail.com",
-        votes: 99,
-        posts: 99,
-    },
 ];
 
 export const chartBoxUser = {
@@ -129,13 +113,10 @@ export const chartBoxProduct = {
     dataKey: "posts",
     percentage: 21,
     chartData: [
-        { name: "Sun", posts: 400 },
-        { name: "Mon", posts: 600 },
-        { name: "Tue", posts: 500 },
-        { name: "Wed", posts: 700 },
-        { name: "Thu", posts: 400 },
-        { name: "Fri", posts: 500 },
-        { name: "Sat", posts: 450 },
+        { name: "week1", posts: 400 },
+        { name: "week2", posts: 600 },
+        { name: "week3", posts: 500 },
+        { name: "week4", posts: 700 },
     ],
 };
 export const chartBoxRevenue = {
@@ -174,37 +155,57 @@ export const chartBoxConversion = {
 };
 
 export const barChartBoxRevenue = {
-    title: "Profit Earned",
+    title: "Blog posted",
     color: "#8884d8",
-    dataKey: "profit",
+    dataKey: "blogs",
     chartData: [
         {
             name: "Sun",
-            profit: 4000,
+            blogs: 4000,
         },
         {
             name: "Mon",
-            profit: 3000,
+            blogs: 3000,
         },
         {
             name: "Tue",
-            profit: 2000,
+            blogs: 2000,
         },
         {
             name: "Wed",
-            profit: 2780,
+            blogs: 2780,
         },
         {
             name: "Thu",
-            profit: 1890,
+            blogs: 1890,
         },
         {
             name: "Fri",
-            profit: 2390,
+            blogs: 2390,
         },
         {
             name: "Sat",
-            profit: 3490,
+            blogs: 3490,
+        },
+        {
+            name: "Tue",
+            blogs: 2000,
+        },
+        {
+            name: "Wed",
+            blogs: 2780,
+        },
+        {
+            name: "Thu",
+            blogs: 1890,
+        },
+        {
+            name: "Fri",
+            blogs: 2390,
+        },
+        {
+            name: "Sat",
+            blogs: 3490,
         },
     ],
 };
@@ -233,6 +234,26 @@ export const barChartBoxVisit = {
         {
             name: "Thu",
             visit: 1890,
+        },
+        {
+            name: "Fri",
+            visit: 2390,
+        },
+        {
+            name: "Sat",
+            visit: 3490,
+        },
+        {
+            name: "Fri",
+            visit: 2390,
+        },
+        {
+            name: "Sat",
+            visit: 3490,
+        },
+        {
+            name: "Sat",
+            visit: 3490,
         },
         {
             name: "Fri",

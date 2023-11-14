@@ -27,9 +27,10 @@ const DataTable = (props: Props) => {
               <img src="./view.svg" alt="" />
             </Link>
           </div>
-          <div className="delete" onClick={() => handleDelete(params.row.id)}>
+          {props.slug != "users" && <div className="delete" onClick={() => handleDelete(params.row.id)}>
             <img src="./delete.svg" alt="" />
-          </div>
+          </div>}
+
           {props.slug == "users" && <div className="ban" >
             <img src="./ban.svg" alt="" />
           </div>}
